@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Gym-Ware Pro</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Gym-Ware Pro</a> 
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> Register Member <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+				<li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+					</li>
+				
+					
+                    <li>
+                        <a  href="dashboard.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                      <li>
+                        <a  href="notification.html"><i class="fa fa-bell-o fa-3x"></i> Notification</a>
+                    </li>
+                    <!-- <li>
+                        <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
+                    </li>
+                           <li  >
+                        <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
+                    </li>   
+                      <li  >
+                        <a  href="table.html"><i class="fa fa-table fa-3x"></i> Table Examples</a>
+                    </li>
+                    <li  >
+                        <a  href="form.html"><i class="fa fa-edit fa-3x"></i> Forms </a>
+                    </li> -->               
+                    
+                                       
+                    <!-- Inventory Dropdown -->                 
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Inventory<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="inventory.html">Overview</a>
+                            </li>
+                            <li>
+                                <a href="add-inventory.html">Add items</a>
+                            </li>
+                            <li>
+                                <a href="remove-inventory.html">Remove items</a>
+                            </li>
+                        </ul>
+                      </li>
+                            <!-- Members Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Members<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="members.html">List</a>
+                            </li>
+                            <li>
+                                <a href="verify-member.html">Verify</a>
+                            </li>
+                            <li>
+                                <a class="active-menu" href="register.html">Register</a>
+                            </li>
+                            <li>
+                                <a href="#">Remove</a>
+                            </li>
+                        </ul>
+                      </li>
+
+                      <!-- Cashflow Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-money fa-3x"></i> Cashflow<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Summary</a>
+                            </li>
+                            <li>
+                                <!-- <a href="income.html">Income</a><li> -->
+                                <a href="income.html">Income<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="income-summary.html">Summary</a>
+                                    </li>
+                                    <li>
+                                        <a href="income.html">Add income</a>
+                                    </li>
+                                </ul>
+                               
+                            </li>
+                            </li>
+                            <li>
+                                <!-- <a href="expense.html">Expense</a> -->
+                                <a href="income.html">Expense<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="expense-summary.html">Summary</a>
+                                    </li>
+                                    <li>
+                                        <a href="expense.html">Add expense</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                      </li>
+
+                        <!-- Settings Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Settings<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                <a href="#">Reset Password</a>
+                            </li>
+                            <li>
+                                <a href="#">Logout</a>
+                            </li>
+                        </ul>
+                      </li>
+
+                        </ul>
+                      </li>  
+                  <!-- Blank Page -->
+                  <!-- <li  >
+                        <a  href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                    </li> -->   
+                </ul>
+               
+            </div>
+            
+        </nav>  
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Registeration Form</h2>   
+                        <!-- <h5>Welcome Jhon Deo , Love to see you back. </h5> -->
+                      
+                    </div>
+                </div>
+                 <!-- /. ROW  -->
+                 <!-- <hr /> -->
+               <div class="row">
+                <div class="col-md-12">
+                    <!-- Form Elements -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Personal Data</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- <h3>Basic Form Examples</h3> -->
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input class="form-control" />
+                                        </div>
+                                        <label>Gender</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"/>Male
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"/>Female
+                                                </label>
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                                <label>Date of Birth</label>
+                                                <input class="form-control" />
+                                            </div>
+
+                                        <div class="form-group">
+                                            <label>Phone</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Occupation</label>
+                                            <select class="form-control">
+                                                <option>Student</option>
+                                                <option>Lecturer</option>
+                                                <option>Service Personnel</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Specify if other</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Emergency Contact</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                            <h3>Students Only</h3><br>
+
+                                        <div class="form-group">
+                                            <label>Hostel</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Room No.</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Programme</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Year</label>
+                                            <select class="form-control">
+                                                <option>One</option>
+                                                <option>Two</option>
+                                                <option>Three</option>
+                                                <option>Four</option>
+                                                <option>Five</option>
+                                                <option>Six</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Student ID</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                            <h3>Health Details</h3><br>
+
+                                        <label>Have you ever joined a gym?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                            <label>Do you need instructions?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>When was the last time you exercised?</label>
+                                                    <select class="form-control">
+                                                        <option>Within a month ago</option>
+                                                        <option>Within three months ago</option>
+                                                        <option>Within six months ago</option>
+                                                        <option>Within a year ago</option>
+                                                        <option>Over a year ago</option>
+                                                        <option>Don't remember</option>
+                                                    </select>
+                                            </div>
+
+                                            <label>Do you have a joint problem?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                            <label>Have you undergone any surgery in six months?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                            <label>Are you taking any prescribed medication?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Specify if yes</label>
+                                                <input class="form-control" />
+                                            </div>
+
+                                            <label>Do you have any other medical conditions that should be made known?</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios1" value="option1" />Yes
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="gym" id="optionsRadios2" value="option2"/>No
+                                                </label>
+                                            </div>
+
+                                        <div class="form-group">
+                                            <label>Specify if yes</label>
+                                            <input class="form-control" />
+                                        </div>
+
+                                            <h3>Terms and Conditions</h3>
+                                        <p>
+                                            Money paid is <b>not refundable</b><br>
+                                            80% of membership fees has to be paid in advance and is not refundable. The remaining should be paid in a week's time.<br>
+                                            Membership is not transferable.<br>
+                                            You hoave to be in your right dress code always before coming to the gym.<br>
+                                            Membership is valid for one academic semester and will be renewed every semester.<br>
+                                            Get a personal trainer the gym provides, <b>if you need one.</b><br>
+                                            In case of death or injury, the gym will not take responsibility of the cause.<br>
+                                            Pack/Clean equpment after use.<br>
+                                            No politics and arguments in the gym.<br>
+                                            No fighting in the gym.<br>
+                                            No eating in the gym.<br>
+                                        </p>
+
+                                        <h3>Code of Conduct</h3><br>
+
+                                        <ul>
+                                            <li>Guys please wash your training kits, thus sneakers.</li>
+                                            <li>Bring bottles along for your sachet water.</li>
+                                            <li>Don't drop weights on the ground since it can crack.</li>
+                                            <li>Guys please do not come to the ladies' training grounds (place)</li>
+                                            <li>Do not use machines meant for ladies i.e those inscribed "Ladies Only"</li>
+                                            <li>Do not remove your attire in front of the ladies or mirror.</li>
+                                            <li>Do not peep at the ladies whilst training.</li>
+                                            <li>Do not flirt with the ladies at the gym.</li>
+                                            <li>No dead life in the gym; send it outside.</li>
+                                            <li>Always wipe your sweat off the bench after training.</li>
+                                            <li>Do not lean metals against the wall.</li>
+                                            <li>Dess code for Friday wear must be obeyed (any member who fails to do so wouldn't be allowed to train).</li>
+                                            <li>Do not bring mobile phones and bags intothe gym. The gym wouldn't be held responsible dor any stolen items (BAGS AND  PHONES CAN BE LEFT AT THE OFFICE).</li>
+                                            <li>Members who refuse to adhere to these codes will be subjected to 2 weeks suspension <b>or</b> will besacked totally, neverto return!</li>
+                                            <li><b>No towel, No machine!</b></li>
+                                        </ul>
+
+                                        <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" />I have read the terms and conditions overleaf, and agree to abide by them. I have, to the best of my knowledge, completed the health questionnaire and informed members of the gym committee of any relevant information regarding my use of the gym.
+                                                </label>
+                                            </div>
+
+                                        <div class="form-group">
+                                            <label>Just A Label Control</label>
+                                            <p class="form-control-static">info@yourdomain.com</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>File input</label>
+                                            <input type="file" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Text area</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Checkboxes</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" />Checkbox Example One
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value=""/>Checkbox Example Two
+                                                </label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value=""/>Checkbox Example Three
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Inline Checkboxes Examples</label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox"/> One
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox"/> Two
+                                            </label>
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox"/> Three
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Radio Button Examples</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked />Radio Example One
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"/>Radio Example Two
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"/>Radio Example Three
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Select Example</label>
+                                            <select class="form-control">
+                                                <option>One Vale</option>
+                                                <option>Two Vale</option>
+                                                <option>Three Vale</option>
+                                                <option>Four Vale</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Multiple Select Example</label>
+                                            <select multiple class="form-control">
+                                                <option>One Vale</option>
+                                                <option>Two Vale</option>
+                                                <option>Three Vale</option>
+                                                <option>Four Vale</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-default">Submit Button</button>
+                                        <button type="reset" class="btn btn-primary">Reset Button</button>
+
+                                    </form>
+                                    <br />
+                                      <h3>With radio & checkboxes</h3>
+                                    <form>
+
+    <div class="form-group input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" />
+      </span>
+      <input type="text" class="form-control" />
+    </div>
+                                         <div class="form-group input-group">
+      <span class="input-group-addon">
+        <input type="radio" />
+      </span>
+      <input type="text" class="form-control" />
+    </div>
+                                    </form>
+
+                                 
+    </div>
+                                
+                                <div class="col-md-6">
+                                    <h3>Upload Passport Picture</h3>
+
+                                    
+
+                                    <form role="form">
+                                        <fieldset disabled="disabled">
+                                            <div class="form-group">
+                                                <label for="disabledSelect">Disabled input</label>
+                                                <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disabledSelect">Disabled select </label>
+                                                <select id="disabledSelect" class="form-control">
+                                                    <option>Disabled select</option>
+                                                </select>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" />Disabled Checkbox
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Disabled Button</button>
+                                        </fieldset>
+                                    </form>
+                                    <h3>Validation State Examples</h3>
+                                    <form role="form">
+                                        <div class="form-group has-success">
+                                            <label class="control-label" for="inputSuccess">Input with success</label>
+                                            <input type="text" class="form-control" id="inputSuccess">
+                                        </div>
+                                        <div class="form-group has-warning">
+                                            <label class="control-label" for="inputWarning">Input with warning</label>
+                                            <input type="text" class="form-control" id="inputWarning">
+                                        </div>
+                                        <div class="form-group has-error">
+                                            <label class="control-label" for="inputError">Input with error</label>
+                                            <input type="text" class="form-control" id="inputError">
+                                        </div>
+                                    </form>
+                                    <h3>Input Group Examples</h3>
+                                    <form role="form">
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input type="text" class="form-control" placeholder="Username">
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-eur"></i>
+                                            </span>
+                                            <input type="text" class="form-control" placeholder="Font Awesome Icon">
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-addon">.00</span>
+                                        </div>
+                                        <div class="form-group input-group">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                    <h3>Different Size Input Groups</h3>
+                                     <form role="form">
+  <div class=" form-group input-group input-group-lg">
+  <span class="input-group-addon">@</span>
+  <input type="text" class="form-control" placeholder="Username" />
+</div>
+
+<div class="form-group input-group">
+  <span class="input-group-addon">@</span>
+  <input type="text" class="form-control" placeholder="Username" />
+</div>
+
+<div class="form-group input-group input-group-sm">
+  <span class="input-group-addon">@</span>
+  <input type="text" class="form-control" placeholder="Username" />
+</div>
+                                         
+                                     </form>
+                                    <h3>Different Size Input Groups</h3>
+                                     <form role="form">
+                                  <div class="input-group">
+      <span class="form-group input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input type="text" class="form-control" />
+    </div>
+<br />
+                                           <div class="input-group">
+     
+      <input type="text" class="form-control" />
+                                                <span class="form-group input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+                                         </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End Form Elements -->
+                </div>
+            </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>More Customization</h3>
+                         <p>
+                        For more customization for this template or its components please visit official bootstrap website i.e getbootstrap.com or <a href="http://getbootstrap.com/components/" target="_blank">click here</a> . We hope you will enjoy our template. This template is easy to use, light weight and made with love by binarycart.com 
+                        </p>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    
+   
+</body>
+</html>

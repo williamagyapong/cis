@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Member | Gym-Ware Pro</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Gym-Ware Pro</a> 
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> Verify Member <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                <li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+                    </li>
+                
+                    
+                    <li>
+                        <a href="dashboard.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                     <li>
+                        <a href="notification.html"><i class="fa fa-bell-o fa-3x"></i> Notification</a>
+                    </li>
+                    
+                    <!-- Inventory Dropdown -->                 
+                    <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Inventory<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="inventory.html">Overview</a>
+                            </li>
+                            <li>
+                                <a href="add-inventory.html">Add items</a>
+                            </li>
+                            <li>
+                                <a href="remove-inventory.html">Remove items</a>
+                            </li>
+                        </ul>
+                      </li>  
+
+                      <!-- Members Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Members<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="members.html">List</a>
+                            </li>
+                            <li>
+                                <a class="active-menu" href="verify-member.html">Verify</a>
+                            </li>
+                            <li>
+                                <a href="register.html">Register</a>
+                            </li>
+                            <li>
+                                <a href="remove-member.html">Remove</a>
+                            </li>
+                        </ul>
+                      </li>
+
+                      <!-- Cashflow Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-money fa-3x"></i> Cashflow<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Summary</a>
+                            </li>
+                            <li>
+                                <!-- <a href="income.html">Income</a><li> -->
+                                <a href="income.html">Income<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="income-summary.html">Summary</a>
+                                    </li>
+                                    <li>
+                                        <a href="income.html">Add income</a>
+                                    </li>
+                                </ul>
+                               
+                            </li>
+                            </li>
+                            <li>
+                                <!-- <a href="expense.html">Expense</a> -->
+                                <a href="income.html">Expense<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="expense-summary.html">Summary</a>
+                                    </li>
+                                    <li>
+                                        <a href="expense.html">Add expense</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                      </li>
+
+                      <!-- Settings Dropdown -->
+                      <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> Settings<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Profile</a>
+                            </li>
+                            <li>
+                                <a href="#">Reset Password</a>
+                            </li>
+                            <li>
+                                <a href="#">Logout</a>
+                            </li>
+                        </ul>
+                      </li>
+
+                      <!-- Blank Page -->
+                  <!-- <li  >
+                        <a  href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                    </li> -->   
+                </ul>
+               
+            </div>
+            
+        </nav> 
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Verify</h2>                          
+                    </div>
+                </div>
+                 <!-- /. ROW  -->
+                <hr />
+                <div class="row">
+                <div class="col-md-3 form-group">
+                    <h4>Input code </h4><input class="form-control" /></div>
+                    <div class="col-md-12" align="right">
+                        <p>
+                        <input type="submit" value="Verify member" name="" class="btn btn-default btn-md" role="button">
+                        <a href="#" class="btn btn-success btn-md" role="button">Add member</a>
+                        <a href="remove-member.html" class="btn btn-danger btn-md" role="button">Remove member</a>
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                </div>
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    
+   
+</body>
+</html>
