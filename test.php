@@ -2,6 +2,7 @@
 require_once 'settings.php';
 $member = new Member();
 $user = new User();
+print_array($member->getAdults(18));
 function test()
 {
 	return 454;

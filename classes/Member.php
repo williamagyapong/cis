@@ -37,7 +37,18 @@ class Member extends Model
 	public function getAdults($childAgeLimit)
 	{
         //$sql0 = "SELECT date_of_birth FROM {$this->table2}";
-		return $this->db->select("SELECT * FROM {$this->table2} WHERE `age`>={$childAgeLimit} ORDER BY `f_name` ASC")->all();
+        $members = $this->get();
+        $data    = []; //initialize empty data array
+        $thisYear = date('Y');
+        foreach($members as $member) {
+        	$birthYear = date('Y', strtotime($member->birth_date));
+        	$age = $thisYear - $birthYear;
+        	if($age>=$childAgeLimit) {
+        		$data[] = $member;
+        	}
+        }
+        return $data;
+		//return $this->db->select("SELECT * FROM {$this->table2} WHERE `age`>={$childAgeLimit} ORDER BY `f_name` ASC")->all();
 	}
 
 

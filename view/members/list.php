@@ -29,6 +29,9 @@ $members = $member->get();
                <div class="col-md-12">
                  <div class="panel panel-default">
                    <div class="panel-body">
+                     <div class="w3-container w3-margin-bottom">
+                       <span>Filter By: </span>
+                     </div>
                      <div class="table-responsive">
                        <table class="table table-striped table-bordered table-hover" id="members_table">
                          <thead>
