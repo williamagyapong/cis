@@ -176,7 +176,7 @@
                                        <label class="w3-text-grey"><b><label for="id_where_baptised">Congregation:</label></b></label>
                                         <select id="id_where_baptised" name="where_baptised" class="w3-select w3-border w3-border-dark-grey" required>
                                             <option value="" selected>---------</option>
-                                            <option value="gbawe">Gbawe Church</option>
+                                            <option value="Gbawe">Gbawe Church</option>
                                             <option value="other church">Other Church</option>
                                         </select>    
                                     </div>

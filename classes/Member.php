@@ -165,11 +165,12 @@ class Member extends Model
 	*/
 	public function addMember()
 	{
-		$father = json_encode(array('name'=>Input::get('father_name'), 'congregation'=>Input::get('father_congregation')));
-		$mother = json_encode(array('name'=>Input::get('mother_name'), 'congregation'=>Input::get('mother_congregation')));
+		$father = json_encode(array('name'=>Input::get('father_name'), 'contact'=>Input::get('father_contact')));
+		$mother = json_encode(array('name'=>Input::get('mother_name'), 'contact'=>Input::get('mother_contact')));
 		$memberCode = $this->generateId();
 		$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
+		$baptisedAt = (Input::get('baptised_at')=='Gbawe')?Input::get('baptised_at'):Input::get('other_baptised_cong');
 	
 	    if($memberCode !=0)
 	    {
@@ -179,7 +180,7 @@ class Member extends Model
 												  'm_name'=>Input::get('middle_name'),
 												  'l_name'=>Input::get('last_name'),
 												  'gender'=>Input::get('gender'),
-												  'date_of_birth'=>Input::get('birth_date'),
+												  'birth_date'=>Input::get('birth_date'),
 												  'age'=>$age,
 												  'home_town'=>Input::get('home_town'),
 												  'region'=>Input::get('home_region'),
@@ -194,8 +195,7 @@ class Member extends Model
 												  'marital_status'=>Input::get('marital_status'),
 												  'baptismal_status'=>$baptismalStatus,
 												  'baptised_on'=>Input::get('date_baptised'),
-												  'baptised_at'=>Input::get('where_baptised'),
-												  'other_baptised_cong'=>Input::get('other_baptised_cong'),
+												  'baptised_at'=>$baptisedAt,
 												  'blood_group'=>Input::get('blood_group'),
 												  'sickling_status'=>Input::get('sickling_status'),
 												  'kids'=>Input::get('kids'),

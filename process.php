@@ -8,7 +8,7 @@ if(Input::exist('add_token'))
     switch(Input::get('add_token'))
     {
       case 'add_member':
-	         if($member->addMember()) Redirect::to('views/index.php?page=new_member');
+	         if($member->addMember()) Redirect::to('view/index.php?page=new_member');
 	         else Redirect::to(502);
 	  break;
 

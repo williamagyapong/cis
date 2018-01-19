@@ -35,6 +35,7 @@ $members = $member->get();
                            <tr>
                              <th>Member ID</th>
                              <th>Name</th>
+                             <th>Baptised</th>
                              <th>Ministry</th>
                              <th>Residence</th>
                              <th>Zone</th>
@@ -47,12 +48,19 @@ $members = $member->get();
                            <?php foreach($members as $person):?>
                             <tr>
                               <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;" class="w3-text-blue"><?php echo $person->member_code;?></td>
+
                               <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;"><?php echo $person->f_name.' '.$person->m_name.' '.$person->l_name;?></td>
+                              <td>
+                                <?php echo ($person->baptismal_status=='baptised')?'<i class="fa fa-check w3-text-blue"></i>':'<i class="fa fa-close w3-text-red"></i>';?>
+                              </td>
+
                               <td><?php echo $member->getMinistry($person->ministry_id)->name;?></td>
                               <td><?php echo $person->residence;?></td>
                               <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                               <td><?php echo $person->phone;?></td>
+
                               <td title="Edit Record"><span onclick="<?php echo "popUpEditModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+
                               <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                             </tr>
                            <?php endforeach;?>
@@ -78,7 +86,7 @@ $members = $member->get();
     
     <script>
       $(document).ready(function () {
-          $('#members_tabl').dataTable({
+          $('#members_table').dataTable({
              "order":[[1, "asc"]]
           });
       });

@@ -32,7 +32,7 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Date of Birth</b></td>
-	   	 	  	<td><?php echo date('d/m/Y', strtotime($memberData->date_of_birth));?></td>
+	   	 	  	<td><?php echo date('d/m/Y', strtotime($memberData->birth_date));?></td>
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Marital Status</b></td>
@@ -47,8 +47,7 @@
 	   	 	  	<td>
 	   	 	  		<?php if($memberData->baptismal_status=='baptised'):?>
                        <span>
-                       	 Baptised at 
-                       	 <?php echo ($memberData->baptised_at=='other church')?$memberData->other_baptised_cong:$memberData->baptised_at;?>
+                       	 Baptised at <?php echo ucwords($memberData->baptised_at);?>
                        </span>
 	   	 	  	    <?php else:?>
 	   	 	  	     <span class="w3-text-red">Not Baptised</span>	
@@ -56,7 +55,7 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Home Town</b></td>
-	   	 	  	<td><?php echo $memberData->home_town.", ".$memberData->region;?></td>
+	   	 	  	<td><?php echo ucwords($memberData->home_town).", ".$memberData->region;?></td>
 	   	 	  </tr>
 	   	 	</table>
 	   	 </div>

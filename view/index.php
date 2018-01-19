@@ -56,7 +56,7 @@ require_once '../settings.php';
                 <p class="main-text">Children</p>
                 <p class="main-text"><?php echo count($members)-count($adults);?> <img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"></p>
                 <p><a href="index.php?page=new_member" class="btn btn-default btn-lg" role="button">Add New</a>
-                <a href="#" class="btn btn-default btn-lg" role="button">Remove</a></p>
+                <a href="#" class="btn btn-default btn-lg" role="button">View</a></p>
             </div>
            </div>
           </div>
@@ -66,7 +66,7 @@ require_once '../settings.php';
                     <p class="main-text">Adults</p>
                     <p class="main-text"><?php echo count($adults);?><img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"></p>
                     <p><a href="index.php?page=new_member" class="btn btn-default btn-lg" role="button">Add New</a>
-                    <a href="#" class="btn btn-default btn-lg" role="button">Remove</a></p>
+                    <a href="#" class="btn btn-default btn-lg" role="button">View</a></p>
                 </div>
            </div>
          </div>    
