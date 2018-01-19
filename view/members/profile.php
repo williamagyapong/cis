@@ -9,7 +9,7 @@
 
 <div class="w3-row">
 	<div>
-		<h4 style="text-decoration: underline; " class="w3-center">Member Details <span class="fa fa-pencil-square-o w3-text-orange"></span></h4>
+		<h4 style="text-decoration: underline; " class="w3-center">Member Details <span class="fa fa-edit w3-text-blue"></span></h4>
 	</div>
 	<!-- first grid -->
 	<div class="w3-col l6 m6">

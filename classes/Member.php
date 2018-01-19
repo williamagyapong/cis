@@ -19,7 +19,8 @@ class Member extends Model
 		else
 		{
 			//select all members
-	        return $this->db->select("SELECT * FROM {$this->table2} ORDER BY `f_name` ASC")->all();
+	        //return $this->db->select("SELECT * FROM {$this->table2} ORDER BY `f_name` ASC")->all();
+	        return $this->db->get($this->table2, array())->all();
 			
 		}
 		

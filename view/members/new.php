@@ -273,7 +273,7 @@
 
                         <div class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
                             <div class="w3-container w3-blue-grey">
-                              <h4>Church Activity</h4>
+                              <h4>Church Participation</h4>
                             </div>
                             <div class="fieldWrapper">
                                 <br>

@@ -29,7 +29,7 @@ require_once '../settings.php';
         <div class="row" id="top-page">
             <div class="w3-col m6 l6">
                <div class="w3-card-4 w3-margin w3-padding" style="height: 100px;" >
-                  <h2>Welcome <span class="w3-text-blue-grey"><?php echo ucfirst($user->data()->username);?></span></h2>   
+                  <h2>Welcome <span class="w3-text-blue-grey"><i><?php echo ucfirst($user->data()->username);?></i></span></h2>   
                   <h5>Love to see you back. </h5>
             </div> 
             </div>
