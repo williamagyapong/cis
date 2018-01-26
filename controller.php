@@ -17,19 +17,22 @@ $settings = new Settings();
 
  			case 'new_zone_ui':
  			 $middleware->newZoneUi();
-            break;
+      break;
 
-            case 'crop_image':
-            $image = Session::get('uploaded_pic');
-            echo "<div class=\"w3-container\" style=\"\">
-                        <img id=\"cropbox\" class=\"w3-left w3-card w3-border w3-border-dark-grey\" src=\"../assets/images/$image\" alt=\"member picture\" width=\"200\" height=\"200\" style=\"max-width:200px; height: 200px\">
-                    </div>";
-            /*echo "<input type=\"hidden\" id=\"x\" name=\"x\" />
-                    <input type=\"hidden\" id=\"y\" name=\"y\" />
-                    <input type=\"hidden\" id=\"w\" name=\"w\" />
-                    <input type=\"hidden\" id=\"h\" name=\"h\" />
-             ";*/
-             break;
+      case 'zones_ui':
+       $middleware->zonesUi();
+      break;
+
+      case 'ministries_ui':
+       $middleware->ministriesUi();
+      break;
+
+      case 'crop_image':
+      $image = Session::get('uploaded_pic');
+      echo "<div class=\"w3-container\" style=\"\">
+                  <img id=\"cropbox\" class=\"w3-left w3-card w3-border w3-border-dark-grey\" src=\"../assets/images/$image\" alt=\"member picture\" width=\"200\" height=\"200\" style=\"max-width:200px; height: 200px\">
+              </div>";
+       break;
  		}
  	}
 

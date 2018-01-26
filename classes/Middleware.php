@@ -1,5 +1,5 @@
 <?php
-class Middleware
+class Middleware extends Model
 {
   private  $text = 'w3-input w3-border w3-border-dark-grey';
   private $textBox = 'w3-input w3-border w3-border-dark-grey';
@@ -14,7 +14,7 @@ class Middleware
   public function createFamilyUi()
   {
   	  echo "<div style=\"width:\" class=\"w3-margin\"><br><br>
-          <div class=\"w3-container w3-blue\">
+          <div class=\"w3-container w3-blue-grey\">
           <h2 class=\"w3-center\">Create Family</h2>
           </div>
           <form action=\"\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
@@ -84,13 +84,15 @@ class Middleware
   public function newMinistryUi()
   {
   	echo "<br><br><br><div class=\"w3-margin\">
-		  <div class=\"w3-container w3-blue\">
-		    <h2 class=\"w3-center\">Add a New Ministry</h2>
+		  <div class=\"w3-container w3-blue-grey\">
+		    <h2 class=\"w3-center\">Create a New Ministry</h2>
 		  </div>
 		  <form action=\"../controller.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
 		    <div class=\"w3-row-padding\">
 		      <label class=\"w3-bold\" for=\"id_name\">Name:</label><br>
 		      <input id=\"id_name\" type=\"text\" name=\"name\" class=\"w3-input w3-border w3-border-dark-grey\" required><br>
+          <label class=\"w3-bold\" for=\"id_leader\">Leader:</label><br>
+          <input id=\"id_leader\" type=\"text\" name=\"leader\" class=\"w3-input w3-border w3-border-dark-grey\" required>
            <input type=\"hidden\" name=\"token\" value=\"add_ministry\">
 		      <button class=\"btn btn-primary w3-margin-top\">Submit</button>
 		    </div>
@@ -108,7 +110,7 @@ class Middleware
   public function newZoneUi()
   {
   	echo "<br><br><br><div class=\"w3-margin\">
-		  <div class=\"w3-container w3-blue\">
+		  <div class=\"w3-container w3-blue-grey\">
 		    <h2 class=\"w3-center\">Create a New Zone</h2>
 		  </div>
 		  <form action=\"../controller.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
@@ -124,6 +126,43 @@ class Middleware
 		</div>";
   }
 
+  
+  /**
+  * provides interface for displaying existing ministries
+  * @param
+  * @var
+  */
+  public function ministriesUi()
+  {
+    $ministries = $this->db->get($this->ministries, array())->all();
+    echo "<div class=\"w3-card-4 w3-margin w3-padding\">
+            <h3 class=\"w3-blue-grey w3-padding w3-center\">Existing Ministries</h3>
+            <ul class=\"w3-ul\">";
+              foreach($ministries as $ministry) {
+                 echo "<li class=\"w3-hover-blue-grey w3-hover-text-white\"><a style=\"text-decoration:none; display:block;\" href=\"index.php?page=ministry_members&ID=$ministry->id\">$ministry->name</a></li>";
+              }
+    echo  " </ul>
+          </div>";
+  }
+
+
+  /**
+  * provides interface for displaying existing zones
+  * @param
+  * @var
+  */
+  public function zonesUi()
+  {
+    $zones  = $this->db->get($this->zones, array())->all();
+    echo "<div class=\"w3-card-4 w3-margin w3-padding\">
+            <h3 class=\"w3-blue-grey w3-padding w3-center\">Available Zones</h3>
+            <ul class=\"w3-ul\">";
+              foreach($zones as $zone) {
+                 echo "<li class=\"w3-hover-blue-grey w3-hover-text-white\"><a style=\"text-decoration:none; display:block;\" href=\"index.php?page=zone_members&ID=$zone->id\">$zone->name</a></li>";
+              }
+    echo  " </ul>
+          </div>";
+  }
 
   /**
   * provides interface for creating zones

@@ -4,7 +4,7 @@ require_once '../settings.php';
  $member = new Member();
  $members = $member->get();
  $adults = $member->getAdults(18);
-//$settings = new Settings();
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,7 @@ require_once '../settings.php';
       <div id="page-inner">
         <div class="row" id="top-page">
             <div class="w3-col m6 l6">
-               <div class="w3-card-4 w3-margin w3-padding" style="height: 100px;" >
+               <div class="w3-card-4 w3-margin w3-padding w3-white" style="height: 100px;" >
                   <h2>Welcome <span class="w3-text-blue-grey"><i><?php echo ucfirst($user->data()->username);?></i></span></h2>   
                   <h5>Love to see you back. </h5>
             </div> 
@@ -52,16 +52,6 @@ require_once '../settings.php';
        <div class="row" id="master-page">
          <div class="col-md-6 col-sm-12 col-xs-12">           
            <div class="panel panel-back noti-box">
-            <div class="text-box" align="center">
-                <p class="main-text">Children</p>
-                <p class="main-text"><?php echo count($members)-count($adults);?>&nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"></p>
-                <p><a href="index.php?page=new_member" class="btn btn-default btn-lg" role="button">Add New</a>
-                <a href="#" class="btn btn-default btn-lg" role="button">View</a></p>
-            </div>
-           </div>
-          </div>
-         <div class="col-md-6 col-sm-12 col-xs-12">           
-           <div class="panel panel-back noti-box">
                 <div class="text-box" align="center">
                     <p class="main-text">Adults</p>
                     <p class="main-text"><?php echo count($adults);?>&nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"></p>
@@ -69,7 +59,17 @@ require_once '../settings.php';
                     <a href="#" class="btn btn-default btn-lg" role="button">View</a></p>
                 </div>
            </div>
-         </div>    
+         </div> 
+         <div class="col-md-6 col-sm-12 col-xs-12">           
+           <div class="panel panel-back noti-box">
+            <div class="text-box" align="center">
+                <p class="main-text">Children</p>
+                <p class="main-text"><?php echo count($members)-count($adults);?>&nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"></p>
+                <p><a href="index.php?page=new_member" class="btn btn-default btn-lg" role="button">Add New</a>
+                <a href="#" class="btn btn-default btn-lg" role="button">View</a></p>
+            </div>
+           </div>
+          </div>   
              <!-- /. ROW  -->           
          </div>
          <!-- /. PAGE INNER  -->

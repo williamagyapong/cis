@@ -23,6 +23,13 @@
     <?php require '../include/sidemenu.php';?>
     <div id="page-wrapper" >
       <div id="page-inner">
+        <div class="row" id="top-page">
+           <div class="w3-margin-left">
+               <!-- <input id="adult_type" type="radio" name="member_type" value="adult" class="w3-radio" checked>Adult -->&nbsp;&nbsp;
+               <label class="w3-text-grey w3-large" for="is_child">Is a child:</label>
+               <input id="is_child" type="checkbox" value="child" class="w3-check w3-border w3-border-dark-grey">
+           </div>
+        </div>
         <main class="w3-row w3-padding">
         
             <div  class="page-background w3-white w3-card-4" style="margin-top:40px;max-width:960px;margin-left:auto;margin-right:auto">
@@ -48,7 +55,7 @@
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
-                                <label class="w3-text-grey"><b><label for="id_last_name">Last name<span class="w3-text-red w3-large">*</span></label></b></label><br>
+                                <label class="w3-text-grey"><b><label for="id_last_name">Last name/Surname<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <input type="text" name="last_name" class="w3-input w3-border w3-border-dark-grey" maxlength="64" required id="id_last_name" />
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
@@ -66,7 +73,7 @@
                             <div class="fieldWrapper w3-margin-bottom">
                                 
                                 <label class="w3-text-grey"><b><label for="id_birth_date">Date of birth<span class="w3-text-red w3-large">*</span></label></b></label><br>
-                                <input type="date" name="birth_date" class="w3-input w3-border w3-border-dark-grey" required id="id_birth_date" />
+                                <input type="text" name="birth_date" class="w3-input w3-border w3-border-dark-grey" required id="id_birth_date" />
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
@@ -99,7 +106,7 @@
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
-                                <label class="w3-text-grey"><b><label for="id_picture">Picture<span class="w3-text-red w3-large">*</span></label></b></label><br>
+                                <label class="w3-text-grey"><b><label for="id_picture">Picture<span id="picture_required" class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <div id="image_preview" class="w3-container" style="">
                                     <!-- load image here after cropping -->
                                 </div>
@@ -136,13 +143,13 @@
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
-                                <label class="w3-text-grey"><b><label for="id_phone">Phone<span class="w3-text-red w3-large">*</span></label></b></label><br>
-                                <input type="number" name="phone" class="w3-input w3-border w3-border-dark-grey" min="0" maxlength="50" required id="id_phone" />
+                                <label class="w3-text-grey"><b><label for="id_phone">Phone<span id="phone_required" class="w3-text-red w3-large">*</span></label></b></label><br>
+                                <input type="text" name="phone" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" required id="id_phone" />
                             </div>
-                            <div class="fieldWrapper w3-margin-bottom">
+                            <div id="other_phone" class="fieldWrapper w3-margin-bottom">
                                 
                                 <label class="w3-text-grey"><b><label for="id_phone_other">Phone(Other)</label></b></label><br>
-                                <input type="number" name="phone_other" class="w3-input w3-border w3-border-dark-grey" min="0" maxlength="50" id="id_phone_other" />
+                                <input type="text" name="phone_other" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="id_phone_other" />
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
@@ -150,7 +157,7 @@
                                 <input type="email" name="email" class="w3-input w3-border w3-border-dark-grey" maxlength="254" id="id_email" />
                             </div>
                         </div>
-                        <div class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
+                        <div id="baptism" class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
                             <div class="w3-container w3-blue-grey w3-margin-bottom">
                               <h4>Baptism</h4>
                             </div>
@@ -194,7 +201,7 @@
                                         </div>
                                         <div class="w3-col l6 m6">
                                             <label class="w3-text-grey"><b><label for="contact_person_phone">Contact:</label></b></label>
-                                            <input type="text" name="contact_person_phone" class="w3-input w3-border w3-border-dark-grey" id="contact_person_phone" disabled />
+                                            <input type="text" name="contact_person_phone" class="w3-input w3-border w3-border-dark-grey numberonly" id="contact_person_phone" min="0" maxlength="10" disabled />
                                         </div>
                                     </div>  
                                 </div>
@@ -226,7 +233,7 @@
                                 <label class="w3-text-grey"><b><label for="id_education">Highest Educational Level<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <input type="text" name="education" class="w3-input w3-border w3-border-dark-grey" maxlength="50" required id="id_education" />
                             </div>
-                            <div class="fieldWrapper w3-margin-bottom">
+                            <div id="marriage" class="fieldWrapper w3-margin-bottom">
                                 <div class="w3-row">
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_marital">Marital Status<span class="w3-text-red w3-large">*</span></label></b></label>
@@ -271,7 +278,7 @@
                             </div>
                         </div>
 
-                        <div class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
+                        <div  class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
                             <div class="w3-container w3-blue-grey">
                               <h4>Church Participation</h4>
                             </div>
@@ -279,23 +286,21 @@
                                 <br>
                                 <label class="w3-text-grey"><b><label for="id_zone">Zone<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <select name="zone" class="w3-select w3-border w3-border-dark-grey" id="id_zone" required>
-            					  <option value="" selected>----------</option>
-                                  <option value="6">None</option>
+            					            <option value="" selected>----------</option>
                                   <?php foreach($zones as $zone):?>
                                   <option value="<?php echo $zone->id;?>"><?php echo $zone->name;?></option>
                                   <?php endforeach;?>
-            					</select>
+            					          </select>
             	            </div>
-                            <div class="fieldWrapper">
+                            <div id="ministry" class="fieldWrapper">
                                 <br>
                                 <label class="w3-text-grey"><b><label for="id_ministry">Ministry<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <select name="ministry" class="w3-select w3-border w3-border-dark-grey" id="id_ministry" required>
                                   <option value="" selected>----------</option>
-                                  <option value="6">None</option>
-            					  <?php foreach($ministries as $ministry): ?>
+            					            <?php foreach($ministries as $ministry): ?>
                                   <option value="<?php echo $ministry->id; ?>"><?php echo $ministry->name; ?></option>
                                   <?php endforeach; ?>
-            					</select>
+            					          </select>
                             </div>
                         </div>
                         <div id="parents_field" class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
@@ -345,12 +350,12 @@
                                 </div>
                                 <div class="w3-col m6 l6">
                                     <label class="w3-text-grey"><b><label for="id_mother_contact">Contact</label></b></label><br>
-                                    <input type="number" name="mother_contact" class="w3-input w3-border w3-border-dark-grey" min="0" maxlength="10" id="id_mother_contact" required/>
+                                    <input type="text" name="mother_contact" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="id_mother_contact" required/>
                                 </div>
                             </div>
                             </fieldset>
                     </div>
-                    <div class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
+                    <div id="next_of_kin" class="w3-row w3-margin w3-opacity w3-hover-opacity-off">
                     <div class="w3-container w3-blue-grey w3-margin-bottom">
                         <h4>Next of Kin</h4>
                     </div>
@@ -366,7 +371,7 @@
                             </div>
                             <div class="w3-col m6 l6">
                                 <label class="w3-text-grey"><b><label for="next_kin_contact">Contact:</label></b></label><br>
-                                <input type="number" name="next_kin_contact" class="w3-input w3-border w3-border-dark-grey" id="next_kin_contact" min="0" maxlength="10" required/>
+                                <input type="text" name="next_kin_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="next_kin_contact" min="0" maxlength="10" required/>
                             </div>
                         </div>                                   
                     </div>
@@ -390,83 +395,10 @@
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <?php require_once'../include/scripts.html';?>
     <script src="../assets/js/jquery.Jcrop.min.js"></script>
+    <script src="../assets/js/member-form.js"></script>
     
     <script type="text/javascript">
-        $(document).ready(function(){
-/*
-            $('#hello').dialog({
-                draggable:false,
-                resizable:false,
-                modal:true,
-                show: 'slideDown',
-                hide: 'slideUp'
-            });*/
-            $(document).change(function() {
-            // toggle baptism field inputs visibility
-            if($('#id_is_baptised').prop('checked')) {
-                $('.baptism').removeClass('w3-hide');
-                $('.baptism :input').prop('disabled', false)
-            } else {
-                $('.baptism').addClass('w3-hide');
-                $('.baptism :input').prop('disabled', true)
-            }
-            
-            // make specify other Congregation required
-            var whereBaptised = $('#id_where_baptised').val();
-            if(whereBaptised=='other church') {
-               $('#id_other_baptised').prop('disabled', false)
-               $('#id_contact_person').prop('disabled', false) 
-               $('#contact_person_phone').prop('disabled', false)
-            } else {
-                    $('#id_other_baptised').prop('disabled', true)
-                    $('#id_contact_person').prop('disabled', true)
-                    $('#contact_person_phone').prop('disabled', true) 
-            }
-
-        })
-
-        // member picture loading
-            var picture = $('input[name="picture"]');
-            picture.change(function(){
-
-                if(picture.val() !='') {
-                 var formData = new FormData($('#member_form')[0]);
-                 $.ajax({
-                    type: 'post',
-                    url:'../controller.php',
-                    data: formData,
-                    dataType:'json',
-                    encode:true,
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                 })
-                 .done(function(response) {
-                    showCropPanel('../controller.php','crop_image', response.image);
         
-                 })
-                 .fail(function(){
-                    console.log('failed to upload picture')
-                 })
-            }
-
-                // crop picture
-            $(function(){
-              $('#cropbox').Jcrop({
-                aspectRatio: 1,
-                onSelect: updateCoords
-              });
-            });
-
-            function updateCoords(c){
-              $('#x').val(c.x);
-              $('#y').val(c.y);
-              $('#w').val(c.w);
-              $('#h').val(c.h);
-            };
-            })
-            
-    })
 
     </script>
    

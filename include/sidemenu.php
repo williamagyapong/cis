@@ -11,7 +11,11 @@
                 <a  href="#"><i class="fa fa-calendar fa-2x"></i> Events<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                 	<li>
-                		<a href="index.php?page=">Birthdays</a>
+                		<?php if(count($birthdays)==0):?>
+                            <a href="index.php?page=birthdays">Birthdays</a>
+                        <?php else:?>
+                            <a href="index.php?page=birthdays">Birthdays<span class="w3-badge w3-small w3-red"><?php echo count($birthdays)?></span></a>
+                        <?php endif;?>
                 	</li>
                     <li>
                         <a href="index.php?page=">Deaths</a>
@@ -39,7 +43,7 @@
                         <a href="index.php?page=new_member"><i class="fa fa-plus-square"></i> New</a>
                     </li>
                     <li>
-                        <a href="index.php?page=members_list"><i class="fa fa-list"></i> List</a>
+                        <a href="index.php?page=members_list"><i class="fa fa-table"></i> List</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-user"></i> Families<span class="fa arrow"></span></a>
@@ -48,7 +52,7 @@
                             <a href="javascript:void()" onclick="popUpModal('../controller.php','create_fam_ui')"><i class="fa fa-plus-square"></i>New</a>
                           </li>
                           <li>
-                            <a href="index.php?page=create_family"><i class="fa fa-list"></i> List</a>
+                            <a href="index.php?page=create_family"><i class="fa fa-table"></i> List</a>
                           </li>
                         </ul>
                     </li>
@@ -75,7 +79,7 @@
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_ministry_ui')"><i class="fa fa-plus-square"></i> New</a>
                     </li>
                     <li>
-                        <a href="index.php?page="><i class="fa fa-list"></i> List</a>
+                        <a href="javascript:void()" onclick="popUpModal('../controller.php','ministries_ui')"><i class="fa fa-table"></i> List</a>
                     </li>
                 </ul>
               </li>
@@ -87,7 +91,7 @@
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_zone_ui')"><i class="fa fa-plus-square"></i> New</a>
                     </li>
                     <li>
-                        <a href="index.php?page="><i class="fa fa-list"></i> List</a>
+                        <a href="javascript:void()" onclick="popUpModal('../controller.php','zones_ui')"><i class="fa fa-table"></i> List</a>
                     </li>
                 </ul>
               </li>

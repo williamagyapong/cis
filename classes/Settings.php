@@ -10,7 +10,7 @@ class Settings extends Model
 	*/
 	public function addLanguage()
 	{
-		if($this->db->insert($this->table9, [
+		if($this->db->insert($this->languages, [
 												'type'=>Input::get('type'),
 												'name'=>Input::get('language')
 		                                    ])) return true;
@@ -28,7 +28,7 @@ class Settings extends Model
 	{
 		if(!$name)
 		{
-			return $this->db->get($this->table9, [])->all();
+			return $this->db->get($this->languages, [])->all();
 		} 
 		else
 		{

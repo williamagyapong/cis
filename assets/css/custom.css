@@ -20,7 +20,9 @@ a{
     text-decoration: none;
 }
 
-
+.anchor{
+    text-decoration: none;
+}
 #header{
     background: url("../images/system/header.png") repeat;
 }

@@ -1,6 +1,14 @@
 <?php 
  $user = new User();
  $settings = new Settings();
+ $member = new Member();
+ $members = $member->get();
+ $birthdays = $member->getBirthDays();
+
+ if(!$user->isLoggedIn()) {
+    Redirect::to('../index.php');//user authentication
+ }
+
 ?>
 <nav id="header" class="navbar navbar-default navbar-cls-top w3-card-4" role="navigation" style="margin-bottom: 0">
 	<div class="navbar-header">

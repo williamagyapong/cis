@@ -54,6 +54,13 @@
 }(jQuery));
 
 //my custom js
+//make form input accept only number values
+ jQuery('.numberonly').keyup(function () { 
+    if(this.value != this.value.replace(/[^0-9\.]/g,'')) {
+      this.value = this.value.replace(/[^0-9\.]/g,'')
+    }
+    //this.value = this.value.replace(/[^0-9\.]/g,'');
+});
 // animate user image
  $('#user_image').mouseover(function() {
     $(this).css({"max-width":"150px", "max-height":"150px"})
@@ -100,7 +107,7 @@
     
     }
 
-    function popUpEditModal(url='../controller.php', token, id='') {
+    function popUpLargeModal(url='../controller.php', token, id='') {
         // show modal
         $('#edit_modal').show();
         $.get(url, {token:token, unique_id:id}, function(data){

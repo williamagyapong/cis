@@ -11,16 +11,16 @@ class Model
 	*@var string
 	*/
 
-    protected $table = 'users';
-    protected $table2 = 'members';
-    protected $table3 = 'families';
-    protected $table4 = 'children';
-    protected $table5 = 'visitors';
-    protected $table6 = 'occasions';
-    protected $table7 = 'ministries';
-    protected $table8 = 'zones';
-    protected $table9 = 'languages';
-    protected $table10 = 'regions';
+    protected $users = 'users';
+    protected $members = 'members';
+    protected $families = 'families';
+    protected $children = 'children';
+    protected $visitors = 'visitors';
+    protected $occasions = 'occasions';
+    protected $ministries = 'ministries';
+    protected $zones = 'zones';
+    protected $languages = 'languages';
+    protected $regions = 'regions';
 	protected $db;
 
 

@@ -14,13 +14,13 @@ class Member extends Model
 		if($id)
 		{
 			//select a particular member
-			return $this->db->select("SELECT * FROM {$this->table2} WHERE `id`='$id'")->first();
+			return $this->db->select("SELECT * FROM {$this->members} WHERE `id`='$id'")->first();
 		}
 		else
 		{
 			//select all members
 	        //return $this->db->select("SELECT * FROM {$this->table2} ORDER BY `f_name` ASC")->all();
-	        return $this->db->get($this->table2, array())->all();
+	        return $this->db->get($this->members, array())->all();
 			
 		}
 		
@@ -34,9 +34,8 @@ class Member extends Model
 	* @var
 	* @return int
 	*/
-	public function getAdults($childAgeLimit)
+	public function getAdults($childAgeLimit=18)
 	{
-        //$sql0 = "SELECT date_of_birth FROM {$this->table2}";
         $members = $this->get();
         $data    = []; //initialize empty data array
         $thisYear = date('Y');
@@ -53,6 +52,72 @@ class Member extends Model
 
 
 	/**
+	* fetch total number of children
+	* @param void
+	* @var
+	* @return int
+	*/
+	public function getChildren($childAgeLimit=18)
+	{
+        $members = $this->get();
+        $data    = []; //initialize empty data array
+        $thisYear = date('Y');
+        foreach($members as $member) {
+        	$birthYear = date('Y', strtotime($member->birth_date));
+        	$age = $thisYear - $birthYear;
+        	if($age<$childAgeLimit) {
+        		$data[] = $member;
+        	}
+        }
+        return $data;
+	}
+
+
+
+	/**
+	* fetch total number of children
+	* @param token | string
+	* @var
+	* @return array
+	*/
+	public function getBaptised($token = null)
+	{
+		if($token) {
+			return $this->db->get($this->members, array('baptismal_status', '=','not baptised'))->all();
+		} else {
+			return $this->db->get($this->members, array('baptismal_status', '=','baptised'))->all();
+		}
+	}
+
+    
+    /**
+	* fetch all birthdays within a week
+	* @param period in days | int
+	* @var
+	* @return array
+	*/
+    public function getBirthDays($period=7)
+    {
+    	$members = $this->get();
+    	$data    = []; //initialize empty data array
+    	$dateLimit = $period*24*3600;
+    	foreach($members as $member) {
+    		$birthDayToSeconds = strtotime(date('Y-').date('m-d',strtotime($member->birth_date)));
+    		$todayToSeconds = strtotime(date('Y-m-d'));
+    		$timeLeft = $birthDayToSeconds-$todayToSeconds;
+    		if($timeLeft<0) {
+    			continue;//skip past birthdays
+    		}
+    		if($timeLeft>=0 && $timeLeft <=$dateLimit) {
+    			//get birthdays from today till the next seven days
+    			$data[] = $member;
+    		}
+    	}
+    	return $data;
+    }
+
+
+	/**
 	* retrieve members records
 	* @param
 	* @var
@@ -62,12 +127,29 @@ class Member extends Model
 	{
 		if($memberId)
 		{
-			return $this->db->get($this->table7, array('id','=',$memberId))->first();
+			return $this->db->get($this->ministries, array('id','=',$memberId))->first();
 		}
 		else
 		{
-			return $this->db->get($this->table7, array())->all();
+			return $this->db->get($this->ministries, array())->all();
 		}
+	}
+
+
+	/**
+	* retrieve ministry members records
+	* @param
+	* @var
+	* @return
+	*/
+	public function getMinistryMembers($ministryId=null)
+	{
+		if($ministryId)
+		{
+			return $this->db->get($this->members, array('ministry_id','=',$ministryId))->all();
+		}
+		return array();
+	
 	}
 
 
@@ -81,12 +163,28 @@ class Member extends Model
 	{
 		if($zoneId)
 		{
-			return $this->db->get($this->table8, array('id','=',$zoneId))->first();
+			return $this->db->get($this->zones, array('id','=',$zoneId))->first();
 		}
 		else
 		{
-			return $this->db->get($this->table8, array())->all();
+			return $this->db->get($this->zones, array())->all();
 		}
+	}
+
+
+	/**
+	* retrieve zone members records
+	* @param
+	* @var
+	* @return
+	*/
+	public function getzoneMembers($zoneId=null)
+	{
+		if($zoneId)
+		{
+			return $this->db->get($this->members, array('zone_id','=',$zoneId))->all();
+		}
+		return array();
 	}
 
 
@@ -101,10 +199,10 @@ class Member extends Model
 	{
 		if($token) {
 			$field = (is_numeric($token))?'id':'name';
-			return $this->db->get($this->table10, array($field,'=',$token))->first();
+			return $this->db->get($this->regions, array($field,'=',$token))->first();
 		} 
 		else {
-			return $this->db->get($this->table10, array())->all();
+			return $this->db->get($this->regions, array())->all();
 		}
 	}
 
@@ -117,7 +215,7 @@ class Member extends Model
 	*/
 	public function getDuplicates($firstName, $lastName)
 	{
-	   return $this->db->select("SELECT * FROM {$this->table2} WHERE `f_name`='{$firstName}' AND `l_name` = '{$lastName}'")->all();
+	   return $this->db->select("SELECT * FROM {$this->members} WHERE `f_name`='{$firstName}' AND `l_name` = '{$lastName}'")->all();
 	}
 
 
@@ -143,7 +241,7 @@ class Member extends Model
 	*/
     public function getLastRegistered()
     {
-    	return $this->db->select("SELECT id FROM {$this->table2} ORDER BY id DESC LIMIT 1")->first();
+    	return $this->db->select("SELECT id FROM {$this->members} ORDER BY id DESC LIMIT 1")->first();
     }
 
 	/**
@@ -160,7 +258,7 @@ class Member extends Model
     		{   
     			$timeStamp = strtotime($dateOfBirth);
     			$code =  date('d', $timeStamp).date('m', $timeStamp).$lastStr;
-    			$result = $this->db->get($this->table2, array('member_code','=', $code))->all();
+    			$result = $this->db->get($this->members, array('member_code','=', $code))->all();
     			if(count($result)==0) return $code;
     			else
     			    return false;
@@ -185,7 +283,7 @@ class Member extends Model
 	
 	    if($memberCode !=0)
 	    {
-	    	$run = $this->db->insert($this->table2, [
+	    	$run = $this->db->insert($this->members, [
 	    										  'member_code'=>$memberCode,
 												  'f_name'=>Input::get('first_name'),
 												  'm_name'=>Input::get('middle_name'),
@@ -220,7 +318,7 @@ class Member extends Model
 		{
 			// add member to users
 			$year = date('Y', strtotime(Input::get('date_baptized')));
-			$run2 = $this->db->insert($this->table, [
+			$run2 = $this->db->insert($this->users, [
 				                                       'username'=>Input::get('first_name'),
 				                                       'password'=>Hash::make($memberCode),
 				                                       'member_id'=>$this->db->lastInsertedId(),

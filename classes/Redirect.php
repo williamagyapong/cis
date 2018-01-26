@@ -65,6 +65,21 @@ class Redirect
 	         	exit();
 	        break;
 
+	        case 'birthdays':
+	         	include '../view/events/birthdays.php';
+	         	exit();
+	        break;
+
+	        case 'ministry_members':
+	         	include '../view/groups/ministries.php';
+	         	exit();
+	        break;
+
+	        case 'zone_members':
+	         	include '../view/groups/zones.php';
+	         	exit();
+	        break;
+
 	        case 'system_settings':
 	         	include '../view/admin/settings.php';
 	         	exit();

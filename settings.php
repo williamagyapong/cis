@@ -88,11 +88,9 @@ require_once 'functions.php';
 */
    //all url requests are resolved here
    Redirect::route();
+
   
 /**
-
-
-
 |---------------------------------------------
 |      SYSTEM CONVENTIONS
 |---------------------------------------------
