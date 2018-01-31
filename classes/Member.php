@@ -9,21 +9,47 @@ class Member extends Model
 	* @var
 	* @return
 	*/
-	public function get($id = null)
+	public function get($token = null)
 	{
-		if($id)
+		if($token)
 		{
 			//select a particular member
-			return $this->db->select("SELECT * FROM {$this->members} WHERE `id`='$id'")->first();
+			if($token=='deaths'){
+				//fetch dead members
+				return $this->db->get($this->members, array('status','=',0))->all();
+
+			} elseif(strlen($token)==10) {
+				//fetch relation data with primary phone/memberId where relation is a member
+				$sql = "SELECT * FROM {$this->members} WHERE `phone`='{$token}' OR `member_code` ='{$token}'";
+				return $this->db->select($sql)->first();
+			}
+			else {
+				//fetch a particular member's data
+				return $this->db->get($this->members, array('id','=',$token))->first();
+			}
 		}
 		else
 		{
-			//select all members
+			//fetch all members
 	        //return $this->db->select("SELECT * FROM {$this->table2} ORDER BY `f_name` ASC")->all();
-	        return $this->db->get($this->members, array())->all();
+	        return $this->db->get($this->members, array('status','=',1))->all();
 			
 		}
 		
+	}
+
+
+	/**
+	* fetch relations
+	* @param void
+	* @var
+	* @return int
+	*/
+	public function getRelation($memberId,$token)
+	{   
+	
+		$sql = "SELECT * FROM {$this->relations} WHERE `member_id`='{$memberId}' AND `type` = '{$token}'";
+		return  $this->db->select($sql)->first();
 	}
 
 
@@ -80,18 +106,19 @@ class Member extends Model
 	* @var
 	* @return array
 	*/
-	public function getBaptised($token = null)
+	/*public function getBaptised($token = null)
 	{
 		if($token) {
 			return $this->db->get($this->members, array('baptismal_status', '=','not baptised'))->all();
 		} else {
 			return $this->db->get($this->members, array('baptismal_status', '=','baptised'))->all();
 		}
-	}
+	}*/
 
     
     /**
-	* fetch all birthdays within a week
+	* fetch all birthdays within a specified period. It defaults to 7 days/1 week
+	* period is used here to mean the birthday period
 	* @param period in days | int
 	* @var
 	* @return array
@@ -99,21 +126,56 @@ class Member extends Model
     public function getBirthDays($period=7)
     {
     	$members = $this->get();
-    	$data    = []; //initialize empty data array
-    	$dateLimit = $period*24*3600;
-    	foreach($members as $member) {
-    		$birthDayToSeconds = strtotime(date('Y-').date('m-d',strtotime($member->birth_date)));
+    	$data    = []; //initialize empty data array 
+    	$dateLimit = $period*24*3600;//convert period in days to seconds
+    	$daysLeft = 31- date('d');//days left in last month
+    	$day = date('Y-12-29');
+        $nextYear = (string)(date('Y') +1); //the year following the current year
+    	foreach($members as $member) 
+    	{
+    		#where birthday period falls with the current year
+    	    //find seconds equivalence to birthday
+	        $birthdayToSeconds = strtotime(date('Y-').date('m-d',strtotime($member->birth_date)));
     		$todayToSeconds = strtotime(date('Y-m-d'));
-    		$timeLeft = $birthDayToSeconds-$todayToSeconds;
+    		$timeLeft = $birthdayToSeconds-$todayToSeconds;
+    		//$data[] = $birthdayToSeconds.'-'.$todayToSeconds.'-'.$timeLeft.'-'.$dateLimit;
     		if($timeLeft<0) {
     			continue;//skip past birthdays
     		}
+    		
+
     		if($timeLeft>=0 && $timeLeft <=$dateLimit) {
-    			//get birthdays from today till the next seven days
+    			//get birthdays within the period
     			$data[] = $member;
     		}
+        
+            //find out whether birthday period extends into the following year
+            /*if((date('m', strtotime($day)) == '12') && ($daysLeft<$period)) 
+            {    
+            	#fetch birthdays where birthday period extend into the following year.
+            	#the magic here is simply changing the year to the next year
+
+            	 //find seconds equivalence to birthday
+    		    $birthdayToSeconds = strtotime($nextYear.date('-m-d',strtotime($member->birth_date)));
+    		    $todayToSeconds = strtotime('2018-12-29');//there is a problem here
+	    		$timeLeft = $birthdayToSeconds-$todayToSeconds;
+	    		//$data[] = $birthdayToSeconds.'-'.$todayToSeconds.'-'.$timeLeft.'-'.$dateLimit;
+	    		if($timeLeft<0) {
+	    			continue;//skip past birthdays
+	    		}
+	    		
+                //$data[] = $member;
+	    		if($timeLeft>=0 && $timeLeft <=$dateLimit) {
+	    			//get birthdays within the period
+	    			$data[] = $member;
+	    		}
+
+
+            } */
+    		
     	}
-    	return $data;
+        //rint_array($data);
+    	return $data;//output all birthdays collected
     }
 
 
@@ -186,7 +248,6 @@ class Member extends Model
 		}
 		return array();
 	}
-
 
 
     /**
@@ -277,7 +338,7 @@ class Member extends Model
 		$father = json_encode(array('name'=>Input::get('father_name'), 'contact'=>Input::get('father_contact')));
 		$mother = json_encode(array('name'=>Input::get('mother_name'), 'contact'=>Input::get('mother_contact')));
 		$memberCode = $this->generateId();
-		$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
+		//$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
 		$baptisedAt = (Input::get('baptised_at')=='Gbawe')?Input::get('baptised_at'):Input::get('other_baptised_cong');
 	
@@ -290,7 +351,6 @@ class Member extends Model
 												  'l_name'=>Input::get('last_name'),
 												  'gender'=>Input::get('gender'),
 												  'birth_date'=>Input::get('birth_date'),
-												  'age'=>$age,
 												  'home_town'=>Input::get('home_town'),
 												  'region'=>Input::get('home_region'),
 												  'languages'=>json_encode($_POST['languages']),
@@ -309,23 +369,65 @@ class Member extends Model
 												  'sickling_status'=>Input::get('sickling_status'),
 												  'kids'=>Input::get('kids'),
 												  'ministry_id'=>Input::get('ministry'),
-												  'zone_id'=>Input::get('zone'),
-												  'father'=>$father,
-												  'mother'=>$mother
+												  'zone_id'=>Input::get('zone')
 												]);
 		
 		if($run) 
 		{
+			Session::put('new_member_id', $this->db->lastInsertedId());
+
 			// add member to users
 			$year = date('Y', strtotime(Input::get('date_baptized')));
 			$run2 = $this->db->insert($this->users, [
 				                                       'username'=>Input::get('first_name'),
 				                                       'password'=>Hash::make($memberCode),
-				                                       'member_id'=>$this->db->lastInsertedId(),
+				                                       'member_id'=>Session::get('new_member_id'),
 				                                       'role'=>'Ordinary',
 				                                       'date_registered'=>date('Y-m-d')
 			                                         ]);
-			if($run2) return true;
+			//add spouse
+			   $run3 = true;
+			if(Input::get('marital_status'=='married')||Input::get('marital_status'=='separated')||Input::get('marital_status'=='divorced')) {
+				$run3 = $this->db->insert($this->relations, [
+														  'member_id'=>Session::get('new_member_id'),
+														  'name'=>Input::get('spouse_name'),
+														  'contact'=>Input::get('spouse_contact'),
+														  'type'=>'spouse',
+														  'token'=>Input::get('spouse_token')
+			                                            ]);
+			}
+			//add father
+			$run4 = $this->db->insert($this->relations, [
+														  'member_id'=>Session::get('new_member_id'),
+														  'type'=>'father',
+														  'name'=>Input::get('father_name'),
+														  'contact'=>Input::get('father_contact'),
+														  'deceased'=>Input::get('is_father_deceased'),
+														  'token'=>Input::get('spouse_token')
+			                                            ]);
+
+			//add mother
+			$run5 = $this->db->insert($this->relations, [
+														  'member_id'=>Session::get('new_member_id'),
+														  'type'=>'mother',
+														  'name'=>Input::get('mother_name'),
+														  'contact'=>Input::get('mother_contact'),
+														  'deceased'=>Input::get('is_mother_deceased'),
+														  'token'=>Input::get('mother_token')
+			                                            ]);
+
+			//add mother
+			$run6 = $this->db->insert($this->relations, [
+														  'member_id'=>Session::get('new_member_id'),
+														  'type'=>'next_of_kin',
+														  'name'=>Input::get('next_kin_name'),
+														  'contact'=>Input::get('next_kin_contact'),
+														  'relationship'=>Input::get('next_kin_relation')
+			                                            ]);
+			if($run2&&$run3&&$run4&&$run5&&$run6) {
+				Session::delete('new_member_id');
+				return true;
+			}
 			Session::put('add_new_errors', 'failed to create user<br>');
 			return false;
 		}

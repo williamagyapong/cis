@@ -87,7 +87,7 @@ class Middleware extends Model
 		  <div class=\"w3-container w3-blue-grey\">
 		    <h2 class=\"w3-center\">Create a New Ministry</h2>
 		  </div>
-		  <form action=\"../controller.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+		  <form action=\"\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
 		    <div class=\"w3-row-padding\">
 		      <label class=\"w3-bold\" for=\"id_name\">Name:</label><br>
 		      <input id=\"id_name\" type=\"text\" name=\"name\" class=\"w3-input w3-border w3-border-dark-grey\" required><br>
@@ -113,7 +113,7 @@ class Middleware extends Model
 		  <div class=\"w3-container w3-blue-grey\">
 		    <h2 class=\"w3-center\">Create a New Zone</h2>
 		  </div>
-		  <form action=\"../controller.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+		  <form action=\"\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
 		    <div class=\"w3-row-padding\">
 		      <label class=\"w3-bold\" for=\"id_name\">Name:</label><br>
 		      <input id=\"id_name\" type=\"text\" name=\"name\" class=\"w3-input w3-border w3-border-dark-grey\" required>

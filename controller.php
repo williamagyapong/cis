@@ -61,15 +61,7 @@ $settings = new Settings();
                   $response = array('image'=>$filename);
 
                   echo json_encode($response);
- 			/*$image = $_FILES['picture'];
- 			$temp = explode(".", $image["name"]);
-			$newfilename = round(microtime(true)) . '.' . end($temp);
-			//move_uploaded_file($_FILES["file"]["tmp_name"], "../img/imageDirectory/" . $newfilename);
- 			if(move_uploaded_file($image['tmp_name'], "assets/images/members/".$newfilename))
-            {
-            	Session::put('uploaded_pic', $newfilename);
-            	echo $newfilename;
-            } */
+ 			
                  break;
 
                  case 'save_cropped':
@@ -103,7 +95,10 @@ $settings = new Settings();
                    echo json_encode(array('image'=>Session::get('uploaded_pic')));
                    break;
                 case 'add_ministry':
-                  DBHandler::getInstance()->insert('ministries', array('name'=>Input::get('name')));
+                  DBHandler::getInstance()->insert('ministries', array('name'=>Input::get('name'), 'leader'=>Input::get('leader')));
+                  break;
+                case 'add_zone':
+                  DBHandler::getInstance()->insert('zones', array('name'=>Input::get('name'), 'leader'=>Input::get('leader')));
                   break;
  		}
  	}

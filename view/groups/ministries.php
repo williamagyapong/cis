@@ -42,7 +42,7 @@ require_once '../settings.php';
                  </h3>
                  <div class="w3-dropdown-content w3-bar-block w3-text-grey w3-border-top w3-border-dark-grey w3-card-4">
                     <?php foreach($ministries as $ministry):?>
-                     <a href="index.php?page=ministry_members&ID=<?php echo $ministry->id;?>" class="w3-bar-item w3-button w3-large w3-hover-dark-gray" style="text-transform:capitalize"><?php echo $ministry->name?></a>
+                     <a href="index.php?page=ministry_members&ID=<?php echo $ministry->id;?>" class="w3-bar-item w3-button w3-large w3-hover-dark-gray w3-hover-text-white" style="text-transform:capitalize"><?php echo $ministry->name?></a>
                    <?php endforeach;?>
                  </div>
                </div>

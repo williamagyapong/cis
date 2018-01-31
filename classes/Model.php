@@ -14,12 +14,13 @@ class Model
     protected $users = 'users';
     protected $members = 'members';
     protected $families = 'families';
-    protected $children = 'children';
+    protected $relations = 'relations';
     protected $visitors = 'visitors';
     protected $occasions = 'occasions';
     protected $ministries = 'ministries';
     protected $zones = 'zones';
     protected $languages = 'languages';
+    protected $memberLanguages = 'member_languages';
     protected $regions = 'regions';
 	protected $db;
 

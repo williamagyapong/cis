@@ -5,11 +5,14 @@
             <img id="user_image" src="../assets/images/<?php echo $user->data()->image;?>" class="user-image img-responsive"/>
 		</li>
             <li>
-                <a class=""  href="index.php"><i class="fa fa-dashboard fa-2x"></i> Dashboard</a>
+                <a class=""  href="index.php"><i class="fa fa-dashboard fa-2x w3-text-blue"></i> Dashboard</a>
             </li>
              <li>
-                <a  href="#"><i class="fa fa-calendar fa-2x"></i> Events<span class="fa arrow"></span></a>
+                <a  href="#"><i class="fa fa-calendar fa-2x w3-text-blue"></i> Events<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
+                    <li>
+                        <a href="index.php?page=publisher">Publish Event</a>
+                    </li>
                 	<li>
                 		<?php if(count($birthdays)==0):?>
                             <a href="index.php?page=birthdays">Birthdays</a>
@@ -18,26 +21,23 @@
                         <?php endif;?>
                 	</li>
                     <li>
-                        <a href="index.php?page=">Deaths</a>
+                        <a href="index.php?page=funerals">Funerals</a>
                     </li>
                     <li>
-                        <a href="index.php?page=p">Funerals</a>
-                    </li>
-                    <li>
-                        <a href="index.php?page=">Invitations</a>
+                        <a href="index.php?page=invitations">Invitations</a>
                     </li>
                 	<li>
-                		<a href="index.php?page=">Marriages</a>
+                		<a href="index.php?page=marriage_notices">Marriages</a>
                 	</li>
                 	
                 	<li>
-                		<a href="index.php?page=">Others</a>
+                		<a href="index.php?page=other_events">Others</a>
                 	</li>
                 </ul>
             </li>
             <!-- Members Dropdown -->
             <li>
-                <a href="#"><i class="fa fa-users fa-2x"></i> Members<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-users fa-2x w3-text-blue"></i> Members<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=new_member"><i class="fa fa-plus-square"></i> New</a>
@@ -73,7 +73,7 @@
 			
 			<!-- Ministries Dropdown -->                 
             <li>
-                <a href="#"><i class="fa fa-sitemap fa-2x"></i> Ministries<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Ministries<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_ministry_ui')"><i class="fa fa-plus-square"></i> New</a>
@@ -85,7 +85,7 @@
               </li>
               <!-- Zones Dropdown -->                 
             <li>
-                <a href="#"><i class="fa fa-sitemap fa-2x"></i> Zones<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Zones<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_zone_ui')"><i class="fa fa-plus-square"></i> New</a>
@@ -97,16 +97,16 @@
               </li>
               <!-- Register -->
               <li>
-                <a href="#"><i class="fa fa-book fa-2x"></i>Register<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-book fa-2x w3-text-blue"></i>Register<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="index.php?page=">Baptism</a>
+                        <a href="index.php?page=baptisms">Baptism</a>
                     </li>
                     <li>
-                        <a href="index.php?page=">Marriage</a>
+                        <a href="index.php?page=marriages">Marriage</a>
                     </li>
                     <li>
-                        <a href="index.php?page=">Death</a>
+                        <a href="index.php?page=deaths">Death</a>
                     </li>
                      
                 </ul>
@@ -114,7 +114,7 @@
 
               <!-- Cashflow Dropdown -->
               <li>
-                <a href="#"><i class="fa fa-money fa-2x"></i> Cashflow<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-money fa-2x w3-text-blue"></i> Cashflow<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=cashflow">Summary</a>
@@ -150,10 +150,10 @@
 
               <!-- Settings Dropdown -->
               <li>
-                <a href="#"><i class="fa fa-cog fa-2x w3-spin"></i> Settings<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-cog fa-2x w3-spin w3-text-blue"></i> Settings<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="index.php?page=">Profile</a>
+                        <a href="index.php?page=admin_profile">Profile</a>
                     </li>
                     <li>
                         <a href="index.php?page=system_settings">System</a>

@@ -4,6 +4,7 @@
     $zones = $member->getZone();
     $ministries = $member->getMinistry();
     $regions = $member->getRegion();
+  
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +74,7 @@
                             <div class="fieldWrapper w3-margin-bottom">
                                 
                                 <label class="w3-text-grey"><b><label for="id_birth_date">Date of birth<span class="w3-text-red w3-large">*</span></label></b></label><br>
-                                <input type="text" name="birth_date" class="w3-input w3-border w3-border-dark-grey" required id="id_birth_date" />
+                                <input type="date" name="birth_date" class="w3-input w3-border w3-border-dark-grey" required id="id_birth_date" />
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
@@ -100,7 +101,7 @@
                                 <label class="w3-text-grey"><b><label for="id_languages">Languages<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <select name="languages[]" class="w3-select w3-border w3-border-dark-grey" required id="id_languages" size="3" multiple>
                                   <?php foreach($settings->getLanguage() as $language):?>
-                                      <option class="w3-padding-left" value="<?php echo $language->name;?>"><?php echo $language->name;?></option>
+                                      <option class="w3-padding-left" value="<?php echo $language->id;?>"><?php echo $language->name;?></option>
                                   <?php endforeach;?>
                                 </select>
                             </div>
@@ -171,7 +172,7 @@
                                     <div class="w3-col m6 l6 w3-hide baptism">
                                        <div>
                                            <label class="w3-text-grey"><b><label for="id_date_baptised">Date:</label></b></label>
-                                        <input type="date" name="date_baptised" class="w3-border w3-border-dark-grey" id="id_date_baptised" required />  
+                                        <input type="date" name="date_baptised" class="w3-border w3-border-dark-grey" id="id_date_baptised" disabled required />  
                                        </div> 
                                     </div>
                                 </div>
@@ -181,7 +182,7 @@
                                 <div class="w3-row w3-margin-bottom">
                                     <div class="w3-col m6 l6">
                                        <label class="w3-text-grey"><b><label for="id_where_baptised">Congregation:</label></b></label>
-                                        <select id="id_where_baptised" name="where_baptised" class="w3-select w3-border w3-border-dark-grey" required>
+                                        <select id="id_where_baptised" name="where_baptised" class="w3-select w3-border w3-border-dark-grey" disabled required>
                                             <option value="" selected>---------</option>
                                             <option value="Gbawe">Gbawe Church</option>
                                             <option value="other church">Other Church</option>
@@ -226,31 +227,8 @@
                               </div>
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
-                                
-                                
-                            </div>
-                            <div class="fieldWrapper w3-margin-bottom">
                                 <label class="w3-text-grey"><b><label for="id_education">Highest Educational Level<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <input type="text" name="education" class="w3-input w3-border w3-border-dark-grey" maxlength="50" required id="id_education" />
-                            </div>
-                            <div id="marriage" class="fieldWrapper w3-margin-bottom">
-                                <div class="w3-row">
-                                    <div class="w3-col m6 l6">
-                                        <label class="w3-text-grey"><b><label for="id_marital">Marital Status<span class="w3-text-red w3-large">*</span></label></b></label>
-                                        <select name="marital_status" class="w3-select w3-border w3-border-dark-grey" required id="id_marital">
-                                          <option value="" selected>---------</option>
-                                          <option value="single">Single</option>
-                                          <option value="married">Married</option>
-                                          <option value="divorced">Divorced</option>
-                                          <option value="separated">Separated</option>
-                                          <option value="widowed">widowed</option>
-                                        </select>
-                                    </div>
-                                    <div class="w3-col m6 l6">
-                                        <label class="w3-text-grey"><b><label for="id_kids">Kids<span class="w3-text-red w3-large">*</span></label></b></label>
-                                        <input type="number" name="kids" class="w3-input w3-border w3-border-dark-grey" min="0" id="id_kids" required />
-                                    </div>
-                                </div>
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 <div class="w3-row">
@@ -273,6 +251,51 @@
                                             <option value="SS">SS</option>
                                             <option value="AB">AB</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="marriage" class="fieldWrapper w3-margin-bottom">
+                                <div class="w3-row">
+                                    <div class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="marital_status">Marital Status<span class="w3-text-red w3-large">*</span></label></b></label>
+                                        <select name="marital_status" class="w3-select w3-border w3-border-dark-grey" required id="marital_status">
+                                          <option value="" selected>---------</option>
+                                          <option value="single">Single</option>
+                                          <option value="married">Married</option>
+                                          <option value="divorced">Divorced</option>
+                                          <option value="separated">Separated</option>
+                                          <option value="widowed">widowed</option>
+                                        </select>
+                                    </div>
+                                    <div class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="id_kids">Kids<span class="w3-text-red w3-large">*</span></label></b></label>
+                                        <input type="number" name="kids" class="w3-input w3-border w3-border-dark-grey" min="0" id="id_kids" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="spouse" class="fieldWrapper w3-margin-bottom w3-hide">
+                              <div class="w3-container w3-blue-grey w3-margin-bottom">
+                                <h5>Spouse</h5>
+                              </div>
+                              <div class="w3-row">
+                                   <br>
+                                    <div class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="is_spouse_member">Is Member:</label></b></label> 
+                                       <input type="checkbox" name="is_spouse_member" class="w3-check w3-border w3-border-dark-grey" id="is_spouse_member" checked />
+                                    </div>
+                                    <div id="spouse_token_field" class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="spouse_token">Token:</label></b></label>
+                                        <input type="text" name="spouse_token" class="w3-input w3-border w3-border-dark-grey numberonly" maxlength="10" id="spouse_token" placeholder="spouse's primary phone" />
+                                    </div>
+                                </div>
+                                <div id="spouse_field" class="w3-row w3-hide">
+                                    <div class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="spouse_name">Full name:</label></b></label><br>
+                                       <input type="text" name="spouse_name" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="spouse_name" required disabled/>
+                                    </div>
+                                    <div class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="spouse_contact">Contact:</label></b></label><br>
+                                        <input type="text" name="spouse_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="spouse_contact" min="0" maxlength="10" required disabled/>
                                     </div>
                                 </div>
                             </div>
@@ -312,21 +335,25 @@
                                 <div class="w3-row">
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_is_father_member">Is Member:</label></b></label> 
-                                       <input type="checkbox" name="is_father_member" class="w3-check w3-border w3-border-dark-grey" id="id_is_father_member"/>
+                                       <input type="checkbox" name="is_father_member" class="w3-check w3-border w3-border-dark-grey" id="id_is_father_member" checked />
                                     </div>
-                                    <div class="w3-col m6 l6">
-                                        <label class="w3-text-grey"><b><label for="id_is_mother_deceased">Is Deceased:</label></b></label>
+                                    <div id="father_token_field" class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="father_token">Token:</label></b></label>
+                                        <input type="text" name="father_token" class="w3-input w3-border w3-border-dark-grey numberonly" maxlength="10" id="father_token" placeholder="father's primary phone" />
+                                    </div>
+                                    <div class="w3-col m6 l6 w3-hide father">
+                                        <label class="w3-text-grey"><b><label for="id_is_father_deceased">Is Deceased:</label></b></label>
                                         <input type="checkbox" name="is_father_deceased" class="w3-check w3-border w3-border-dark-grey" id="id_is_father_deceased"/>
                                     </div>
                                 </div>
-                                <div id="father_field" class="w3-row fieldWrapper">
+                                <div id="father_field" class="w3-row w3-hide father">
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_father_name">Full name:</label></b></label><br>
-                                       <input type="text" name="father_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_father_name" required/>
+                                       <input type="text" name="father_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_father_name" required disabled/>
                                     </div>
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_father_contact">Contact:</label></b></label><br>
-                                        <input type="number" name="father_contact" class="w3-input w3-border w3-border-dark-grey" id="id_father_contact" min="0" maxlength="10" required/>
+                                        <input type="text" name="father_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="id_father_contact" min="0" maxlength="10" required disabled/>
                                     </div>
                                 </div>
                             </fieldset><br>
@@ -335,22 +362,25 @@
                                 <div class="w3-row">
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_is_mother_member">Is Member:</label></b></label>
-                                        <input type="checkbox" name="is_mother_member" class="w3-check w3-border w3-border-dark-grey" id="id_is_mother_member"/>
+                                        <input type="checkbox" name="is_mother_member" class="w3-check w3-border w3-border-dark-grey" id="id_is_mother_member" checked/>
                                     </div>
-                                    <div class="w3-col m6 l6">
+                                    <div id="mother_token_field" class="w3-col m6 l6">
+                                        <label class="w3-text-grey"><b><label for="mother_token">Token:</label></b></label>
+                                        <input type="text" name="mother_token" class="w3-input w3-border w3-border-dark-grey numberonly" maxlength="10" id="mother_token" placeholder="mother's primary phone" />
+                                    </div>
+                                    <div class="w3-col m6 l6 w3-hide mother">
                                         <label class="w3-text-grey"><b><label for="id_is_mother_member">Is Deceased:</label></b></label>
                                         <input type="checkbox" name="id_is_mother_deceased" class="w3-check w3-border w3-border-dark-grey" id="id_is_mother_deceased" />
                                     </div>
                                 </div>
-                                <div id="mother_field" class="w3-row fieldWrapper">
-                                <br>
+                                <div id="mother_field" class="w3-row w3-hide mother">
                                 <div class="w3-col m6 l6">
                                     <label class="w3-text-grey"><b><label for="id_mother_name">Full name:</label></b></label><br>
-                                   <input type="text" name="mother_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_mother_name" required>
+                                   <input type="text" name="mother_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_mother_name" required disabled>
                                 </div>
                                 <div class="w3-col m6 l6">
                                     <label class="w3-text-grey"><b><label for="id_mother_contact">Contact</label></b></label><br>
-                                    <input type="text" name="mother_contact" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="id_mother_contact" required/>
+                                    <input type="text" name="mother_contact" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="id_mother_contact" required disabled/>
                                 </div>
                             </div>
                             </fieldset>

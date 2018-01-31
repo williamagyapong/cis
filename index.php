@@ -96,7 +96,7 @@
       <div>
       <?php include'include/footer.php';?>
       </div>
-      <div id="login_msg"  class="w3-text-red">
+      <div id="login_msg"  class="w3-text-white w3-bold w3-center">
         
         <?php
         if(isset($errorMsg))

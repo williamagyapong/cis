@@ -24,21 +24,25 @@ class Settings extends Model
 	* @var
 	* @return
 	*/
-	public function getLanguage($name=null)
+	public function getLanguage($token=null)
 	{
-		if(!$name)
+
+		if($token)
 		{
-			return $this->db->get($this->languages, [])->all();
+			//fetch a particular language
+			return $this->db->get($this->languages, ['id','=',$token])->first();	
 		} 
 		else
 		{
-			return array();
+			// fetch all languages
+			return $this->db->get($this->languages, [])->all();
 		}
 	}
+    
 
 
 	/**
-	* retrieve languages
+	* reset password
 	* @param
 	* @var
 	* @return

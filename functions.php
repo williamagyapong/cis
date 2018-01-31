@@ -46,6 +46,21 @@ function activePage($page){
 	}
 }
 
+
+function numEncrypt($value)
+{
+  //$result = $value/34534998876;
+  $result = ($value+10000)/13;
+  return $result;
+}
+
+function numDecrypt($value)
+{
+  //$result = $value*34534998876;
+  $result = ($value*13)-10000;
+  return round($result);
+}
+
 function deleteFile()
 {
 	$filename = $_POST['delete_file'];

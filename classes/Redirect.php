@@ -20,7 +20,8 @@ class Redirect
 
 					case 503:
 					 	header('HTTP/1.0 503 FAILURE');
-					 	include 'include/errors/503.php';
+					 	// echo "<a href=\"../include/errors/503.php\">error</a>";
+					 	include '../include/errors/503.php';
 					 	exit();
 					break;
 
@@ -46,7 +47,7 @@ class Redirect
 	      switch(Input::get('page'))
 	      {
 	        case 'cashflow':
-	        	include '../view/admin/cashflow.php';
+	        	include '../view/accounts/cashflow.php';
 	         	exit();
 	        break;
 
@@ -65,11 +66,6 @@ class Redirect
 	         	exit();
 	        break;
 
-	        case 'birthdays':
-	         	include '../view/events/birthdays.php';
-	         	exit();
-	        break;
-
 	        case 'ministry_members':
 	         	include '../view/groups/ministries.php';
 	         	exit();
@@ -80,8 +76,58 @@ class Redirect
 	         	exit();
 	        break;
 
+	        case 'admin_profile':
+	         	include '../view/admin/admin.profile.php';
+	         	exit();
+	        break;
+
 	        case 'system_settings':
-	         	include '../view/admin/settings.php';
+	         	include '../view/admin/admin.settings.php';
+	         	exit();
+	        break;
+
+	        case 'baptisms':
+	         	include '../view/register/baptisms.php';
+	         	exit();
+	        break;
+
+	        case 'marriages':
+	         	include '../view/register/marriages.php';
+	         	exit();
+	        break;
+
+	        case 'deaths':
+	         	include '../view/register/deaths.php';
+	         	exit();
+	        break;
+
+	        case 'publisher':
+	         	include '../view/events/publisher.php';
+	         	exit();
+	        break;
+
+	        case 'birthdays':
+	         	include '../view/events/birthdays.php';
+	         	exit();
+	        break;
+
+	        case 'funerals':
+	         	include '../view/events/funerals.php';
+	         	exit();
+	        break;
+
+	        case 'invitations':
+	         	include '../view/events/invitations.php';
+	         	exit();
+	        break;
+
+	        case 'marriage_notices':
+	         	include '../view/events/marriages.php';
+	         	exit();
+	        break;
+
+	        case 'other_events':
+	         	include '../view/events/other.php';
 	         	exit();
 	        break;
 

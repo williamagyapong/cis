@@ -3,8 +3,9 @@ require_once '../settings.php';
 $member = new Member();
 $adults = $member->getAdults();
 $children = $member->getChildren();
-$baptisedMembers = $member->getBaptised();
-$NotBaptisedMembers = $member->getBaptised('not');
+$members = $member->get();
+//$baptisedMembers = $member->getBaptised();
+//$NotBaptisedMembers = $member->getBaptised('not');
 ?>
 
 <!DOCTYPE html>
@@ -137,6 +138,7 @@ $NotBaptisedMembers = $member->getBaptised('not');
                                        </table>
                                      </div>
                                 </div>
+                                <!-- children tab -->
                                 <div class="tab-pane fade" id="children">
                                   <br>
                                    <div class="table-responsive">
@@ -178,6 +180,7 @@ $NotBaptisedMembers = $member->getBaptised('not');
                                      </table>
                                    </div>
                                 </div>
+                                <!-- baptised tab -->
                                 <div class="tab-pane fade" id="baptised">
                                   <br>
                                    <div class="table-responsive">
@@ -196,7 +199,9 @@ $NotBaptisedMembers = $member->getBaptised('not');
                                            </tr>
                                          </thead>
                                          <tbody>
-                                           <?php foreach($baptisedMembers as $person):?>
+                                           <?php foreach($members as $person):
+                                              if($person->baptismal_status !='baptised') continue;
+                                           ?>
                                             <tr>
                                               <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;" class="w3-text-blue"><?php echo $person->member_code;?></td>
 
@@ -237,7 +242,9 @@ $NotBaptisedMembers = $member->getBaptised('not');
                                            </tr>
                                          </thead>
                                          <tbody>
-                                           <?php foreach($NotBaptisedMembers as $person):?>
+                                           <?php foreach($members as $person):
+                                              if($person->baptismal_status =='baptised') continue;//skip all those baptised;
+                                           ?>
                                             <tr>
                                               <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;" class="w3-text-blue"><?php echo $person->member_code;?></td>
 
