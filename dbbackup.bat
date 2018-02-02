@@ -1,6 +1,7 @@
 @ECHO OFF
 
 set TIMESTAMP=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%
+REM set TIMESTAMP=%DATE:~10,4%%DATE:~4,2%%DATE:~7,2%
 
 REM Export all databases into file C:\path\backup\databases.[year][month][day].sql
   REM "C:\xampp\mysql\bin\mysqldump.exe" --all-databases --result-file="C:\test\backup\databases.%TIMESTAMP%.sql" --user=root --password=""

@@ -15,6 +15,7 @@
 			<span class="">Member Details </span>
 			
 			<span class="fa fa-edit w3-text-blue"></span>
+			<!-- <img src="../assets/images/system/edit_icon2.png" width="50" height="30"> -->
 			<!-- <span onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')" class="fa fa-times btn btn-danger w3-right"></span> -->
 			<button title="Close" class="w3-button w3-border w3-right w3-hover-red" name="button" onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')"><i class="fa fa-times"></i></button>
 		</h4>
@@ -207,8 +208,8 @@
                                               if(empty($fatherExist)){
                                               	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$father->token</i></h5>";
                                                } else {
-                                               	 echo "<h5> $fatherExist->f_name.' '.$fatherExist->l_name; (Name)</h5>
-                                               	     <h5> $fatherExist->phone; (Contact)</h5>
+                                               	 echo "<h5> $fatherExist->f_name $fatherExist->l_name (Name)</h5>
+                                               	     <h5> $fatherExist->phone (Contact)</h5>
                                                	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
                                                }
                                         	?>
@@ -243,8 +244,8 @@
                                               if(empty($motherExist)){
                                               	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$mother->token</i></h5>";
                                                } else {
-                                               	 echo "<h5> $motherExist->f_name.' '.$motherExist->l_name; (Name)</h5>
-                                               	     <h5> $motherExist->phone; (Contact)</h5>
+                                               	 echo "<h5> $motherExist->f_name $motherExist->l_name (Name)</h5>
+                                               	     <h5> $motherExist->phone (Contact)</h5>
                                                	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
                                                }
                                         	?>
@@ -279,8 +280,8 @@
 	                                              if(empty($nextOfKinExist)){
 	                                              	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$nextOfKin->token</i></h5>";
 	                                               } else {
-	                                               	 echo "<h5> $nextOfKinExist->f_name.' '.$nextOfKinExist->l_name; (Name)</h5>
-	                                               	     <h5> $nextOfKinExist->phone; (Contact)</h5>
+	                                               	 echo "<h5> $nextOfKinExist->f_name $nextOfKinExist->l_name (Name)</h5>
+	                                               	     <h5> $nextOfKinExist->phone (Contact)</h5>
 	                                               	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
 	                                               }
 	                                        	?>

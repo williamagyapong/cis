@@ -6,6 +6,7 @@ require_once '../settings.php';
  $adults = $member->getAdults(18);
  $birthdays = $member->getBirthDays();
  $birthdaysCount = count($birthdays);
+ $deaths = $member->get('deaths');
 
 ?>
 
@@ -92,8 +93,42 @@ require_once '../settings.php';
                 <a href="index.php?page=members_list" class="btn btn-default btn-lg" role="button">View</a></p>
             </div>
            </div>
-          </div>   
-             <!-- /. ROW  -->           
+          </div>  
+         </div>
+         <div class="row" id="master-page">
+         <div class="col-md-4 col-sm-12 col-xs-12">           
+           <div class="panel panel-back noti-box">
+                <div class="text-box" align="center">
+                    <p class="main-text">Baptisms</p>
+                    <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($adults);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
+                    <!-- <span>out of <?php echo count($members) ?></span> -->
+                    <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                    <a href="index.php?page=baptisms" class="btn btn-default btn-lg" role="button">View</a></p>
+                </div>
+           </div>
+         </div> 
+         <div class="col-md-4 col-sm-12 col-xs-12">           
+           <div class="panel panel-back noti-box">
+            <div class="text-box" align="center">
+                <p class="main-text">Marriages</p>
+                <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($members)-count($adults);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
+                <!-- <span>out of <?php echo count($members) ?></span> -->
+                <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                <a href="index.php?page=marriages" class="btn btn-default btn-lg" role="button">View</a></p>
+            </div>
+           </div>
+         </div>
+         <div class="col-md-4 col-sm-12 col-xs-12">           
+           <div class="panel panel-back noti-box">
+                <div class="text-box" align="center">
+                    <p class="main-text">Deaths</p>
+                    <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($deaths);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
+                    <!-- <span>out of <?php echo count($members) ?></span> -->
+                    <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                    <a href="index.php?page=deaths" class="btn btn-default btn-lg" role="button">View</a></p>
+                </div>
+           </div>
+         </div>           
          </div>
          <!-- /. PAGE INNER  -->
         </div>

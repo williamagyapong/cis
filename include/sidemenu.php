@@ -5,10 +5,10 @@
             <img id="user_image" src="../assets/images/<?php echo $user->data()->image;?>" class="user-image img-responsive"/>
 		</li>
             <li>
-                <a class=""  href="index.php"><i class="fa fa-dashboard fa-2x w3-text-blue"></i> Dashboard</a>
+                <a class="w3-hover-text-grey"  href="index.php"><i class="fa fa-dashboard fa-2x w3-text-blue"></i> Dashboard</a>
             </li>
              <li>
-                <a  href="#"><i class="fa fa-calendar fa-2x w3-text-blue"></i> Events<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey"  href="#"><i class="fa fa-calendar fa-2x w3-text-blue w3-hover-text-grey"></i> Events<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=publisher">Publish Event</a>
@@ -37,7 +37,7 @@
             </li>
             <!-- Members Dropdown -->
             <li>
-                <a href="#"><i class="fa fa-users fa-2x w3-text-blue"></i> Members<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-users fa-2x w3-text-blue"></i> Members<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=new_member"><i class="fa fa-plus-square"></i> New</a>
@@ -73,7 +73,7 @@
 			
 			<!-- Ministries Dropdown -->                 
             <li>
-                <a href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Ministries<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Ministries<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_ministry_ui')"><i class="fa fa-plus-square"></i> New</a>
@@ -85,7 +85,7 @@
               </li>
               <!-- Zones Dropdown -->                 
             <li>
-                <a href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Zones<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-sitemap fa-2x w3-text-blue"></i> Zones<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="javascript:void()" onclick="popUpModal('../controller.php','new_zone_ui')"><i class="fa fa-plus-square"></i> New</a>
@@ -97,7 +97,7 @@
               </li>
               <!-- Register -->
               <li>
-                <a href="#"><i class="fa fa-book fa-2x w3-text-blue"></i>Register<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-book fa-2x w3-text-blue"></i>Register<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=baptisms">Baptism</a>
@@ -114,7 +114,7 @@
 
               <!-- Cashflow Dropdown -->
               <li>
-                <a href="#"><i class="fa fa-money fa-2x w3-text-blue"></i> Cashflow<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-money fa-2x w3-text-blue"></i> Cashflow<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=cashflow">Summary</a>
@@ -134,8 +134,8 @@
                     </li>
                     </li>
                     <li>
-                        <!-- <a href="expense.html">Expense</a> -->
-                        <a href="#">Expense<span class="fa arrow"></span></a>
+                        <!-- Accounts -->
+                        <a class="w3-hover-text-grey" href="#">Expense<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                             <li>
                                 <a href="index.php?page=">Summary</a>
@@ -150,7 +150,7 @@
 
               <!-- Settings Dropdown -->
               <li>
-                <a href="#"><i class="fa fa-cog fa-2x w3-spin w3-text-blue"></i> Settings<span class="fa arrow"></span></a>
+                <a class="w3-hover-text-grey" href="#"><i class="fa fa-cog fa-2x w3-spin w3-text-blue"></i> Settings<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="index.php?page=admin_profile">Profile</a>
