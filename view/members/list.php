@@ -87,9 +87,9 @@ $members = $member->get();
                                               <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                                               <td><?php echo $person->phone;?></td>
 
-                                              <td title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+                                              <td style="cursor: pointer;" title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
 
-                                              <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
+                                              <td style="cursor: pointer;" title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                                             </tr>
                                            <?php endforeach;?>
                                          </tbody>
@@ -129,9 +129,9 @@ $members = $member->get();
                                               <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                                               <td><?php echo $person->phone;?></td>
 
-                                              <td title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+                                              <td style="cursor: pointer;" title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
 
-                                              <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
+                                              <td style="cursor: pointer;" title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                                             </tr>
                                            <?php endforeach;?>
                                          </tbody>
@@ -171,9 +171,9 @@ $members = $member->get();
                                             <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                                             <td><?php echo $person->phone;?></td>
 
-                                            <td title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+                                            <td style="cursor: pointer;" title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
 
-                                            <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
+                                            <td style="cursor: pointer;" title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                                           </tr>
                                          <?php endforeach;?>
                                        </tbody>
@@ -215,9 +215,9 @@ $members = $member->get();
                                               <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                                               <td><?php echo $person->phone;?></td>
 
-                                              <td title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+                                              <td style="cursor: pointer;" title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
 
-                                              <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
+                                              <td style="cursor: pointer;" title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                                             </tr>
                                            <?php endforeach;?>
                                          </tbody>
@@ -258,9 +258,9 @@ $members = $member->get();
                                               <td><?php echo $member->getZone($person->zone_id)->name;?></td>
                                               <td><?php echo $person->phone;?></td>
 
-                                              <td title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
+                                              <td style="cursor: pointer;" title="Edit Record"><span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$person->id."')"?>" class="fa fa-pencil-square-o w3-text-blue"></span></td>
 
-                                              <td title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
+                                              <td style="cursor: pointer;" title="Delete Record"><span class="fa fa-trash w3-text-red"></span></td>
                                             </tr>
                                            <?php endforeach;?>
                                          </tbody>

@@ -26,7 +26,7 @@
 	   	 <div>
 	   	 	<table class="table table-striped table-bordered">
 	   	 	  <tr>
-	   	 	  	<td colspan="2">
+	   	 	  	<td colspan="2" class="w3-center w3-grey" style="padding:20px 0;">
 	   	 	  		<img src="../assets/images/members/<?php echo $memberData->picture;?>" width="270" height="250" alt="member picture" >
 	   	 	  	</td>
 	   	 	  </tr>
@@ -47,16 +47,16 @@
 	   	 	  	<td><b>Marital Status</b></td>
 	   	 	  	<td><?php echo $memberData->marital_status;?></td>
 	   	 	  </tr>
-	   	 	  <?php if(($memberData->marital_status=='single')|| ($memberData->marital_status=='widowed')):?>
+	   	 	  <?php if(($memberData->marital_status=='single')|| ($memberData->marital_status=='')):?>
 	   	 	      <!-- do nothing -->
 	   	 	  <?php else:?>
 	   	 	  <tr>
 	   	 	  	<td colspan="2">
-                        <div class="panel-group" id="accordion" style="margin-bottom: 0">
+                        <div class="panel-group" id="spouse_accordion" style="margin-bottom: 0">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                    	<a data-toggle="collapse" data-parent="#accordion" href="#spouse" class="collapsed" style="display: block;text-decoration: none;">Spouse Details</a>
+                                    	<a data-toggle="collapse" data-parent="#spouse_accordion" href="#spouse" class="collapsed" style="display: block;text-decoration: none;">Spouse Details</a>
                                     </h4>
                                 </div>
                                 <div id="spouse" class="panel-collapse collapse" style="height: 0px;">
@@ -67,17 +67,18 @@
 								    ?>
 								      <h5 class="w3-text-red"><i>Not available</i></h5>
 								    <?php else:?>
-								        <?php if($spouse->token==''):?>
-								        	<!-- spouse is not a member -->
-								        	<h5><?php echo $spouse->name;?> (Name)</h5>
-								        	<h5><?php echo $spouse->contact;?> (Contact)</h5>
+								        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $spouse->name;?></span></h5>
+								        	<?php if($spouse->deceased=='yes'):?>
+								        	  <h5><i>Of blessed memory</i></h5>
+								            <?php else:?>
+                                        	  <h5>Contact&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $spouse->contact;?></span></h5>
+                                        	<?php endif;?>
+
+								        	<?php if($spouse->member==''):?>
 								        	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
-								        <?php else: $spouseExist = $member->get($spouse->token);?>
-								        	<!-- spouse is also a member -->
-								        	<h5><?php echo $spouseExist->f_name.' '.$spouseExist->l_name;?> (Name)</h5>
-								        	<h5><?php echo $spouseExist->phone;?> (Contact)</h5>
+										    <?php else:?>
 								        	<h5 class="w3-text-red"><i>Member of the church</i></h5>
-								        <?php endif;?>
+								            <?php endif;?>
 								     <?php endif;?>
 								    </div>
 								</div>
@@ -105,7 +106,7 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Home Town</b></td>
-	   	 	  	<td><?php echo ucwords($memberData->home_town).", ".$memberData->region;?></td>
+	   	 	  	<td><?php echo ucwords($memberData->home_town).", ".$member->getRegion($memberData->region_id)->name;?></td>
 	   	 	  </tr>
 	   	 	</table>
 	   	 </div>
@@ -196,24 +197,23 @@
                                     ?>
                                       <h5 class="w3-text-red"><i>Not available</i></h5>
                                     <?php else:?>
-                                        <?php if($father->token==''):?>
                                         	<!-- father is not a member -->
-                                        	<h5><?php echo $father->name;?> (Name)</h5>
-                                        	<h5><?php echo $father->contact;?> (Contact)</h5>
-                                        	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
-                                        <?php else: ?>
-                                        	<!-- father is also a member -->
+                                        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $father->name;?></span></h5>
+                                        	<?php if($father->deceased=='yes'):?>
+								        	  <h5><i>Of blessed memory</i></h5>
+								            <?php else:?>
+                                        	  <h5>Contact&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $father->contact;?></span></h5>
+                                        	<?php endif;?>
+                                        	
                                         	<?php
-                                              $fatherExist = $member->get($father->token);
-                                              if(empty($fatherExist)){
-                                              	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$father->token</i></h5>";
+                                            
+                                              if($father->member==''){
+                                              	echo "<h5 class=\"w3-text-red\"><i>Not a member of the church</i></h5>";
                                                } else {
-                                               	 echo "<h5> $fatherExist->f_name $fatherExist->l_name (Name)</h5>
-                                               	     <h5> $fatherExist->phone (Contact)</h5>
-                                               	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
+                                               	 echo "<h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
                                                }
                                         	?>
-                                        <?php endif;?>
+                                     
                                     <?php endif;?>
                                     </div>
                                 </div>
@@ -232,24 +232,20 @@
                                     ?>
                                       <h5 class="w3-text-red"><i>Not available</i></h5>
                                     <?php else:?>
-                                        <?php if($mother->token==''):?>
-                                        	<!-- mother is not a member -->
-                                        	<h5><?php echo $mother->name;?> (Name)</h5>
-                                        	<h5><?php echo $mother->contact;?> (Contact)</h5>
-                                        	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
-                                        <?php else: ?>
-                                        	<!-- mother is also a member -->
-                                        	<?php
-                                              $motherExist = $member->get($mother->token);
-                                              if(empty($motherExist)){
-                                              	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$mother->token</i></h5>";
+                                        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $mother->name;?></span></h5>
+                                        	<?php if($mother->deceased=='yes'):?>
+								        	  <h5><i>Of blessed memory</i></h5>
+								            <?php else:?>
+                                        	  <h5>Contact&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $mother->contact;?></span></h5>
+                                        	<?php endif;?>
+                                             <?php
+                                            
+                                              if($mother->member==''){
+                                              	echo "<h5 class=\"w3-text-red\"><i>Not a member of the church</i></h5>";
                                                } else {
-                                               	 echo "<h5> $motherExist->f_name $motherExist->l_name (Name)</h5>
-                                               	     <h5> $motherExist->phone (Contact)</h5>
-                                               	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
+                                               	 echo "<h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
                                                }
                                         	?>
-                                        <?php endif;?>
                                      <?php endif;?>
                                     </div>
                                 </div>
@@ -264,28 +260,14 @@
                                     <div class="panel-body">
                                         <?php 
 										 $nextOfKin = $member->getRelation($memberData->id,'next_of_kin');
-										 if(empty($nextOfKin)):
+										 if(empty($nextOfKin)|| ($nextOfKin->name=='')):
 										?>
 										  <h5 class="w3-text-red"><i>Not available</i></h5>
 										<?php else:?>
-										    <?php if($nextOfKin->token==''):?>
-										    	<!-- next of kin is not a member -->
-										    	<h5><?php echo $nextOfKin->name;?> (Name)</h5>
-										    	<h5><?php echo $nextOfKin->contact;?> (Contact)</h5>
-										    	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
-										    <?php else:?>
-										    	<!-- next of kin is also a member -->
-										    	<?php
-	                                              $nextOfKinExist = $member->get($nextOfKin->token);
-	                                              if(empty($nextOfKinExist)){
-	                                              	echo "<h5 class=\"w3-text-red\">Incorrect token number: <i class=\"w3-text-blue-grey\">$nextOfKin->token</i></h5>";
-	                                               } else {
-	                                               	 echo "<h5> $nextOfKinExist->f_name $nextOfKinExist->l_name (Name)</h5>
-	                                               	     <h5> $nextOfKinExist->phone (Contact)</h5>
-	                                               	     <h5 class=\"w3-text-red\"><i>Member of the church</i></h5>";
-	                                               }
-	                                        	?>
-										    <?php endif;?>
+										    	<!-- next of kin is details -->
+										    	<h5>Name&nbsp;<span class="fa fa-arrow-right"></span> <span class="w3-text-blue-grey"><?php echo $nextOfKin->name;?></span></h5>
+										    	<h5>Contact&nbsp;<span class="fa fa-arrow-right"></span> <span class="w3-text-blue-grey"><?php echo $nextOfKin->contact;?></span></h5>
+										    	<h5 >Relationship&nbsp;<span class="fa fa-arrow-right"></span> <span class="w3-text-blue-grey"><?php echo $nextOfKin->relationship;?></span></h5>
 										<?php endif;?>
                                     </div>
                                 </div>

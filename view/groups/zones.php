@@ -47,17 +47,23 @@ require_once '../settings.php';
                  </div>
                </div>
             </div>
-            <?php if($zoneObject->name !='None'):?>
             <div class="w3-col m6 l6">
+              <?php if(($zoneObject->name !='None') && ($zoneObject->leader!=0)):?>
               <h3>
                 <span class="w3-right">Zone Leader: <span title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$zoneObject->leader."')"?>" style="cursor: pointer;" class="w3-text-blue-grey">
                   <?php 
                   $zoneLeader = $member->get($zoneObject->leader);
-                  echo $zoneLeader->f_name.' '.$zoneLeader->l_name;
+                  $zoneLeaderName =  $zoneLeader->f_name.' '.$zoneLeader->l_name;
+                  echo truncateStr($zoneLeaderName);
                   ?></span></span>
               </h3>
+            <?php elseif(($zoneObject->name!='None')&&($zoneObject->leader==0)):?>
+              <h3>
+                <button onclick="<?php echo "popUpModal('../process.php','assign_zone_leader_ui', '".$zoneObject->id."')";?>" class="btn btn-primary w3-right w3-margin-right">Assign Leader</button>
+              </h3>
+            <?php endif;?>
             </div>
-           <?php endif;?>
+           
         </div>              
          <!-- /. ROW  -->
           <hr />
@@ -66,6 +72,9 @@ require_once '../settings.php';
               <div class="panel panel-default">
                   <div class="panel-head">
                       <div class="panel-body">
+                        <?php if(($zoneObject->leader!=0)):?>
+                          <button onclick="<?php echo "popUpModal('../process.php','assign_zone_leader_ui', '".$zoneObject->id."')";?>" class="btn btn-primary" style="margin-left: 40%;">Change Leader</button>
+                        <?php endif;?>
                           <div class="table-responsive">
                              <table class="table table-striped table-bordered table-hover" id="zone_members_table">
                                <thead>

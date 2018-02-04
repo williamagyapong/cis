@@ -22,7 +22,7 @@ function display($content)
 }
 
 
-function truncateString($string)
+function truncateStr($string)
 {
 	$length = strlen($string);
 	if($length >= 19)

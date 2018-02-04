@@ -334,9 +334,8 @@ class Member extends Model
 	* @return
 	*/
 	public function addMember()
-	{
-		$father = json_encode(array('name'=>Input::get('father_name'), 'contact'=>Input::get('father_contact')));
-		$mother = json_encode(array('name'=>Input::get('mother_name'), 'contact'=>Input::get('mother_contact')));
+	{  
+
 		$memberCode = $this->generateId();
 		//$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
@@ -352,7 +351,7 @@ class Member extends Model
 												  'gender'=>Input::get('gender'),
 												  'birth_date'=>Input::get('birth_date'),
 												  'home_town'=>Input::get('home_town'),
-												  'region'=>Input::get('home_region'),
+												  'region_id'=>Input::get('home_region'),
 												  'languages'=>json_encode($_POST['languages']),
 												  'phone'=>Input::get('phone'),
 												  'phone_other'=>Input::get('phone_other'),
@@ -386,16 +385,17 @@ class Member extends Model
 				                                       'date_registered'=>date('Y-m-d')
 			                                         ]);
 			//add spouse
-			   $run3 = true;
-			if(Input::get('marital_status'=='married')||Input::get('marital_status'=='separated')||Input::get('marital_status'=='divorced')) {
+			/*   $run3 = true;
+			if(Input::get('marital_status'=='married')||Input::get('marital_status'=='separated')||Input::get('marital_status'=='divorced')||Input::get('marital_status'=='widowed')) {
+				$run3 = false;*/
 				$run3 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
 														  'name'=>Input::get('spouse_name'),
 														  'contact'=>Input::get('spouse_contact'),
 														  'type'=>'spouse',
-														  'token'=>Input::get('spouse_token')
+														  'member'=>Input::get('is_spouse_member')
 			                                            ]);
-			}
+			//}
 			//add father
 			$run4 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
@@ -403,7 +403,7 @@ class Member extends Model
 														  'name'=>Input::get('father_name'),
 														  'contact'=>Input::get('father_contact'),
 														  'deceased'=>Input::get('is_father_deceased'),
-														  'token'=>Input::get('spouse_token')
+														  'member'=>Input::get('is_father_member')
 			                                            ]);
 
 			//add mother
@@ -413,7 +413,7 @@ class Member extends Model
 														  'name'=>Input::get('mother_name'),
 														  'contact'=>Input::get('mother_contact'),
 														  'deceased'=>Input::get('is_mother_deceased'),
-														  'token'=>Input::get('mother_token')
+														  'member'=>Input::get('is_mother_member')
 			                                            ]);
 
 			//add mother

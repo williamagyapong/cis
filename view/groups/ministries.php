@@ -47,17 +47,23 @@ require_once '../settings.php';
                  </div>
                </div>
             </div>
-            <?php if($ministryObject->name !='None'):?>
             <div class="w3-col m6 l6">
+              <?php if(($ministryObject->name !='None')&&($ministryObject->leader!=0)):?>
               <h3>
                 <span class="w3-right">Ministry Leader: <span title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$ministryObject->leader."')"?>" style="cursor: pointer;" class="w3-text-blue-grey">
                   <?php 
                   $ministryLeader = $member->get($ministryObject->leader);
-                  echo $ministryLeader->f_name.' '.$ministryLeader->l_name;
+                  $ministryLeaderName =  $ministryLeader->f_name.' '.$ministryLeader->l_name;
+                  echo truncateStr($ministryLeaderName);
                   ?></span></span>
               </h3>
+               <?php elseif(($ministryObject->name!='None')&&($ministryObject->leader==0)):?>
+                <h3>
+                    <button onclick="<?php echo"popUpModal('../process.php','assign_ministry_leader_ui','".$ministryObject->id."')" ?>" class="btn btn-primary w3-right w3-margin-right">Assign Leader</button>
+                </h3>
+              <?php endif;?>
             </div>
-           <?php endif;?>
+        
         </div>              
          <!-- /. ROW  -->
           <hr />
@@ -66,6 +72,9 @@ require_once '../settings.php';
               <div class="panel panel-default">
                   <div class="panel-head">
                       <div class="panel-body">
+                          <?php if(($ministryObject->leader!=0)):?>
+                          <button onclick="<?php echo"popUpModal('../process.php','assign_ministry_leader_ui','".$ministryObject->id."')" ?>" class="btn btn-primary" style="margin-bottom: :5px">Change Leader</button>
+                        <?php endif;?>
                           <div class="table-responsive">
                              <table class="table table-striped table-bordered table-hover" id="ministry_members_table">
                                <thead>

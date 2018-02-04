@@ -89,7 +89,7 @@ require_once '../settings.php';
                 <p class="main-text">Children</p>
                 <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($members)-count($adults);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
                 <span>out of <?php echo count($members) ?></span>
-                <p><a href="index.php?page=new_member" class="btn btn-default btn-lg" role="button">Add New</a>
+                <p><a href="index.php?page=new_member&filter=child" class="btn btn-default btn-lg" role="button">Add New</a>
                 <a href="index.php?page=members_list" class="btn btn-default btn-lg" role="button">View</a></p>
             </div>
            </div>

@@ -36,7 +36,7 @@
           echo date('Y', strtotime(Input::get('birth_date'))).'<br>';
           print_array($_POST);
           ?>
-	        Sorry, an error occurred while adding new member &nbsp;&nbsp;<a href="views/index.php" class="btn btn-default" style="display: inline; text-decoration: none;color: blue; font-weight: bolder;">Try again </a>
+	        Sorry, an error occurred while adding new member &nbsp;&nbsp;<a href="view/index.php" class="btn btn-default" style="display: inline; text-decoration: none;color: blue; font-weight: bolder;">Try again </a>
             </p><hr>
   	   </div>
   	 	    

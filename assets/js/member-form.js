@@ -1,55 +1,29 @@
 $(document).ready(function(){
-    /*$(function(){
-       $('#id_birth_date').datepicker();
-    })*/
-/*
-      $('#hello').dialog({
-          draggable:false,
-          resizable:false,
-          modal:true,
-          show: 'slideDown',
-          hide: 'slideUp'
-      });*/
+    
     $(document).change(function() {
-      // toggle father field inputs visibility
-      if($('#id_is_father_member').prop('checked')) {
-          $('.father').addClass('w3-hide');
-          $('.father :input').prop('disabled', true);
-          $('#father_token_field').show();
-
+      if(!$('#id_is_father_deceased').prop('checked')) {
+           $('#father_contact_field').removeClass('w3-hide');
+           $('#father_contact_field :input').prop('disabled', false);
+           $('#father_name_field').addClass("w3-col m6 l6");
+              
       } else{
-          $('.father').removeClass('w3-hide');
-          $('.father :input').prop('disabled', false);
-          $('#father_token_field').hide();
-
-          if($('#id_is_father_deceased').prop('checked')) {
-            $('#father_field').addClass('w3-hide');
-            $('#father_field :input').prop('disabled', true);
-            
-            } else{
-                $('#father_field').removeClass('w3-hide');
-                $('#father_field :input').prop('disabled', false);
-            }
+          $('#father_contact_field').addClass('w3-hide');
+          $('#father_contact_field :input').prop('disabled', true);
+          $('#father_name_field').removeClass("w3-col m6 l6");
       }
       
       // toggle mother field inputs visibility
-      if($('#id_is_mother_member').prop('checked')) {
-          $('.mother').addClass('w3-hide');
-          $('.mother :input').prop('disabled', true);
-          $('#mother_token_field').show();
-      } else{
-          $('.mother').removeClass('w3-hide');
-          $('.mother :input').prop('disabled',false);
-          $('#mother_token_field').hide();
-
-          if($('#id_is_mother_deceased').prop('checked')) {
-          $('#mother_field').addClass('w3-hide');
-          $('#mother_field :input').prop('disabled', true);
+      if(!$('#id_is_mother_deceased').prop('checked')) {
+           $('#mother_contact_field').removeClass('w3-hide');
+           $('#mother_contact_field :input').prop('disabled', false);
+           $('#mother_name_field').addClass("w3-col m6 l6");
           
-        } else{
-            $('#mother_field').removeClass('w3-hide');
-            $('#mother_field :input').prop('disabled', false);  
-        }
+              
+      } else{
+          $('#mother_contact_field').addClass('w3-hide');
+          $('#mother_contact_field :input').prop('disabled', true);
+          $('#mother_name_field').removeClass("w3-col m6 l6");
+          
       }
 
       
@@ -62,7 +36,6 @@ $(document).ready(function(){
          $('#spouse').addClass('w3-hide');
          $('#next_of_kin').hide();
          $('#baptism').hide();
-         $('#ministry').hide();
          $('#phone_required').hide();
          $('#picture_required').hide();
          //disable form controls
@@ -70,7 +43,6 @@ $(document).ready(function(){
          $('#spouse :input').prop('disabled', true);
          $('#next_of_kin :input').prop('disabled', true);
          $('#baptism :input').prop('disabled', true);
-         $('#ministry :input').prop('disabled', true);
 
       } else{
               $('#id_phone').attr('required','');
@@ -82,13 +54,11 @@ $(document).ready(function(){
               $('#spouse').removeClass('w3-hide');
               $('#next_of_kin').show();
               $('#baptism').show();
-              $('#ministry').show();
               //enable form controls
               $('#marriage :input').prop('disabled', false);
               $('#spouse :input').prop('disabled', false);
               $('#next_of_kin :input').prop('disabled', false);
               $('#baptism :input').prop('disabled', false);
-              $('#ministry :input').prop('disabled', false);
       }
       // toggle baptism field inputs visibility
       if($('#id_is_baptised').prop('checked')) {
@@ -113,24 +83,27 @@ $(document).ready(function(){
 
       // toggle spouse inputs visibility
       var maritalStatus = $('#marital_status').val();
-      if((maritalStatus=='single')||(maritalStatus=='widowed')||(maritalStatus=='')) {
+      if((maritalStatus=='single')||(maritalStatus=='')) {
           $('#spouse').addClass('w3-hide');
           $('#spouse :input').prop('disabled', true);
       } else {
-          $('#spouse').removeClass('w3-hide');
-          $('#spouse :input').prop('disabled', false);
+          //
+          if(!$('#is_child').prop('checked')){
+              $('#spouse').removeClass('w3-hide');
+              $('#spouse :input').prop('disabled', false);
+          }
+          
+          //control contact field visibility
+          if(maritalStatus=='widowed') {
+              $('#spouse_contact_field').addClass('w3-hide');
+              $('#spouse_contact_field :input').prop('disabled', true);
+              $('#spouse_name_field').removeClass("w3-col m6 l6");
+          } else{
+                  $('#spouse_contact_field').removeClass('w3-hide');
+                  $('#spouse_contact_field :input').prop('disabled', false);
+                  $('#spouse_name_field').addClass("w3-col m6 l6");
+          }
 
-          if($('#is_spouse_member').prop('checked')) {
-              $('#spouse_token_field').show();
-              $('#spouse_field').addClass('w3-hide');
-              $('#spouse_field :input').prop('disabled', true);
-
-            } else{
-                $('#spouse_token_field').hide();
-                $('#spouse_field').removeClass('w3-hide');
-                $('#spouse_field :input').prop('disabled', false);
-                
-            }
       }
 
   })

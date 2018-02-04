@@ -14,7 +14,7 @@
   	   <div class="jumbotron">
         <h2><u>ERROR 503| Operation failure</u></h2>
   	   	 <p>
-	        Sorry, current operation failed &nbsp;&nbsp;<a href="index.php" class="btn btn-default" style="display: inline; text-decoration: none;color: blue; font-weight: bolder;">Return</a>
+	        Sorry, current operation failed &nbsp;&nbsp;<a href="view/index.php" class="btn btn-default" style="display: inline; text-decoration: none;color: blue; font-weight: bolder;">Return</a>
             </p><hr>
   	   </div>
   	 	    

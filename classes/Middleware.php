@@ -81,23 +81,101 @@ class Middleware extends Model
   * @param
   * @var
   */
-  public function newMinistryUi()
+  public function newMinistryUi($ministryObject)
   {
-  	echo "<br><br><br><div class=\"w3-margin\">
+    $members = $ministryObject->get();
+  	echo "<br><br><div class=\"w3-margin\">
 		  <div class=\"w3-container w3-blue-grey\">
 		    <h2 class=\"w3-center\">Create a New Ministry</h2>
 		  </div>
-		  <form action=\"\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+		  <form action=\"../process.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
 		    <div class=\"w3-row-padding\">
-		      <label class=\"w3-bold\" for=\"id_name\">Name:</label><br>
-		      <input id=\"id_name\" type=\"text\" name=\"name\" class=\"w3-input w3-border w3-border-dark-grey\" required><br>
+		      <label class=\"w3-bold\" for=\"id_name\">Ministry Name:</label><br>
+		      <input id=\"id_name\" type=\"text\" name=\"ministry_name\" class=\"w3-input w3-border w3-border-dark-grey\" required><br>
           <label class=\"w3-bold\" for=\"id_leader\">Leader:</label><br>
-          <input id=\"id_leader\" type=\"text\" name=\"leader\" class=\"w3-input w3-border w3-border-dark-grey\" required>
-           <input type=\"hidden\" name=\"token\" value=\"add_ministry\">
+          <select id=\"id_leader\" name=\"member_id\" class=\"w3-select w3-border w3-border-dark-grey\" required>
+              <option value=\"\">-------------</option>";
+            foreach($members as $member) {
+              echo "<option value=\"$member->id\">".$member->f_name.' '.$member->m_name.' '.$member->l_name."</option> ";   
+            }
+             echo "<option value=\"0\">None</option>
+               </select>
+           <input type=\"hidden\" name=\"add_token\" value=\"add_ministry\">
 		      <button class=\"btn btn-primary w3-margin-top\">Submit</button>
 		    </div>
 		  </form>
 		</div>";
+  }
+
+  /**
+  * provides interface for assigning ministry leader
+  * @param
+  * @var
+  */
+  public function assignMinistryLeader($ministryId=null, $memberObject)
+  {
+    if($ministryId) {
+        $ministry = $memberObject->getMinistry($ministryId);
+        $ministryMembers = $memberObject->getMinistryMembers($ministryId);
+       echo "<br><br><div class=\"w3-margin\">
+      <div class=\"w3-container w3-blue-grey\">
+          <h2 class=\"w3-center\">Assign Ministry Leader</h2>
+        </div>
+        <form action=\"../process.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+          <input type=\"hidden\" name=\"ministry_id\" value=\"$ministry->id\">
+          <div class=\"w3-row-padding\">
+            <label class=\"w3-bold\" for=\"id_name\">Ministry:</label><br>
+            <input id=\"id_name\" type=\"text\" name=\"name\" value=\"$ministry->name\" class=\"w3-input w3-border w3-border-dark-grey\" required readonly><br>
+            <label class=\"w3-bold\" for=\"id_leader\">Choose Leader:</label><br>
+            <select id=\"id_leader\" name=\"member_id\" class=\"w3-select w3-border w3-border-dark-grey\" required>
+              <option value=\"\">-------------</option>";
+            foreach($ministryMembers as $member) {
+              echo "<option value=\"$member->id\">".$member->f_name.' '.$member->m_name.' '.$member->l_name."</option> ";   
+            }
+             echo "<option value=\"0\">None</option>
+               </select>
+             <input type=\"hidden\" name=\"add_token\" value=\"assign_ministry_leader\">
+            <button class=\"btn btn-primary w3-margin-top\">Assign</button>
+          </div>
+        </form>
+      </div>";
+    }
+  }
+  
+
+  /**
+  * provides interface for assigning ministry leader
+  * @param
+  * @var
+  */
+  public function assignZoneLeader($zoneId=null, $memberObject)
+  {
+    if($zoneId) {
+        $zone = $memberObject->getzone($zoneId);
+        $zoneMembers = $memberObject->getzoneMembers($zoneId);
+       echo "<br><br><div class=\"w3-margin\">
+      <div class=\"w3-container w3-blue-grey\">
+          <h2 class=\"w3-center\">Assign zone Leader</h2>
+        </div>
+        <form action=\"../process.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+          <input type=\"hidden\" name=\"zone_id\" value=\"$zone->id\">
+          <div class=\"w3-row-padding\">
+            <label class=\"w3-bold\" for=\"id_name\">zone:</label><br>
+            <input id=\"id_name\" type=\"text\" name=\"name\" value=\"$zone->name\" class=\"w3-input w3-border w3-border-dark-grey\" required readonly><br>
+            <label class=\"w3-bold\" for=\"id_leader\">Choose Leader:</label><br>
+            <select id=\"id_leader\" name=\"member_id\" class=\"w3-select w3-border w3-border-dark-grey\" required>
+              <option value=\"\">-------------</option>";
+            foreach($zoneMembers as $member) {
+              echo "<option value=\"$member->id\">".$member->f_name.' '.$member->m_name.' '.$member->l_name."</option> ";   
+            }
+             echo "<option value=\"0\">None</option>
+              </select>
+             <input type=\"hidden\" name=\"add_token\" value=\"assign_zone_leader\">
+            <button class=\"btn btn-primary w3-margin-top\">Assign</button>
+          </div>
+        </form>
+      </div>";
+    }
   }
 
 
@@ -107,19 +185,27 @@ class Middleware extends Model
   * @param
   * @var
   */
-  public function newZoneUi()
+  public function newZoneUi($memberObject)
   {
-  	echo "<br><br><br><div class=\"w3-margin\">
+    $members = $memberObject->get();
+  	echo "<br><br><div class=\"w3-margin\">
 		  <div class=\"w3-container w3-blue-grey\">
 		    <h2 class=\"w3-center\">Create a New Zone</h2>
 		  </div>
-		  <form action=\"\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+		  <form action=\"../process.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
 		    <div class=\"w3-row-padding\">
-		      <label class=\"w3-bold\" for=\"id_name\">Name:</label><br>
-		      <input id=\"id_name\" type=\"text\" name=\"name\" class=\"w3-input w3-border w3-border-dark-grey\" required>
+		      <label class=\"w3-bold\" for=\"id_name\">Zone Name:</label><br>
+		      <input id=\"id_name\" type=\"text\" name=\"zone_name\" class=\"w3-input w3-border w3-border-dark-grey\" required>
 
 		      <label class=\"w3-bold\" for=\"id_leader\">Leader:</label><br>
-		      <input id=\"id_leader\" type=\"text\" name=\"leader\" class=\"w3-input w3-border w3-border-dark-grey\" required>
+		      <select id=\"id_leader\" name=\"member_id\" class=\"w3-select w3-border w3-border-dark-grey\" required>
+              <option value=\"\">-------------</option>";
+            foreach($members as $member) {
+              echo "<option value=\"$member->id\">".$member->f_name.' '.$member->m_name.' '.$member->l_name."</option> ";   
+            }
+             echo "<option value=\"0\">None</option>
+               </select>
+          <input type=\"hidden\" name=\"add_token\" value=\"add_zone\">
 		      <button class=\"btn btn-primary w3-margin-top\">Submit</button>
 		    </div>
 		  </form>

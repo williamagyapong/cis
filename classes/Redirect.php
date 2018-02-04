@@ -61,6 +61,11 @@ class Redirect
 	         	exit();
 	        break;
 
+	        case 'edit_member_records':
+	         	include '../view/members/edit.php';
+	         	exit();
+	        break;
+
 	        case 'create_family':
 	         	include '../view/members/create_family.php';
 	         	exit();

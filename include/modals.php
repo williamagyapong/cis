@@ -32,7 +32,7 @@
 
 
 <div id="edit_modal" class="w3-modal" style="padding-top:50px">
-  <div class="page-background w3-modal-content w3-white w3-border w3-border-dark-grey w3-text-grey" style="background: #000; height:100%;width:80%;overflow:auto">
+  <div class="page-background w3-modal-content w3-white w3-border w3-border-dark-grey w3-text-grey" style="background: #000; height:20%;width:20%;overflow:auto">
   <div class="w3-container content">
     <span id="p-close-btn" onclick="hideElement('current-modal')" class="fa fa-times w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close"></span>
     <div class="w3-display-middle w3-dark-grey">
@@ -43,9 +43,9 @@
     </div>
        <!-- load content on request -->
     </div>
-    <footer class="w3-container">
+    <!-- <footer class="w3-container">
        <button type="button" class="w3-button w3-border w3-display-bottomright w3-margin w3-hover-blue-grey" name="button" onclick="popDownModal('#edit_modal .content', 'edit_modal')">close</button>
-    </footer>
+    </footer> -->
   </div>
 </div>
 

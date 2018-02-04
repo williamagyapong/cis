@@ -2,6 +2,7 @@
 require_once 'settings.php';
 $middleware = new Middleware();
 $settings = new Settings();
+$member = new Member();
 
  if(Input::exist('token', 'get'))
  	{
@@ -12,11 +13,11 @@ $settings = new Settings();
        break;
 
  			case 'new_ministry_ui':
- 			 $middleware->newMinistryUi();
+ 			 $middleware->newMinistryUi($member);
  			 break;
 
  			case 'new_zone_ui':
- 			 $middleware->newZoneUi();
+ 			 $middleware->newZoneUi($member);
       break;
 
       case 'zones_ui':
