@@ -393,6 +393,7 @@ class Member extends Model
 														  'name'=>Input::get('spouse_name'),
 														  'contact'=>Input::get('spouse_contact'),
 														  'type'=>'spouse',
+														  'deceased'=>(Input::get('marital_status')=='widowed')?'yes':'',
 														  'member'=>Input::get('is_spouse_member')
 			                                            ]);
 			//}
@@ -506,7 +507,7 @@ class Member extends Model
 														  'deceased'=>(Input::get('marital_status')=='widowed')?'yes':'',
 														  'last_modified'=>$date,
 														  'modified_by'=>$by
-			                                            ], "`id` = '{$memberId}' AND `type` = 'spouse'");
+			                                            ], "`member_id` = '{$memberId}' AND `type` = 'spouse'");
 			//}
 			//add father
 			$run4 = $this->db->updateSpecial($this->relations, [
@@ -516,7 +517,7 @@ class Member extends Model
 														  'member'=>Input::get('is_father_member'),
 														  'last_modified'=>$date,
 														  'modified_by'=>$by
-			                                            ], "`id` = '{$memberId}' AND `type` = 'father'");
+			                                            ], "`member_id` = '{$memberId}' AND `type` = 'father'");
 
 			//add mother
 			$run5 = $this->db->updateSpecial($this->relations, [
@@ -527,7 +528,7 @@ class Member extends Model
 														  'member'=>Input::get('is_mother_member'),
 														  'last_modified'=>$date,
 														  'modified_by'=>$by
-			                                            ], "`id` = '{$memberId}' AND `type` = 'mother'");
+			                                            ], "`member_id` = '{$memberId}' AND `type` = 'mother'");
 
 			//add mother
 			$run6 = $this->db->updateSpecial($this->relations, [
@@ -536,7 +537,7 @@ class Member extends Model
 														  'relationship'=>Input::get('next_kin_relation'),
 														  'last_modified'=>$date,
 														  'modified_by'=>$by
-			                                            ], "`id` = '{$memberId}' AND `type` = 'next_of_kin'");
+			                                            ], "`member_id` = '{$memberId}' AND `type` = 'next_of_kin'");
 			if($run3&&$run4&&$run5&&$run6) {
 				return true;
 			}
