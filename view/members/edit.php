@@ -15,12 +15,13 @@
     $sickleCells = array('AA', 'AS', 'SS');
 
 ?>
-
+<link rel="stylesheet" href="../assets/css/jquery.Jcrop.min.css" type="text/css" />
 <main class="w3-row w3-padding">
-
+  <label class="w3-text-grey w3-large  w3-hide" for="is_child">Is a child:</label>
+  <input id="is_child" type="checkbox" value="child" class="w3-check w3-border w3-border-dark-grey  w3-hide">
   <div  class="page-background w3-white w3-card-4" style="margin-top:40px;max-width:960px;margin-left:auto;margin-right:auto">
       <div class="w3-container w3-blue-grey">
-        <h3>Member Profile <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px;cursor: pointer;"></span></h3>
+        <h3>Profile of <span class="w3-text-orange"><?php echo $memberData->f_name.' '.$memberData->l_name;?></span> <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px;cursor: pointer;"></span></h3>
 
       </div>
     <form id="member_form" action="../process.php" method="post" enctype="multipart/form-data" class="w3-container w3-card-4 w3-padding w3-card w3-padding-34">
@@ -414,6 +415,7 @@
   </div>
 </main>
     
+    <script src="../assets/js/jquery.Jcrop.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
              // toggle baptism field inputs visibility as soon as page loads
@@ -449,8 +451,43 @@
               $('#mother_name_field').removeClass("w3-col m6 l6");
               
           }
+
+          // make specify other Congregation required
+          var whereBaptised = $('#id_where_baptised').val();
+          if(whereBaptised=='other church') {
+             $('#id_other_baptised').prop('disabled', false)
+             $('#id_contact_person').prop('disabled', false) 
+             $('#contact_person_phone').prop('disabled', false)
+          } else {
+                  $('#id_other_baptised').prop('disabled', true)
+                  $('#id_contact_person').prop('disabled', true)
+                  $('#contact_person_phone').prop('disabled', true) 
+          }
           // toggle spouse inputs visibility
           var maritalStatus = $('#marital_status').val();
+          if((maritalStatus=='single')||(maritalStatus=='')) {
+              $('#spouse').addClass('w3-hide');
+              $('#spouse :input').prop('disabled', true);
+          } else {
+              //
+              if(!$('#is_child').prop('checked')){
+                  $('#spouse').removeClass('w3-hide');
+                  $('#spouse :input').prop('disabled', false);
+              }
+              
+              //control contact field visibility
+              if(maritalStatus=='widowed') {
+                  $('#spouse_contact_field').addClass('w3-hide');
+                  $('#spouse_contact_field :input').prop('disabled', true);
+                  $('#spouse_name_field').removeClass("w3-col m6 l6");
+              } else{
+                      $('#spouse_contact_field').removeClass('w3-hide');
+                      $('#spouse_contact_field :input').prop('disabled', false);
+                      $('#spouse_name_field').addClass("w3-col m6 l6");
+              }
+
+          }
+          /*var maritalStatus = $('#marital_status').val();
           //control contact field visibility
           if(maritalStatus=='widowed') {
               $('#spouse_contact_field').addClass('w3-hide');
@@ -460,7 +497,7 @@
                   $('#spouse_contact_field').removeClass('w3-hide');
                   $('#spouse_contact_field :input').prop('disabled', false);
                   $('#spouse_name_field').addClass("w3-col m6 l6");
-          }
+          }*/
 
             $(document).change(function() {
             // toggle father field inputs visibility
@@ -498,10 +535,45 @@
               $('#mother_name_field').removeClass("w3-col m6 l6");
               
           }
+
+              // make specify other Congregation required
+          var whereBaptised = $('#id_where_baptised').val();
+          if(whereBaptised=='other church') {
+             $('#id_other_baptised').prop('disabled', false)
+             $('#id_contact_person').prop('disabled', false) 
+             $('#contact_person_phone').prop('disabled', false)
+          } else {
+                  $('#id_other_baptised').prop('disabled', true)
+                  $('#id_contact_person').prop('disabled', true)
+                  $('#contact_person_phone').prop('disabled', true) 
+          }
           // toggle spouse inputs visibility
           var maritalStatus = $('#marital_status').val();
+          if((maritalStatus=='single')||(maritalStatus=='')) {
+              $('#spouse').addClass('w3-hide');
+              $('#spouse :input').prop('disabled', true);
+          } else {
+              //
+              if(!$('#is_child').prop('checked')){
+                  $('#spouse').removeClass('w3-hide');
+                  $('#spouse :input').prop('disabled', false);
+              }
+              
+              //control contact field visibility
+              if(maritalStatus=='widowed') {
+                  $('#spouse_contact_field').addClass('w3-hide');
+                  $('#spouse_contact_field :input').prop('disabled', true);
+                  $('#spouse_name_field').removeClass("w3-col m6 l6");
+              } else{
+                      $('#spouse_contact_field').removeClass('w3-hide');
+                      $('#spouse_contact_field :input').prop('disabled', false);
+                      $('#spouse_name_field').addClass("w3-col m6 l6");
+              }
+
+          }
+          
           //control contact field visibility
-          if(maritalStatus=='widowed') {
+          /*if(maritalStatus=='widowed') {
               $('#spouse_contact_field').addClass('w3-hide');
               $('#spouse_contact_field :input').prop('disabled', true);
               $('#spouse_name_field').removeClass("w3-col m6 l6");
@@ -509,7 +581,7 @@
                   $('#spouse_contact_field').removeClass('w3-hide');
                   $('#spouse_contact_field :input').prop('disabled', false);
                   $('#spouse_name_field').addClass("w3-col m6 l6");
-          }
+          }*/
             
         })
 
