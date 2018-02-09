@@ -50,6 +50,10 @@ body{
     letter-spacing:3px;
     font-weight:bolder;
  }
+ #login_msg{
+  padding-top: 20px;
+  
+ }
  
  #textbox{
 	width:auto;

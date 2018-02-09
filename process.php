@@ -12,6 +12,11 @@ if(Input::exist('add_token'))
 	         else Redirect::to(502);
 	    break;
 
+      case 'update_member_profile':
+           if($member->updateProfile()) Redirect::to('view/index.php?page=members_list');
+           else Redirect::to(502);
+      break;
+
       case 'add_ministry':
           if(DBHandler::getInstance()->insert('ministries', ['name'=>ucwords(Input::get('ministry_name')),'leader'=>Input::get('member_id')])) {
              Redirect::to('view/index.php');

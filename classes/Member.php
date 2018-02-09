@@ -339,7 +339,7 @@ class Member extends Model
 		$memberCode = $this->generateId();
 		//$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
-		$baptisedAt = (Input::get('baptised_at')=='Gbawe')?Input::get('baptised_at'):Input::get('other_baptised_cong');
+		$baptisedAt = (Input::get('where_baptised')=='Gbawe')?Input::get('where_baptised'):Input::get('other_baptised_cong');
 	
 	    if($memberCode !=0)
 	    {
@@ -445,4 +445,111 @@ class Member extends Model
 		
 												  
     }
+
+
+
+    /**
+	* update member records to reflect any changes
+	* @param
+	* @var
+	* @return
+	*/
+	public function updateProfile()
+	{   
+		$date = date('Y-m-d H:i:s');
+		$by = Session::get('user');
+		$memberId = Input::get('member_id');
+		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
+		$baptisedAt = (Input::get('where_baptised')=='Gbawe')?Input::get('where_baptised'):Input::get('other_baptised_cong');
+	
+	    	$run = $this->db->update($this->members, [
+												  'f_name'=>Input::get('first_name'),
+												  'm_name'=>Input::get('middle_name'),
+												  'l_name'=>Input::get('last_name'),
+												  'gender'=>Input::get('gender'),
+												  'birth_date'=>Input::get('birth_date'),
+												  'home_town'=>Input::get('home_town'),
+												  'region_id'=>Input::get('home_region'),
+												  'languages'=>json_encode($_POST['languages']),
+												  'phone'=>Input::get('phone'),
+												  'phone_other'=>Input::get('phone_other'),
+												  'email'=>Input::get('email'),
+												  'picture'=>Input::get('saved_picture'),
+												  'education'=>Input::get('education'),
+												  'occupation'=>Input::get('occupation'),
+												  'residence'=>Input::get('residence'),
+												  'marital_status'=>Input::get('marital_status'),
+												  'baptismal_status'=>$baptismalStatus,
+												  'baptised_on'=>Input::get('date_baptised'),
+												  'baptised_at'=>$baptisedAt,
+												  'blood_group'=>Input::get('blood_group'),
+												  'sickling_status'=>Input::get('sickling_status'),
+												  'kids'=>Input::get('kids'),
+												  'ministry_id'=>Input::get('ministry'),
+												  'zone_id'=>Input::get('zone')
+												],$memberId);
+		
+		if($run) 
+		{
+			
+
+			// update member user status
+			
+			//add spouse
+			/*   $run3 = true;
+			if(Input::get('marital_status'=='married')||Input::get('marital_status'=='separated')||Input::get('marital_status'=='divorced')||Input::get('marital_status'=='widowed')) {
+				$run3 = false;*/
+				$run3 = $this->db->updateSpecial($this->relations, [
+														  'name'=>Input::get('spouse_name'),
+														  'contact'=>Input::get('spouse_contact'),
+														  'member'=>Input::get('is_spouse_member'),
+														  'deceased'=>(Input::get('marital_status')=='widowed')?'yes':'',
+														  'last_modified'=>$date,
+														  'modified_by'=>$by
+			                                            ], "`id` = '{$memberId}' AND `type` = 'spouse'");
+			//}
+			//add father
+			$run4 = $this->db->updateSpecial($this->relations, [
+														  'name'=>Input::get('father_name'),
+														  'contact'=>Input::get('father_contact'),
+														  'deceased'=>Input::get('is_father_deceased'),
+														  'member'=>Input::get('is_father_member'),
+														  'last_modified'=>$date,
+														  'modified_by'=>$by
+			                                            ], "`id` = '{$memberId}' AND `type` = 'father'");
+
+			//add mother
+			$run5 = $this->db->updateSpecial($this->relations, [
+														  
+														  'name'=>Input::get('mother_name'),
+														  'contact'=>Input::get('mother_contact'),
+														  'deceased'=>Input::get('is_mother_deceased'),
+														  'member'=>Input::get('is_mother_member'),
+														  'last_modified'=>$date,
+														  'modified_by'=>$by
+			                                            ], "`id` = '{$memberId}' AND `type` = 'mother'");
+
+			//add mother
+			$run6 = $this->db->updateSpecial($this->relations, [
+														  'name'=>Input::get('next_kin_name'),
+														  'contact'=>Input::get('next_kin_contact'),
+														  'relationship'=>Input::get('next_kin_relation'),
+														  'last_modified'=>$date,
+														  'modified_by'=>$by
+			                                            ], "`id` = '{$memberId}' AND `type` = 'next_of_kin'");
+			if($run3&&$run4&&$run5&&$run6) {
+				return true;
+			}
+			Session::put('add_new_errors', 'failed to create user<br>');
+			return false;
+		}
+		else
+			{
+				  Session::put('add_new_errors', 'registration failed<br>');
+			      return false;
+			}
+												  
+    }
+
+
 }

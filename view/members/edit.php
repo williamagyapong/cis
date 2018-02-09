@@ -5,7 +5,12 @@
     $zones = $member->getZone();
     $ministries = $member->getMinistry();
     $regions = $member->getRegion();
-    $memberData = $member->get(Input::get('unique_id','get'));
+    $memberId = Input::get('unique_id');
+    $father = $member->getRelation($memberId, 'father');
+    $mother = $member->getRelation($memberId, 'mother');
+    $spouse = $member->getRelation($memberId,'spouse');
+    $nextOfKin = $member->getRelation($memberId, 'next_of_kin');
+    $memberData = $member->get($memberId);
     $bloodGroups = array('A','B','AB', 'O');
     $sickleCells = array('AA', 'AS', 'SS');
 
@@ -15,7 +20,7 @@
 
   <div  class="page-background w3-white w3-card-4" style="margin-top:40px;max-width:960px;margin-left:auto;margin-right:auto">
       <div class="w3-container w3-blue-grey">
-        <h3>Member Profile <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px"></span></h3>
+        <h3>Member Profile <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px;cursor: pointer;"></span></h3>
 
       </div>
     <form id="member_form" action="../process.php" method="post" enctype="multipart/form-data" class="w3-container w3-card-4 w3-padding w3-card w3-padding-34">
@@ -114,8 +119,8 @@
                           </footer>
                         </div>
                       </div>
-                      <input type="hidden" name="saved_picture">
-                      <input class="w3-input" type="file" name="picture" value="<?php echo $memberData->picture;?>" id="id_picture" required />
+                      <input type="hidden" name="saved_picture" value="<?php echo $memberData->picture;?>" />
+                      <input class="w3-input" type="file" name="picture" value="<?php echo $memberData->picture;?>" id="id_picture" />
                       <!-- include input controls for cropping picture -->
                       <input type="hidden" id="x" name="x" />
                       <input type="hidden" id="y" name="y" />
@@ -250,37 +255,37 @@
                               <label class="w3-text-grey"><b><label for="marital_status">Marital Status<span class="w3-text-red w3-large">*</span></label></b></label>
                               <select name="marital_status" class="w3-select w3-border w3-border-dark-grey" required id="marital_status">
                                 <option value="" selected>---------</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="divorced">Divorced</option>
-                                <option value="separated">Separated</option>
-                                <option value="widowed">widowed</option>
+                                <?php echo ($memberData->marital_status=='single')?"<option value=\"single\" selected>Single</option>":"<option value=\"single\">Single</option>";?>
+                                <?php echo ($memberData->marital_status=='married')?"<option value=\"married\" selected>Married</option>":"<option value=\"married\">Married</option>";?>
+                                <?php echo ($memberData->marital_status=='divorced')?"<option value=\"divorced\" selected>Divorced</option>":"<option value=\"divorced\">Divorced</option>";?>
+                                <?php echo ($memberData->marital_status=='separated')?"<option value=\"separated\" selected>Separated</option>":"<option value=\"separated\">Separated</option>";?>
+                                <?php echo ($memberData->marital_status=='widowed')?"<option value=\"widowed\" selected>widowed</option>":"<option value=\"widowed\">widowed</option>";?>
                               </select>
                           </div>
                           <div class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="id_kids">Kids<span class="w3-text-red w3-large">*</span></label></b></label>
-                              <input type="number" name="kids" class="w3-input w3-border w3-border-dark-grey" min="0" id="id_kids" required />
+                              <input type="number" name="kids" value="<?php echo $memberData->kids;?>" class="w3-input w3-border w3-border-dark-grey" min="0" id="id_kids" required />
                           </div>
                       </div>
                   </div>
-                  <div id="spouse" class="w3-margin-bottom w3-hide">
+                  <div id="spouse" class="w3-margin-bottom">
                     <div class="w3-container w3-blue-grey w3-margin-bottom">
                       <h5>Spouse</h5>
                     </div>
                     <div class="w3-row">
                           <div class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="is_spouse_member">Is Member:</label></b></label> 
-                             <input type="checkbox" name="is_spouse_member" value="yes" class="w3-check w3-border w3-border-dark-grey" id="is_spouse_member" />
+                             <?php echo ($spouse->member=='yes')?"<input type=\"checkbox\" name=\"is_spouse_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_spouse_member\" checked />":"<input type=\"checkbox\" name=\"is_spouse_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_spouse_member\" />";?>
                           </div>
                       </div>
                       <div id="spouse_field" class="w3-row">
                           <div id="spouse_name_field" class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="spouse_name">Full name:</label></b></label><br>
-                             <input type="text" name="spouse_name" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="spouse_name" required/>
+                             <input type="text" name="spouse_name" value="<?php echo $spouse->name;?>" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="spouse_name" required/>
                           </div>
                           <div id="spouse_contact_field" class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="spouse_contact">Contact:</label></b></label><br>
-                              <input type="text" name="spouse_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="spouse_contact" min="0" maxlength="10" required/>
+                              <input type="text" name="spouse_contact" value="<?php echo $spouse->contact;?>" class="w3-input w3-border w3-border-dark-grey numberonly" id="spouse_contact" min="0" maxlength="10" required/>
                           </div>
                       </div>
                   </div>
@@ -294,9 +299,8 @@
                       <br>
                       <label class="w3-text-grey"><b><label for="id_zone">Zone<span class="w3-text-red w3-large">*</span></label></b></label><br>
                       <select name="zone" class="w3-select w3-border w3-border-dark-grey" id="id_zone" required>
-                        <option value="" selected>----------</option>
                         <?php foreach($zones as $zone):?>
-                        <option value="<?php echo $zone->id;?>"><?php echo $zone->name;?></option>
+                          <?php echo ($memberData->zone_id==$zone->id)?"<option value=\"$zone->id\" selected>$zone->name</option>":"<option value=\"$zone->id\">$zone->name</option>";?>
                         <?php endforeach;?>
                       </select>
                 </div>
@@ -306,7 +310,7 @@
                       <select name="ministry" class="w3-select w3-border w3-border-dark-grey" id="id_ministry" required>
                         <option value="" selected>----------</option>
                         <?php foreach($ministries as $ministry): ?>
-                        <option value="<?php echo $ministry->id; ?>"><?php echo $ministry->name; ?></option>
+                          <?php echo ($memberData->ministry_id==$ministry->id)?"<option value=\"$ministry->id\" selected>$ministry->name</option>":"<option value=\"$ministry->id\">$ministry->name</option>";?>
                         <?php endforeach; ?>
                       </select>
                   </div>
@@ -319,22 +323,22 @@
                       <legend class="w3-text-red w3-border w3-border-dark-grey w3-center">Father</legend>
                       <div class="w3-row">
                           <div class="w3-col m6 l6">
-                              <label class="w3-text-grey"><b><label for="id_is_father_member">Is Member:</label></b></label> 
-                             <input type="checkbox" name="is_father_member" value="yes" class="w3-check w3-border w3-border-dark-grey" id="id_is_father_member" />
+                              <label class="w3-text-grey"><b><label for="is_father_member">Is Member:</label></b></label> 
+                              <?php echo ($father->member=='yes')?"<input type=\"checkbox\" name=\"is_father_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_father_member\" checked />": "<input type=\"checkbox\" name=\"is_father_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_father_member\" />";?>
                           </div>
                           <div class="w3-col m6 l6 father">
-                              <label class="w3-text-grey"><b><label for="id_is_father_deceased">Is Deceased:</label></b></label>
-                              <input type="checkbox" name="is_father_deceased" value="yes" class="w3-check w3-border w3-border-dark-grey" id="id_is_father_deceased"/>
+                              <label class="w3-text-grey"><b><label for="is_father_deceased">Is Deceased:</label></b></label>
+                              <?php echo ($father->deceased=='yes')?"<input type=\"checkbox\" name=\"is_father_deceased\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_father_deceased\" checked />": "<input type=\"checkbox\" name=\"is_father_deceased\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_father_deceased\" />";?>
                           </div>
                       </div>
                       <div id="father_field" class="w3-row father">
                           <div id="father_name_field" class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="id_father_name">Full name:</label></b></label><br>
-                             <input type="text" name="father_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_father_name" required/>
+                             <input type="text" name="father_name" value="<?php echo $father->name;?>" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="id_father_name" required/>
                           </div>
                           <div id="father_contact_field" class="w3-col m6 l6">
-                              <label class="w3-text-grey"><b><label for="id_father_contact">Contact:</label></b></label><br>
-                              <input type="text" name="father_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="id_father_contact" min="0" maxlength="10" required />
+                              <label class="w3-text-grey"><b><label for="father_contact">Contact:</label></b></label><br>
+                              <input type="text" name="father_contact" value="<?php echo $father->contact;?>" class="w3-input w3-border w3-border-dark-grey numberonly" id="father_contact" min="0" maxlength="10" required />
                           </div>
                       </div>
                   </fieldset><br>
@@ -342,22 +346,22 @@
                       <legend class="w3-text-red w3-border w3-border-dark-grey w3-center">Mother</legend>
                       <div class="w3-row">
                           <div class="w3-col m6 l6">
-                              <label class="w3-text-grey"><b><label for="id_is_mother_member">Is Member:</label></b></label>
-                              <input type="checkbox" name="is_mother_member" value="yes" class="w3-check w3-border w3-border-dark-grey" id="id_is_mother_member" />
+                              <label class="w3-text-grey"><b><label for="is_mother_member">Is Member:</label></b></label>
+                              <?php echo ($mother->member=='yes')?"<input type=\"checkbox\" name=\"is_mother_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_mother_member\" checked />": "<input type=\"checkbox\" name=\"is_mother_member\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_mother_member\" />";?>
                           </div>
                           <div class="w3-col m6 l6 mother">
-                              <label class="w3-text-grey"><b><label for="id_is_mother_member">Is Deceased:</label></b></label>
-                              <input type="checkbox" name="is_mother_deceased" value="yes" class="w3-check w3-border w3-border-dark-grey" id="id_is_mother_deceased" />
+                              <label class="w3-text-grey"><b><label for="is_mother_deceased">Is Deceased:</label></b></label>
+                              <?php echo ($mother->deceased=='yes')?"<input type=\"checkbox\" name=\"is_mother_deceased\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_mother_deceased\" checked />": "<input type=\"checkbox\" name=\"is_mother_deceased\" value=\"yes\" class=\"w3-check w3-border w3-border-dark-grey\" id=\"is_mother_deceased\" />";?>
                           </div>
                       </div>
                       <div id="mother_field" class="w3-row mother">
                       <div id="mother_name_field" class="w3-col m6 l6">
                           <label class="w3-text-grey"><b><label for="id_mother_name">Full name:</label></b></label><br>
-                         <input type="text" name="mother_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="id_mother_name" required />
+                         <input type="text" name="mother_name" value="<?php echo $mother->name;?>" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="id_mother_name" required />
                       </div>
                       <div id="mother_contact_field" class="w3-col m6 l6">
-                          <label class="w3-text-grey"><b><label for="id_mother_contact">Contact</label></b></label><br>
-                            <input type="text" name="mother_contact" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="id_mother_contact" required/>
+                          <label class="w3-text-grey"><b><label for="mother_contact">Contact</label></b></label><br>
+                            <input type="text" name="mother_contact" value="<?php echo $mother->contact;?>" class="w3-input w3-border w3-border-dark-grey numberonly" min="0" maxlength="10" id="mother_contact" required/>
                         </div>
                     </div>
                     </fieldset>
@@ -369,12 +373,12 @@
             <div class="fieldWrapper w3-margin-bottom">
                  <div class="w3-margin-bottom">
                      <label class="w3-text-grey"><b><label for="next_kin_name">Full name:</label></b></label><br>
-                     <input type="text" name="next_kin_name" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="next_kin_name" required/>
+                     <input type="text" name="next_kin_name" value="<?php echo $nextOfKin->name;?>" class="w3-input w3-border w3-border-dark-grey" maxlength="225" id="next_kin_name" required/>
                  </div>
                  <div id="next_kin_field" class="w3-row">
                     <div class="w3-col m6 l6">
                         <label class="w3-text-grey"><b><label for="next_kin_name">Relationship:</label></b></label>
-                        <input type="text" name="next_kin_relation" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="next_kin_relation" placeholder="e.g. father, mother, son" list="next_kin_relation_data" required autocomplete="off" /> 
+                        <input type="text" name="next_kin_relation" value="<?php echo $nextOfKin->relationship;?>" class="w3-input w3-border w3-border-dark-grey" maxlength="150" id="next_kin_relation" placeholder="e.g. father, mother, son" list="next_kin_relation_data" required autocomplete="off" /> 
                         <datalist id="next_kin_relation_data">
                           <option value="father">
                           <option value="mother">
@@ -393,7 +397,7 @@
                     </div>
                     <div class="w3-col m6 l6">
                         <label class="w3-text-grey"><b><label for="next_kin_contact">Contact:</label></b></label><br>
-                        <input type="text" name="next_kin_contact" class="w3-input w3-border w3-border-dark-grey numberonly" id="next_kin_contact" min="0" maxlength="10" required/>
+                        <input type="text" name="next_kin_contact" value="<?php echo $nextOfKin->contact;?>" class="w3-input w3-border w3-border-dark-grey numberonly" id="next_kin_contact" min="0" maxlength="10" required/>
                     </div>
                 </div>                                   
             </div>
@@ -402,8 +406,9 @@
         <div class="w3-row-padding w3-center">
             <a href="javascript:void()" onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="btn btn-primary w3-margin w3-padding-left-24 padding-right">Cancel</a>
             <input id="image_upload_token" type="hidden" name="token" value="upload_image">
-            <input id="add_member" type="hidden" name="add_token"  value="add_member">
-            <button type="submit" class="btn btn-primary w3-margin" onclick="">Save Details</button>
+            <input type="hidden" name="member_id" value="<?php echo $memberData->id;?>">
+            <input id="add_member" type="hidden" name="add_token"  value="update_member_profile">
+            <button type="submit" class="btn btn-primary w3-margin" onclick="">Save Changes</button>
         </div>
      </form>
   </div>
@@ -420,19 +425,45 @@
                 $('.baptism :input').prop('disabled', true)
             }
 
+            if(!$('#is_father_deceased').prop('checked')) {
+               $('#father_contact_field').removeClass('w3-hide');
+               $('#father_contact_field :input').prop('disabled', false);
+               $('#father_name_field').addClass("w3-col m6 l6");
+                      
+          } else{
+              $('#father_contact_field').addClass('w3-hide');
+              $('#father_contact_field :input').prop('disabled', true);
+              $('#father_name_field').removeClass("w3-col m6 l6");
+          }
+          
+          // toggle mother field inputs visibility
+          if(!$('#is_mother_deceased').prop('checked')) {
+               $('#mother_contact_field').removeClass('w3-hide');
+               $('#mother_contact_field :input').prop('disabled', false);
+               $('#mother_name_field').addClass("w3-col m6 l6");
+              
+                  
+          } else{
+              $('#mother_contact_field').addClass('w3-hide');
+              $('#mother_contact_field :input').prop('disabled', true);
+              $('#mother_name_field').removeClass("w3-col m6 l6");
+              
+          }
+          // toggle spouse inputs visibility
+          var maritalStatus = $('#marital_status').val();
+          //control contact field visibility
+          if(maritalStatus=='widowed') {
+              $('#spouse_contact_field').addClass('w3-hide');
+              $('#spouse_contact_field :input').prop('disabled', true);
+              $('#spouse_name_field').removeClass("w3-col m6 l6");
+          } else{
+                  $('#spouse_contact_field').removeClass('w3-hide');
+                  $('#spouse_contact_field :input').prop('disabled', false);
+                  $('#spouse_name_field').addClass("w3-col m6 l6");
+          }
+
             $(document).change(function() {
             // toggle father field inputs visibility
-            if($('#id_is_father_member').prop('checked')) {
-                $('#father_field input[type="text"]').prop('disabled', true);
-            } else{
-                $('#father_field input[type="text"]').prop('disabled', false);
-            }
-            // toggle mother field inputs visibility
-            if($('#id_is_mother_member').prop('checked')) {
-                $('#mother_field input[type="text"]').prop('disabled', true);
-            } else{
-                $('#mother_field input[type="text"]').prop('disabled', false);
-            }
             // toggle baptism field inputs visibility
             if($('#id_is_baptised').prop('checked')) {
                 $('.baptism').removeClass('w3-hide');
@@ -442,9 +473,44 @@
                 $('.baptism :input').prop('disabled', true)
             }
 
-            // make specify other Congregation required
-            //console.log($('#member_form input[name="where_baptised"]').val());
 
+            if(!$('#is_father_deceased').prop('checked')) {
+               $('#father_contact_field').removeClass('w3-hide');
+               $('#father_contact_field :input').prop('disabled', false);
+               $('#father_name_field').addClass("w3-col m6 l6");
+                      
+          } else{
+              $('#father_contact_field').addClass('w3-hide');
+              $('#father_contact_field :input').prop('disabled', true);
+              $('#father_name_field').removeClass("w3-col m6 l6");
+          }
+          
+          // toggle mother field inputs visibility
+          if(!$('#is_mother_deceased').prop('checked')) {
+               $('#mother_contact_field').removeClass('w3-hide');
+               $('#mother_contact_field :input').prop('disabled', false);
+               $('#mother_name_field').addClass("w3-col m6 l6");
+              
+                  
+          } else{
+              $('#mother_contact_field').addClass('w3-hide');
+              $('#mother_contact_field :input').prop('disabled', true);
+              $('#mother_name_field').removeClass("w3-col m6 l6");
+              
+          }
+          // toggle spouse inputs visibility
+          var maritalStatus = $('#marital_status').val();
+          //control contact field visibility
+          if(maritalStatus=='widowed') {
+              $('#spouse_contact_field').addClass('w3-hide');
+              $('#spouse_contact_field :input').prop('disabled', true);
+              $('#spouse_name_field').removeClass("w3-col m6 l6");
+          } else{
+                  $('#spouse_contact_field').removeClass('w3-hide');
+                  $('#spouse_contact_field :input').prop('disabled', false);
+                  $('#spouse_name_field').addClass("w3-col m6 l6");
+          }
+            
         })
 
         // member picture loading

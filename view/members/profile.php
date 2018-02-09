@@ -12,9 +12,9 @@
 <div class="w3-row">
 	<div>
 		<h4 class="w3-center">
-			<span class="">Member Details </span>
+			<span class="">Member Profile </span>
 			
-			<span class="fa fa-edit w3-text-blue"></span>
+			<span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$memberData->id."')"?>" class="fa fa-edit w3-text-blue" style="cursor: pointer;" title="Edit Profile" ></span>
 			<!-- <img src="../assets/images/system/edit_icon2.png" width="50" height="30"> -->
 			<!-- <span onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')" class="fa fa-times btn btn-danger w3-right"></span> -->
 			<button title="Close" class="w3-button w3-border w3-right w3-hover-red" name="button" onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')"><i class="fa fa-times"></i></button>
@@ -104,6 +104,13 @@
 	   	 	  	     <span class="w3-text-red">Not Baptised</span>	
 	   	 	  	    <?php endif;?>
 	   	 	  </tr>
+	   	 	  <?php if($memberData->baptismal_status=='baptised'):?>
+	   	 	  <tr>
+	   	 	  	<td><b>Date of Baptism</b></td>
+	   	 	  	<td>
+                    <span><?php echo date('d/m/Y', strtotime($memberData->baptised_on));?></span>
+	   	 	  </tr>
+	   	 	  <?php endif;?>
 	   	 	  <tr>
 	   	 	  	<td><b>Home Town</b></td>
 	   	 	  	<td><?php echo ucwords($memberData->home_town).", ".$member->getRegion($memberData->region_id)->name;?></td>

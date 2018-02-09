@@ -259,7 +259,7 @@
                                             <option value="AA">AA</option>
                                             <option value="AS">AS</option>
                                             <option value="SS">SS</option>
-                                            <option value="AB">AB</option>
+                                            <!-- <option value="AB">AB</option> -->
                                         </select>
                                     </div>
                                 </div>

@@ -177,23 +177,23 @@ class DBHandler
    }
 
 
-   public function update($table, $fields=array(), $idValue, $tableId = "id") 
+   public function update($table, $data=array(), $fieldValue, $tableField = "id") 
    {
-   		if(count($fields)) {
+   		if(count($data)) {
    			$set = '';
    			$counter = 1; 
 
-   			foreach($fields as $field => $value) {
+   			foreach($data as $field => $value) {
    				$set .= "{$field} = ?";
-   				if($counter < count($fields)) {
+   				if($counter < count($data)) {
    					$set .= ",";
    				}
    				$counter++;
    			}
             
-   			$sql = "UPDATE {$table} SET {$set} WHERE {$tableId} = {$idValue}";
+   			$sql = "UPDATE {$table} SET {$set} WHERE {$tableField} = {$fieldValue}";
 
-   			if(!$this->query($sql, $fields)->getError()) {
+   			if(!$this->query($sql, $data)->getError()) {
    				return true;//success
    			} 
    				
@@ -235,14 +235,39 @@ class DBHandler
 
 
 
-   public function updateSpecial($sql)
+   /**
+   * update database records
+   * @param data|array clause|string
+   * @var
+   * @return boolean
+   */
+   public function updateSpecial($table, array $data, $whereSql)
    {
-     $query = $this->_pdo->prepare($sql);
-     if($query->execute()){
-        return true;
-     }
-     return false;
+      if(count($data)) {
+        $set = '';
+        $counter = 1; 
+
+        foreach($data as $field => $value) {
+          $set .= "{$field} = ?";
+          if($counter < count($data)) {
+            $set .= ",";
+          }
+          $counter++;
+        }
+            
+        $sql = "UPDATE {$table} SET {$set} WHERE {$whereSql}";
+
+        if(!$this->query($sql, $data)->getError()) {
+          return true;//success
+        } 
+          
+         return false; //error
+        
+      }
+     
    }
+
+   
    
    public function delete($table, $where) {
         return $this->action('DELETE', $table, $where);
