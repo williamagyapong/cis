@@ -193,7 +193,8 @@ class Member extends Model
 		}
 		else
 		{
-			return $this->db->get($this->ministries, array())->all();
+			//return $this->db->get($this->ministries, array())->all();
+			return $this->db->select("SELECT * FROM {$this->ministries} ORDER BY `name` ASC")->all();
 		}
 	}
 
@@ -229,7 +230,8 @@ class Member extends Model
 		}
 		else
 		{
-			return $this->db->get($this->zones, array())->all();
+			//return $this->db->get($this->zones, array())->all();
+			return $this->db->select("SELECT * FROM {$this->zones} ORDER BY `name` ASC")->all();
 		}
 	}
 
@@ -340,6 +342,7 @@ class Member extends Model
 		//$age = date('Y') - date('Y', strtotime(Input::get('birth_date')));
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
 		$baptisedAt = (Input::get('where_baptised')=='Gbawe')?Input::get('where_baptised'):Input::get('other_baptised_cong');
+		$bContactPerson = json_encode(array('name'=>Input::get('contact_person'), 'phone'=>Input::get('contact_person_phone')));
 	
 	    if($memberCode !=0)
 	    {
@@ -364,6 +367,7 @@ class Member extends Model
 												  'baptismal_status'=>$baptismalStatus,
 												  'baptised_on'=>Input::get('date_baptised'),
 												  'baptised_at'=>$baptisedAt,
+												  'b_contact_person'=>$bContactPerson,
 												  'blood_group'=>Input::get('blood_group'),
 												  'sickling_status'=>Input::get('sickling_status'),
 												  'kids'=>Input::get('kids'),
@@ -377,18 +381,10 @@ class Member extends Model
 
 			// add member to users
 			$year = date('Y', strtotime(Input::get('date_baptized')));
-			$run2 = $this->db->insert($this->users, [
-				                                       'username'=>Input::get('first_name'),
-				                                       'password'=>Hash::make($memberCode),
-				                                       'member_id'=>Session::get('new_member_id'),
-				                                       'role'=>'Ordinary',
-				                                       'date_registered'=>date('Y-m-d')
-			                                         ]);
+
 			//add spouse
-			/*   $run3 = true;
-			if(Input::get('marital_status'=='married')||Input::get('marital_status'=='separated')||Input::get('marital_status'=='divorced')||Input::get('marital_status'=='widowed')) {
-				$run3 = false;*/
-				$run3 = $this->db->insert($this->relations, [
+
+			$run2 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
 														  'name'=>Input::get('spouse_name'),
 														  'contact'=>Input::get('spouse_contact'),
@@ -398,7 +394,7 @@ class Member extends Model
 			                                            ]);
 			//}
 			//add father
-			$run4 = $this->db->insert($this->relations, [
+			$run3 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
 														  'type'=>'father',
 														  'name'=>Input::get('father_name'),
@@ -408,7 +404,7 @@ class Member extends Model
 			                                            ]);
 
 			//add mother
-			$run5 = $this->db->insert($this->relations, [
+			$run4 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
 														  'type'=>'mother',
 														  'name'=>Input::get('mother_name'),
@@ -418,18 +414,18 @@ class Member extends Model
 			                                            ]);
 
 			//add mother
-			$run6 = $this->db->insert($this->relations, [
+			$run5 = $this->db->insert($this->relations, [
 														  'member_id'=>Session::get('new_member_id'),
 														  'type'=>'next_of_kin',
 														  'name'=>Input::get('next_kin_name'),
 														  'contact'=>Input::get('next_kin_contact'),
 														  'relationship'=>Input::get('next_kin_relation')
 			                                            ]);
-			if($run2&&$run3&&$run4&&$run5&&$run6) {
+			if($run2&&$run3&&$run4&&$run5) {
 				Session::delete('new_member_id');
 				return true;
 			}
-			Session::put('add_new_errors', 'failed to create user<br>');
+			Session::put('add_new_errors', 'failed to relations data<br>');
 			return false;
 		}
 		else
@@ -462,6 +458,7 @@ class Member extends Model
 		$memberId = Input::get('member_id');
 		$baptismalStatus = (Input::get('baptismal_status')=='on')?'baptised':'not baptised';
 		$baptisedAt = (Input::get('where_baptised')=='Gbawe')?Input::get('where_baptised'):Input::get('other_baptised_cong');
+		$bContactPerson = json_encode(array('name'=>Input::get('contact_person'), 'phone'=>Input::get('contact_person_phone')));
 	
 	    	$run = $this->db->update($this->members, [
 												  'f_name'=>Input::get('first_name'),
@@ -483,6 +480,7 @@ class Member extends Model
 												  'baptismal_status'=>$baptismalStatus,
 												  'baptised_on'=>Input::get('date_baptised'),
 												  'baptised_at'=>$baptisedAt,
+												  'b_contact_person'=>$bContactPerson,
 												  'blood_group'=>Input::get('blood_group'),
 												  'sickling_status'=>Input::get('sickling_status'),
 												  'kids'=>Input::get('kids'),

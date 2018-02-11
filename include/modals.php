@@ -80,31 +80,35 @@
           
         </p>
       </div>
-      <footer class="w3-container w3-light-grey">
+      <footer class="w3-container w3-light-grey w3-margin-bottom">
         <div>
           Do you want to register this member anyway?
         </div>
        <div class="w3-right">
-        <button id="add_member_yes" class="w3-button" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>YES</b></button>
-        <button id="add_member_no" class="w3-button" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>NO</b></button>
-        <button id="add_member_cancel" class="w3-button" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>Cancel</b></button>
+        <button id="add_member_yes" class="btn btn-warning" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>YES</b></button>
+        <button id="add_member_no" class="btn btn-info" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>NO</b></button>
+        <button id="add_member_cancel" class="btn btn-primary" onclick="$('#duplicate_names').hide();$('#details').css('display','none')"><b>Cancel</b></button>
        </div>
       </footer>
     </div>
    </div>
-
-<!-- <div class="w3-margin">
-  <div class="w3-container w3-blue">
-    <h2 class="w3-center">Add a New Ministry</h2>
+  <!-- system alert modal  -->
+   <div id="alert_modal" class="w3-modal" style="padding-top:50px">
+     <div class="w3-modal-content w3-card-4 w3-animate-bottom w3-round" style="max-width:650px;min-height:140px;">
+        <header class="w3-container w3-card-4 w3-blue" style="padding-top: 10px;padding-bottom: 10px;"> 
+          <h3 id="alert_title" style="display: inline;" class="w3-margin-bottom"><span class="fa fa-undo"></span> Undo Death Registration</h3>
+        </header>
+        <div class="w3-container">
+            <p class="w3-padding w3-left"><img src="../assets/images/system/warning.png" width="50" height="40"></p>
+            <div id="alert_content" class="w3-margin-top content">
+              <h5>---------- will now be marked as not dead <span class="btn btn-danger">Confirm</span></h5><br>
+              
+            </div>
+        </div>
+        <footer class="w3-container w3-light-grey" style="margin-top: 5px;">
+         <div class="w3-right">
+          <button id="add_member_cancel" class="btn btn-primary" style="margin-bottom: 5px;margin-top: 5px;" onclick="$('#alert_modal').hide();$('#details').css('display','none')"><b>Cancel</b></button>
+         </div>
+        </footer>
+     </div>
   </div>
-  <form action="../controller.php" method="post" class="w3-container w3-card-4 w3-padding w3-card w3-padding-34">
-    <div class="w3-row-padding">
-      <label class="w3-bold" for="id_name">Name:</label><br>
-      <input id="id_name" type="text" name="name" class="w3-input w3-border w3-border-dark-grey" required>
-
-      <label class="w3-bold" for="id_leader">Leader:</label><br>
-      <input id="id_leader" type="text" name="leader" class="w3-input w3-border w3-border-dark-grey" required>
-      <button class="btn btn-primary w3-margin-top">Submit</button>
-    </div>
-  </form>
-</div> -->

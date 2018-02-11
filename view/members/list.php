@@ -29,10 +29,16 @@ $members = $member->get();
         <?php require '../include/sidemenu.php';?>
         <div id="page-wrapper" >
           <div id="page-inner">
-            <div class="row" id="top-page">
-              <div class="col-md-12">
-               <h2 class="w3-text-dark-grey"><span>Members<i class="w3-badge w3-blue"><?php echo count($members)?></i></span></h2>   
+            <div class="w3-row" id="top-page">
+              <div class="w3-col m6 l6">
+               <h2 class="w3-text-dark-grey"><span><span class="w3-badge w3-xlarge w3-padding w3-blue-grey">Members</span></span></h2>   
               </div>
+              <div class="w3-col m6 l6">
+              <h3>
+                Total Membership: <span class="w3-blue w3-large w3-text-white badge"><?php echo count($members);?></span>
+                <a href="index.php?page=new_member" class="w3-right btn btn-primary">New</a>
+              </h3>
+            </div>
             </div><hr />
             <div class="row">
                 <div class="col-md-12 col-sm-6">

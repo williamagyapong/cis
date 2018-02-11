@@ -9,12 +9,12 @@ if(Input::exist('add_token'))
     {
       case 'add_member':
 	         if($member->addMember()) Redirect::to('view/index.php?page=new_member');
-	         else Redirect::to(502);
+	         else Redirect::to(503);
 	    break;
 
       case 'update_member_profile':
            if($member->updateProfile()) Redirect::to('view/index.php?page=members_list');
-           else Redirect::to(502);
+           else Redirect::to(503);
       break;
 
       case 'add_ministry':

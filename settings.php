@@ -15,7 +15,7 @@
      date_default_timezone_set("UTC");
      
      # error reporting
-     error_reporting();
+     error_reporting(0);
 
 
 /**
@@ -28,7 +28,7 @@
 $GLOBALS['config'] = array(
         'mysql'=>array(
               'host'=>'127.0.0.1',
-              'db'=>'cis_db',
+              'db'=>'new_cis_db',
               'password'=>'',
               'username'=>'root'
         	),

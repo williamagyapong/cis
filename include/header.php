@@ -22,7 +22,7 @@
 	    <span class="headtext w3-hide-large" style="cursor: pointer;" title="<?php echo Config::get('app/name');?>">CIS</span>
 	</div>
 
-	<span class="headtext w3-hide-small"> &nbsp;<?php echo Config::get('app/name');?> </span>
+	<span class="headtext w3-hide-small" style="margin-top: 15px; position: absolute;"> &nbsp;<?php echo Config::get('app/name');?> </span>
 	<div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;"><i>...<?php echo Config::get('client/name');?>...</i>
 	<a href="index.php?page=exit" class="btn btn-danger square-btn-adjust"><span class="glyphicon glyphicon-log-out"></span>&nbsp;EXIT</a> 
 	</div>

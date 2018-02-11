@@ -28,17 +28,18 @@ require_once '../settings.php';
       <div id="page-inner">
         <div class="row">
           <div class="col-md-12">
-           <h3 class="w3-text-blue-grey w3-card-4 w3-margin w3-padding w3-white w3-center">Here are Birthdays for the period <span class="w3-text-orange"><i><?php echo date('jS M, Y'); ?></i></span> to <span class="w3-text-orange"><i><?php echo date('jS M, Y', strtotime(date('Y-m-d'))+604800); ?></i></span></h3>   
+           <h3 class="w3-text-blue-grey w3-card-4 w3-margin w3-padding w3-white w3-center"><?php echo (count($birthdays)==0)?"No Birthdays for the period <span class=\"w3-text-orange\">":"Here are Birthdays for the period <span class=\"w3-text-orange\">";?><i><?php echo date('jS M, Y'); ?></i></span> to <span class="w3-text-orange"><i><?php echo date('jS M, Y', strtotime(date('Y-m-d'))+604800); ?></i></span></h3>   
           </div>
         </div>             
          <!-- /. ROW  -->
           <hr />
        <div class="w3-row">
           <div class="w3-half">
-              <img src="../assets/images/system/birthday3.jpg" width="200" height="150">
+              <?php echo (count($birthdays)!=0)?"<img src=\"../assets/images/system/birthday3.jpg\" width=\"200\" height=\"150\">":"";?>
           </div>
           <div class="w3-half">
-              <img src="../assets/images/system/birthday3.jpg" width="200" height="150" style="margin-left: 40%;">
+              <?php echo (count($birthdays)!=0)?"<img src=\"../assets/images/system/birthday3.jpg\" width=\"200\" height=\"150\" style=\"margin-left: 40%;\">":"";?>
+              <!-- <img src="../assets/images/system/birthday3.jpg" width="200" height="150"> -->
           </div>
              <!-- /. ROW  -->           
          </div>
@@ -76,7 +77,7 @@ require_once '../settings.php';
                              </tbody>
                            </table>
                            <div class="w3-center w3-text-pink">
-                               <h4>God bless you with His special love!</h4>
+                               <h4><?php echo (count($birthdays)!=0)?"<i>God bless you with His special love!</i> <img src=\"../assets/images/system/like-2.png\" width=\"50\" height=\"30\">":"";?></h4>
                            </div>
                          </div>
                     </div>

@@ -31,12 +31,13 @@ require_once '../settings.php';
         <div class="w3-row" id="top-page">
             <div class="w3-col m6 l6">  
                <div class="w3-padding-left w3-mobile">
-                  <h3>Marriage Register</h3>
+                  <h3><span class="w3-badge w3-xlarge w3-padding w3-blue-grey">Marriage Register</span></h3>
                </div>
             </div>
             <div class="w3-col m6 l6">
               <h3>
                 Total Marriages recorded: <span class="w3-blue w3-large w3-text-white badge"><?php echo count($marriages);?></span>
+                <span class="w3-right btn btn-primary" onclick="popUpModal('../controller.php','new_marriage_ui')">New</span>
               </h3>
             </div>
         </div>              

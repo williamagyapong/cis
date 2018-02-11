@@ -2,7 +2,7 @@
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
 		<li class="text-center">
-            <img id="user_image" src="../assets/images/<?php echo $user->data()->image;?>" class="user-image img-responsive"/>
+            <img id="user_image" src="../assets/images/users/<?php echo $user->data()->image;?>" class="user-image img-responsive"/>
 		</li>
             <li>
                 <a class="w3-hover-text-grey"  href="index.php"><i class="fa fa-dashboard fa-2x w3-text-blue"></i> Dashboard</a>
@@ -152,9 +152,9 @@
               <li>
                 <a class="w3-hover-text-grey" href="#"><i class="fa fa-cog fa-2x w3-spin w3-text-blue"></i> Settings<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
+                   <!--  <li>
                         <a href="index.php?page=admin_profile">Profile</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="index.php?page=system_settings">System</a>
                     </li>

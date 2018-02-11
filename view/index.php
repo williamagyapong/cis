@@ -7,6 +7,8 @@ require_once '../settings.php';
  $birthdays = $member->getBirthDays();
  $birthdaysCount = count($birthdays);
  $deaths = $member->get('deaths');
+ $marriages = [];
+ $baptisms = [];
 
 ?>
 
@@ -47,6 +49,8 @@ require_once '../settings.php';
                         echo $dateArr['year'];
                         ?>
                     </h2>
+                    <!-- show current time -->
+                    <h5 class="w3-center"><span id="time" class="w3-blue-grey w3-large w3-text-white badge"></h5>
                 </div>
             </div>
         </div>              
@@ -94,15 +98,15 @@ require_once '../settings.php';
             </div>
            </div>
           </div>  
-         </div>
-         <div class="row" id="master-page">
+         </div><br><br><br>
+         <div class="row" id="master-page w3-margin-top">
          <div class="col-md-4 col-sm-12 col-xs-12">           
            <div class="panel panel-back noti-box">
                 <div class="text-box" align="center">
                     <p class="main-text">Baptisms</p>
-                    <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($adults);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
+                    <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($baptisms);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
                     <!-- <span>out of <?php echo count($members) ?></span> -->
-                    <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                    <p><a href="javacript:void()" class="btn btn-default btn-lg" role="button" onclick="popUpModal('../controller.php','new_baptism_ui')">Register New</a>
                     <a href="index.php?page=baptisms" class="btn btn-default btn-lg" role="button">View</a></p>
                 </div>
            </div>
@@ -111,9 +115,9 @@ require_once '../settings.php';
            <div class="panel panel-back noti-box">
             <div class="text-box" align="center">
                 <p class="main-text">Marriages</p>
-                <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($members)-count($adults);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
+                <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($marriages);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
                 <!-- <span>out of <?php echo count($members) ?></span> -->
-                <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                <p><a href="javacript:void()" class="btn btn-default btn-lg" role="button" onclick="popUpModal('../controller.php','new_marriage_ui')">Register New</a>
                 <a href="index.php?page=marriages" class="btn btn-default btn-lg" role="button">View</a></p>
             </div>
            </div>
@@ -124,7 +128,7 @@ require_once '../settings.php';
                     <p class="main-text">Deaths</p>
                     <p class="main-text"><span class="w3-badge w3-blue w3-padding"><?php echo count($deaths);?></span><!-- &nbsp;<img class="w3-circle w3-grey" src="../assets/images/system/ajax-loader.gif"> --></p>
                     <!-- <span>out of <?php echo count($members) ?></span> -->
-                    <p><a href="index.php?page=" class="btn btn-default btn-lg" role="button">Register New</a>
+                    <p><a href="javacript:void()" class="btn btn-default btn-lg" role="button" onclick="popUpModal('../controller.php','new_death_ui')">Register New</a>
                     <a href="index.php?page=deaths" class="btn btn-default btn-lg" role="button">View</a></p>
                 </div>
            </div>
@@ -140,7 +144,46 @@ require_once '../settings.php';
     <?php require_once'../include/modals.php';?>
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <?php require_once'../include/scripts.html';?>    
+    <?php require_once'../include/scripts.html';?> 
+
+    <script type="text/javascript">
+       $(document).ready(function(){
+          //add a  leading zero(0) to  a number to single digit
+          function formatTime(i)
+                {
+                      if(i<10)
+                      {
+                            i = "0"+i;
+                      }
+                      return i;
+                }
+
+                
+
+          // this function sets the current time
+           function setTime()
+                {
+                  var date = new Date();
+                  var h = date.getHours();
+                  var m = date.getMinutes();
+                  var s = date.getSeconds();
+                         
+                    h = formatTime(h);
+                     m = formatTime(m);
+                     s = formatTime(s);
+                     document.getElementById('time').innerHTML = h+":"+m+":"+s;
+
+                    //setTimeout('setTime()', 1000 );
+                }
+                // make a call to currentTime function
+                //setTime();
+                setInterval(function(){
+                       setTime();
+                    }, 1000)
+
+           
+       })
+    </script>   
    
 </body>
 </html>

@@ -21,7 +21,7 @@ class Redirect
 					case 503:
 					 	header('HTTP/1.0 503 FAILURE');
 					 	// echo "<a href=\"../include/errors/503.php\">error</a>";
-					 	include '../include/errors/503.php';
+					 	include 'include/errors/503.php';
 					 	exit();
 					break;
 

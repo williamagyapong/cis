@@ -35,22 +35,11 @@ class Settings extends Model
 		else
 		{
 			// fetch all languages
-			return $this->db->get($this->languages, [])->all();
+			//return $this->db->get($this->languages, [])->all();
+			return $this->db->select("SELECT * FROM {$this->languages} ORDER BY `name` ASC")->all();
 		}
 	}
     
-
-
-	/**
-	* reset password
-	* @param
-	* @var
-	* @return
-	*/
-	public function resetPassword()
-	{
-		
-	}
 
 }
 

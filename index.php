@@ -56,6 +56,8 @@
             
     <div class="header">
           <img style="margin:10px 2px 2px 10px;float:left;" height="53" width="80" src="assets/images/system/worldwide.png" alt="CIS"/>
+          <!-- coc logo -->
+          <img style="margin:10px 15px 2px 10px;float:;" height="53" width="80" src="assets/images/system/coc2.jpg" alt="COC_logo" class="w3-right" />
          <h3 class="headtext w3-hide-large" title="<?php echo Config::get('app/name');?>"> &nbsp;<?php echo Config::get('app/abbr_name');?> </h3>
          <h3 class="headtext w3-hide-small"> &nbsp;<?php echo Config::get('app/name');?> </h3>
     </div>
@@ -74,7 +76,7 @@
               
                 <tr>
                     <td>User Name</td>
-                    <td><input style="padding-left: 10px;" type="text" tabindex="1" name="username" value="<?php echo Input::get('username');?>" required /></td>
+                    <td><input style="padding-left: 10px;" type="text" tabindex="1" name="username" value="<?php echo Input::get('username');?>" required autocomplete="off" /></td>
 
                 </tr>
                 <tr>

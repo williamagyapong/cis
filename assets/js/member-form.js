@@ -1,4 +1,39 @@
 $(document).ready(function(){
+
+     // toggle some fields visibility for member type specifics
+        // mainly necessary when user selects add new child from dasboard page
+      if($('#is_child').prop('checked')) {
+         $('#id_phone').removeAttr('required');
+         $('#id_picture').removeAttr('required');
+         $('#other_phone').hide();
+         $('#marriage').hide();
+         $('#spouse').addClass('w3-hide');
+         $('#next_of_kin').hide();
+         $('#baptism').hide();
+         $('#phone_required').hide();
+         $('#picture_required').hide();
+         //disable form controls
+         $('#marriage :input').prop('disabled', true);
+         $('#spouse :input').prop('disabled', true);
+         $('#next_of_kin :input').prop('disabled', true);
+         $('#baptism :input').prop('disabled', true);
+
+      } else{
+              $('#id_phone').attr('required','');
+              $('#id_picture').attr('required','');
+              $('#other_phone').show();
+              $('#phone_required').show();
+              $('#picture_required').show();
+              $('#marriage').show();
+              $('#spouse').removeClass('w3-hide');
+              $('#next_of_kin').show();
+              $('#baptism').show();
+              //enable form controls
+              $('#marriage :input').prop('disabled', false);
+              $('#spouse :input').prop('disabled', false);
+              $('#next_of_kin :input').prop('disabled', false);
+              $('#baptism :input').prop('disabled', false);
+      }
     
     $(document).change(function() {
       if(!$('#id_is_father_deceased').prop('checked')) {

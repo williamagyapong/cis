@@ -106,6 +106,30 @@ class User
     	}
     }
 
+    /**
+	* reset password
+	* @param
+	* @var
+	* @return
+	*/
+	public function resetPassword()
+	{   
+		$currentPass  = Hash::make(Input::get('old_password'));
+		$newPassword = Hash::make(Input::get('new_password'));
+		$newPasswordMatch = Hash::make(Input::get('new_password_again'));
+        if($newPassword==$newPasswordMatch) {
+        	$userData = $this->_db->get('users', ['password','=', $currentPass])->first();
+			if(!empty($userData)) {
+				if($this->_db->update('users', ['password'=>$newPassword], $userData->id)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+        }
+        return false;
+	}
+
 
 	public function exists() 
 	{

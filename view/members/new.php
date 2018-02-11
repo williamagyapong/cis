@@ -103,11 +103,12 @@
                             <div class="fieldWrapper w3-margin-bottom">
                                 
                                 <label class="w3-text-grey"><b><label for="id_languages">Languages<span class="w3-text-red w3-large">*</span></label></b></label><br>
-                                <select name="languages[]" class="w3-select w3-border w3-border-dark-grey" required id="id_languages" size="3" multiple>
+                                <select name="languages[]" class="w3-select w3-border w3-border-dark-grey" required id="id_languages" size="5" multiple>
                                   <?php foreach($settings->getLanguage() as $language):?>
                                       <option class="w3-padding-left" value="<?php echo $language->id;?>"><?php echo $language->name;?></option>
                                   <?php endforeach;?>
                                 </select>
+                                <span id="language_field_info"></span>
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
                                 
@@ -194,7 +195,7 @@
                                     </div>
                                     <div class="w3-col m6 l6">
                                         <label class="w3-text-grey"><b><label for="id_other_baptised">If other specify:</label></b></label>
-                                        <input type="text" name="other_baptised_cong" class="w3-input w3-border w3-border-dark-grey" id="id_other_baptised" placeholder="Name of other Church" disabled />  
+                                        <input type="text" name="other_baptised_cong" class="w3-input w3-border w3-border-dark-grey" id="id_other_baptised" placeholder="Name of other Church" disabled required/>  
                                     </div>
                                 </div>
                                 <div class="w3-row">
@@ -234,10 +235,13 @@
                                 <label class="w3-text-grey"><b><label for="id_education">Highest Educational Level<span class="w3-text-red w3-large">*</span></label></b></label><br>
                                 <input type="text" name="education" list="education_list" class="w3-input w3-border w3-border-dark-grey" maxlength="50" required id="id_education" autocomplete="off" />
                                 <datalist id="education_list">
-                                  <option value="University">
-                                  <option value="Polytechnic">
+                                  <option value="Tertiary">
+                                  <option value="O Level">
                                   <option value="Senior High">
                                   <option value="Junior High">
+                                  <option value="Primary">
+                                  <option value="Kindergarten">
+                                  <option value="None">
                                 </datalist>
                             </div>
                             <div class="fieldWrapper w3-margin-bottom">
@@ -437,7 +441,9 @@
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <?php require_once'../include/scripts.html';?>
     <script src="../assets/js/jquery.Jcrop.min.js"></script>
+
     <script type="text/javascript">
+      
         var formFilter = "<?php echo Input::get('filter');?>";
         if(formFilter=='child') {
             $('#is_child').prop('checked', true);
@@ -445,7 +451,10 @@
                $('#is_child').prop('checked', false);
         }
 
+
+
         // toggle some fields visibility for member type specifics
+        // mainly necessary when user selects add new child from dasboard page
       if($('#is_child').prop('checked')) {
          $('#id_phone').removeAttr('required');
          $('#id_picture').removeAttr('required');

@@ -24,6 +24,7 @@
 	<div class="w3-col l6 m6">
 	   <div class="w3-container">
 	   	 <div>
+	   	 	<?php echo ($memberData->status==0)?"<span class=\"w3-text-red\"><i>Of Blessed Memory</i></span><span class=\"w3-text-blue-grey w3-margin-left\"><i>Died On: ".date('d/m/Y', strtotime($memberData->died_on))."</i></span>":""?>
 	   	 	<table class="table table-striped table-bordered">
 	   	 	  <tr>
 	   	 	  	<td colspan="2" class="w3-center w3-grey" style="padding:20px 0;">
@@ -32,7 +33,7 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Name</b></td>
-	   	 	  	<td><?php echo $memberData->f_name." ".$memberData->m_name." ".$memberData->l_name;?>
+	   	 	  	<td><?php echo ucfirst($memberData->f_name)." ".ucfirst($memberData->m_name)." ".ucfirst($memberData->l_name);?>
 	   	 	  	</td>
 	   	 	  </tr>
 	   	 	  <tr>
@@ -45,47 +46,45 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Marital Status</b></td>
-	   	 	  	<td><?php echo $memberData->marital_status;?></td>
+	   	 	  	<td><?php echo ucfirst($memberData->marital_status);?></td>
 	   	 	  </tr>
 	   	 	  <?php if(($memberData->marital_status=='single')|| ($memberData->marital_status=='')):?>
 	   	 	      <!-- do nothing -->
 	   	 	  <?php else:?>
 	   	 	  <tr>
 	   	 	  	<td colspan="2">
-                        <div class="panel-group" id="spouse_accordion" style="margin-bottom: 0">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                    	<a data-toggle="collapse" data-parent="#spouse_accordion" href="#spouse" class="collapsed" style="display: block;text-decoration: none;">Spouse Details</a>
-                                    </h4>
-                                </div>
-                                <div id="spouse" class="panel-collapse collapse" style="height: 0px;">
-								    <div class="panel-body">
-								    <?php 
-								     $spouse = $member->getRelation($memberData->id,'spouse');
-								     if(empty($spouse)):
-								    ?>
-								      <h5 class="w3-text-red"><i>Not available</i></h5>
-								    <?php else:?>
-								        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $spouse->name;?></span></h5>
-								        	<?php if($spouse->deceased=='yes'):?>
-								        	  <h5><i>Of blessed memory</i></h5>
-								            <?php else:?>
-                                        	  <h5>Contact&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $spouse->contact;?></span></h5>
-                                        	<?php endif;?>
-
-								        	<?php if($spouse->member==''):?>
-								        	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
-										    <?php else:?>
-								        	<h5 class="w3-text-red"><i>Member of the church</i></h5>
-								            <?php endif;?>
-								     <?php endif;?>
-								    </div>
-								</div>
+                    <div class="panel-group" id="spouse_accordion" style="margin-bottom: 0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                	<a data-toggle="collapse" data-parent="#spouse_accordion" href="#spouse" class="collapsed" style="display: block;text-decoration: none;"><img src="../assets/images/system/detail.png" width="50" height="30"> Spouse Details</a>
+                                </h4>
                             </div>
+                            <div id="spouse" class="panel-collapse collapse" style="height: 0px;">
+							    <div class="panel-body">
+							    <?php 
+							     $spouse = $member->getRelation($memberData->id,'spouse');
+							     if(empty($spouse)):
+							    ?>
+							      <h5 class="w3-text-red"><i>Not available</i></h5>
+							    <?php else:?>
+							        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo ucfirst($spouse->name);?></span></h5>
+							        	<?php if($spouse->deceased=='yes'):?>
+							        	  <h5><i>Of blessed memory</i></h5>
+							            <?php else:?>
+                                    	  <h5>Contact&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $spouse->contact;?></span></h5>
+                                    	<?php endif;?>
+
+							        	<?php if($spouse->member==''):?>
+							        	<h5 class="w3-text-red"><i>Not a member of the church</i></h5>
+									    <?php else:?>
+							        	<h5 class="w3-text-red"><i>Member of the church</i></h5>
+							            <?php endif;?>
+							     <?php endif;?>
+							    </div>
+							</div>
                         </div>
                     </div>
-                 
 	   	 	    </td>
 	   	 	  </tr>
 	   	 	  <?php endif;?>
@@ -109,6 +108,34 @@
 	   	 	  	<td><b>Date of Baptism</b></td>
 	   	 	  	<td>
                     <span><?php echo date('d/m/Y', strtotime($memberData->baptised_on));?></span>
+	   	 	  </tr>
+	   	 	  <?php endif;?>\
+	   	 	  <?php if($memberData->b_contact_person!=''):?>
+	   	 	  <tr>
+	   	 	  	<td colspan="2">
+                    <div class="panel-group" id="contact_person_accordion" style="margin-bottom: 0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                	<a data-toggle="collapse" data-parent="#contact_person_accordion" href="#contact_person" class="collapsed" style="display: block;text-decoration: none;"><img src="../assets/images/system/detail.png" width="50" height="30"> Mother Church Contact</a>
+                                </h4>
+                            </div>
+                            <div id="contact_person" class="panel-collapse collapse" style="height: 0px;">
+							    <div class="panel-body">
+							    <?php 
+							     $contactPerson = json_decode($memberData->b_contact_person);
+							     if(empty($contactPerson)):
+							    ?>
+							      <h5 class="w3-text-red"><i>Not available</i></h5>
+							    <?php else:?>
+							        	<h5>Name&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo ucfirst($contactPerson->name);?></span></h5>
+                                    	  <h5>Phone&nbsp;<span class="fa fa-arrow-right">&nbsp;</span><span class="w3-text-blue-grey"><?php echo $contactPerson->phone;?></span></h5>
+							     <?php endif;?>
+							    </div>
+							</div>
+                        </div>
+                    </div>
+	   	 	    </td>
 	   	 	  </tr>
 	   	 	  <?php endif;?>
 	   	 	  <tr>
@@ -135,7 +162,7 @@
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Phone</b></td>
-	   	 	  	<td><?php echo $memberData->phone;?></td>
+	   	 	  	<td><?php echo ($memberData->phone=='')?'<span class="w3-text-red">xxxxxxxxxx</span>':$memberData->phone;?></td>
 	   	 	  </tr>
 	   	 	  <tr>
 	   	 	  	<td><b>Phone(other)</b></td>
@@ -193,7 +220,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                    	<a data-toggle="collapse" data-parent="#accordion" href="#father" class="collapsed" style="display: block;text-decoration: none;">Father Details</a>
+                                    	<a data-toggle="collapse" data-parent="#accordion" href="#father" class="collapsed" style="display: block;text-decoration: none;"><img src="../assets/images/system/detail.png" width="50" height="30"> Father Details</a>
                                     </h4>
                                 </div>
                                 <div id="father" class="panel-collapse collapse" style="height: 0px;">
@@ -228,7 +255,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#mother" style="display: block;text-decoration: none;">Mother Details</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#mother" style="display: block;text-decoration: none;"><img src="../assets/images/system/detail.png" width="50" height="30"> Mother Details</a>
                                     </h4>
                                 </div>
                                 <div id="mother" class="panel-collapse collapse" style="height: auto;">
@@ -260,7 +287,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#next_of_kin" class="collapsed" style="display: block;text-decoration: none;">Next of Kin</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#next_of_kin" class="collapsed" style="display: block;text-decoration: none;"><img src="../assets/images/system/detail.png" width="50" height="30"> Next of Kin</a>
                                     </h4>
                                 </div>
                                 <div id="next_of_kin" class="panel-collapse collapse">

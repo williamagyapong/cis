@@ -1,5 +1,6 @@
 <?php 
 require_once 'settings.php';
+$user = new User();
 $middleware = new Middleware();
 $settings = new Settings();
 $member = new Member();
@@ -26,6 +27,19 @@ $member = new Member();
 
       case 'ministries_ui':
        $middleware->ministriesUi();
+      break;
+
+      case 'new_death_ui':
+       $middleware->newDeathUi($member);
+      break;
+
+      case 'get_deceased_img':
+         $imageName = $member->get(Input::get('member_id'))->picture;
+        echo json_encode(array('image'=>$imageName));
+      break;
+
+      case 'death_to_undo':
+        $middleware->undodeathUi(Input::get('data'));
       break;
 
       case 'crop_image':
@@ -101,6 +115,25 @@ $member = new Member();
                 case 'add_zone':
                   DBHandler::getInstance()->insert('zones', array('name'=>Input::get('name'), 'leader'=>Input::get('leader')));
                   break;
+
+                case 'register_death':
+                   if(DBHandler::getInstance()->update('members', [
+                                                       'died_on'=>Input::get('death_date'),
+                                                       'status'=>0
+                                                     ], Input::get('member_id')))  Redirect::to('view/index.php?page=deaths');
+                    //error occurred
+                    else Redirect::to(503);
+                   
+                  break;
+                case 'undo_death':
+                  if(DBHandler::getInstance()->update('members', [
+                                                       'died_on'=>'',
+                                                       'status'=>1
+                                                     ], Input::get('member_id')))  Redirect::to('view/index.php?page=deaths');
+                    //error occurred
+                    else Redirect::to(503);
+                break;
+
  		}
  	}
 
@@ -115,7 +148,8 @@ $member = new Member();
                   break;
 
                   case 'reset_password':
-                   //$settings->resetPassword();
+                    if($user->resetPassword()) Redirect::to('view/index.php?page=system_settings');
+                      else Redirect::to(503);
                   break;
 
             }

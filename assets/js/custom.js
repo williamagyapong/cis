@@ -68,10 +68,18 @@
     $(this).css({"max-width":"100px", "max-height":"100px"})
  })
  
-    function showModal(id)
+    function showModal(id, token='', data='')
     {
-
-        $('#'+id).show();
+        if(token!='' && data!='') {
+            //perfor ajax request
+            $.get('../controller.php', {token:token, data:data}, function(response) {
+                 $('#'+id).show();
+                 $('#'+id+' .content').html(response);
+            })
+        } else {
+            // only display modal
+            $('#'+id).show();
+        }
     }
 
 

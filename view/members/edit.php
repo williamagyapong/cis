@@ -21,7 +21,7 @@
   <input id="is_child" type="checkbox" value="child" class="w3-check w3-border w3-border-dark-grey  w3-hide">
   <div  class="page-background w3-white w3-card-4" style="margin-top:40px;max-width:960px;margin-left:auto;margin-right:auto">
       <div class="w3-container w3-blue-grey">
-        <h3>Profile of <span class="w3-text-orange"><?php echo $memberData->f_name.' '.$memberData->l_name;?></span> <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px;cursor: pointer;"></span></h3>
+        <h3>Profile of <span class="w3-text-orange"><?php echo $memberData->f_name.' '.$memberData->l_name;?></span> <span class="fa fa-arrow-right w3-text-dark-grey"></span> editing mode <span onclick="popDownModal('#edit_modal .content', 'edit_modal')" class="fa fa-times w3-right w3-button w3-hover-red" style="padding: 10px;cursor: pointer;" title="Close"></span></h3>
 
       </div>
     <form id="member_form" action="../process.php" method="post" enctype="multipart/form-data" class="w3-container w3-card-4 w3-padding w3-card w3-padding-34">
@@ -182,19 +182,20 @@
                           </div>
                           <div class="w3-col m6 l6">
                               <label class="w3-text-grey"><b><label for="id_other_baptised">If other specify:</label></b></label>
-                              <input type="text" name="other_baptised_cong" value="<?php echo (($memberData->baptised_at!='Gbawe')&&($memberData->baptised_at!=''))?"$memberData->baptised_at":'';?>" class="w3-input w3-border w3-border-dark-grey" id="id_other_baptised" placeholder="Name of other Church" disabled />  
+                              <input type="text" name="other_baptised_cong" value="<?php echo (($memberData->baptised_at!='Gbawe')&&($memberData->baptised_at!=''))?"$memberData->baptised_at":'';?>" class="w3-input w3-border w3-border-dark-grey" id="id_other_baptised" placeholder="Name of other Church" disabled required />  
                           </div>
                       </div>
                       <div class="w3-row">
+                        <?php $contactPerson = json_decode($memberData->b_contact_person);?>
                           <label class="w3-text-grey"><b><label for="id_contact_person">Contact Person (Minister)</label></b></label>
                           <div class="w3-row">
                               <div class="w3-col m6 l6">
                                   <label class="w3-text-grey"><b><label for="id_contact_person">Name:</label></b></label>
-                                  <input type="text" name="contact_person" value="<?php ?>" maxlength="225" class="w3-input w3-border w3-border-dark-grey" id="id_contact_person" disabled />
+                                  <input type="text" name="contact_person" value="<?php echo ($memberData->b_contact_person!='')?$contactPerson->name:'';?>" maxlength="225" class="w3-input w3-border w3-border-dark-grey" id="id_contact_person" disabled />
                               </div>
                               <div class="w3-col l6 m6">
                                   <label class="w3-text-grey"><b><label for="contact_person_phone">Contact:</label></b></label>
-                                  <input type="text" name="contact_person_phone" value="<?php ?>" class="w3-input w3-border w3-border-dark-grey numberonly" id="contact_person_phone" min="0" maxlength="10" disabled />
+                                  <input type="text" name="contact_person_phone" value="<?php echo ($memberData->b_contact_person!='')?$contactPerson->phone:''; ?>" class="w3-input w3-border w3-border-dark-grey numberonly" id="contact_person_phone" min="0" maxlength="10" disabled />
                               </div>
                           </div>  
                       </div>
@@ -222,10 +223,13 @@
                       <label class="w3-text-grey"><b><label for="id_education">Highest Educational Level<span class="w3-text-red w3-large">*</span></label></b></label><br>
                       <input type="text" name="education" value="<?php echo $memberData->education;?>" list="education_list" class="w3-input w3-border w3-border-dark-grey" maxlength="50" required id="id_education" autocomplete="off" />
                       <datalist id="education_list">
-                        <option value="University">
-                        <option value="Polytechnic">
-                        <option value="Senior High">
-                        <option value="Junior High">
+                        <option value="Tertiary">
+                            <option value="O Level">
+                            <option value="Senior High">
+                            <option value="Junior High">
+                            <option value="Primary">
+                            <option value="Kindergarten">
+                            <option value="None">
                       </datalist>
                   </div>
                   <div class="fieldWrapper w3-margin-bottom">
@@ -571,17 +575,6 @@
               }
 
           }
-          
-          //control contact field visibility
-          /*if(maritalStatus=='widowed') {
-              $('#spouse_contact_field').addClass('w3-hide');
-              $('#spouse_contact_field :input').prop('disabled', true);
-              $('#spouse_name_field').removeClass("w3-col m6 l6");
-          } else{
-                  $('#spouse_contact_field').removeClass('w3-hide');
-                  $('#spouse_contact_field :input').prop('disabled', false);
-                  $('#spouse_name_field').addClass("w3-col m6 l6");
-          }*/
             
         })
 

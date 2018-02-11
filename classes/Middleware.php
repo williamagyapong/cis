@@ -250,6 +250,74 @@ class Middleware extends Model
           </div>";
   }
 
+
+
+/**
+  * provides interface for creating zones
+  * @param
+  * @var
+  */
+  public function newDeathUi($memberObject)
+  {
+    $members = $memberObject->get();
+    echo "<div class=\"w3-margin\">
+      <div class=\"w3-container w3-blue-grey\">
+        <h2 class=\"w3-center\">Register New Death</h2>
+      </div>
+      <form action=\"../controller.php\" method=\"post\" class=\"w3-container w3-card-4 w3-padding w3-card w3-padding-34\">
+        <div class=\"w3-row-padding\">
+          
+          <label class=\"w3-bold w3-text-red\" for=\"id_deceased\">Deceased:</label><br>
+          <select id=\"id_deceased\" name=\"member_id\" class=\"w3-select w3-border w3-border-dark-grey w3-margin-bottom\" required>
+              <option value=\"\">-------------</option>";
+            foreach($members as $member) {
+              echo "<option value=\"$member->id\">".$member->f_name.' '.$member->m_name.' '.$member->l_name."</option> ";   
+            }
+             echo "
+               </select>
+               <div class=\"w3-row\">
+                 <div class=\"w3-col m6 l6\">
+                    <label class=\"w3-bold w3-large\" style=\"margin-left:80px;\" for=\"id_died_on\">Died On:</label>
+                 </div>
+                 <div class=\"w3-col m6 l6\">
+                    <input id=\"id_died_on\" type=\"date\" name=\"death_date\" class=\"w3-input w3-border w3-border-dark-grey\" required>
+                 </div>
+                 
+               </div>
+          <input type=\"hidden\" name=\"token\" value=\"register_death\">
+          <button class=\"btn btn-primary w3-margin-top w3-right\">Confirm</button>
+        </div>
+      </form>
+      <div id=\"image_preview\" class=\"w3-container w3-margin-top\" style=\"\">
+          <!-- load image here after selection -->
+          <!-- <img src=\"../assets/images/members/\" width=\"200\" height=\"190\"> -->
+      </div>
+    </div>";
+  }
+
+
+  /**
+  * provides interface for undoing death registration
+  * @param
+  * @var
+  */
+  public function undoDeathUi($memberId)
+  {
+    $member  = $this->db->get($this->members, array('id','=',$memberId))->first();
+    echo "<h5>
+            <img src=\"../assets/images/members/$member->picture\" width=\"100\" height=\"100\" style=\"float:right\">
+            <span style=\"text-decoration:underline\" class=\"w3-text-blue-grey\">".$member->f_name.' '.$member->l_name."</span> will now be marked as not death 
+            <!--<span class=\"btn btn-danger\" onclick=\"\">Confirm</span>-->
+            <form action=\"../controller.php\" method=\"post\" >
+              <input type=\"hidden\" name=\"member_id\" value=\"$member->id\">
+              <input type=\"hidden\" name=\"token\" value=\"undo_death\">
+              <input type=\"submit\" value=\"Confirm\" class=\"btn btn-danger\" style=\"margin-top:10px;\">
+            </form>
+         </h5>
+         ";
+  }
+
+
   /**
   * provides interface for creating zones
   * @param

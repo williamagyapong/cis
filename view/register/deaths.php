@@ -31,12 +31,13 @@ require_once '../settings.php';
         <div class="w3-row" id="top-page">
             <div class="w3-col m6 l6">  
                <div class="w3-padding-left w3-mobile">
-                  <h3>Death Register</h3>
+                  <h3><span class="w3-badge w3-xlarge w3-padding w3-blue-grey">Death Register</span></h3>
                </div>
             </div>
             <div class="w3-col m6 l6">
               <h3>
                 Total Deaths recorded: <span class="w3-blue w3-large w3-text-white badge"><?php echo count($deadMembers);?></span>
+                <span class="w3-right btn btn-primary" onclick="popUpModal('../controller.php','new_death_ui')">New</span>
               </h3>
             </div>
         </div>              
@@ -51,7 +52,7 @@ require_once '../settings.php';
                              <table class="table table-striped table-bordered table-hover" id="dead_members_table">
                                <thead>
                                  <tr>
-                                   <th>Death ID</th>
+                                   <th></th>
                                    <th>Name</th>
                                    <th>Baptised</th>
                                    <th>Ministry</th>
@@ -63,7 +64,10 @@ require_once '../settings.php';
                                <tbody>
                                  <?php foreach($deadMembers as $person): $id++;?>
                                   <tr>
-                                    <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;" class="w3-text-blue"><?php echo $id;?></td>
+                                    <!-- <td title="Click to view details" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;" class="w3-text-blue"><?php echo $id;?></td> -->
+                                     <td title="Undo" onclick="<?php echo "showModal('alert_modal', 'death_to_undo', '".$person->id."')";?>" style="cursor: pointer;">
+                                       <span class="fa fa-undo w3-text-blue"></span>
+                                     </td>
 
                                     <td title="Click to view details" class="w3-text-blue-grey" onclick="<?php echo "popUpModal2('members/profile.php','get_member_details','".$person->id."')"?>" style="cursor: pointer;"><?php echo $person->f_name.' '.$person->m_name.' '.$person->l_name;?></td>
 <!--                                     <td class="w3-center">
@@ -101,9 +105,37 @@ require_once '../settings.php';
    <script>
         $(document).ready(function() {
             $('#dead_members_table').dataTable({
-                "order":[[6,"desc"]]
+                "order":[[6,"asc"]]
             });
+
+
+            //preview image
+            $(document).change(function() {
+                var memberId  = $('#id_deceased').val();
+                if(memberId !='') {
+
+                     $.ajax({
+                        type: 'get',
+                        url:'../controller.php',
+                        data: {token:'get_deceased_img', member_id:memberId},
+                        dataType:'json',
+                        encode:true
+                     })
+                     .done(function(response) {
+                        var img = '<img src=\"../assets/images/members/'+response.image+'\" width=\"200\" height=\"200\" alt=\"member picture\" class\"w3-border w3-border-dark-grey\">';
+                        $('#image_preview').html(img);
+                    
+                     })
+                     .fail(function(){
+                        console.log('failed load original image');
+                    })
+                } else {
+                          $('#image_preview').html('');
+                }
+           })
         })
+
+
     </script>
 </body>
 </html>
