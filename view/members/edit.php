@@ -11,7 +11,7 @@
     $spouse = $member->getRelation($memberId,'spouse');
     $nextOfKin = $member->getRelation($memberId, 'next_of_kin');
     $memberData = $member->get($memberId);
-    $bloodGroups = array('A','B','AB', 'O');
+    $bloodGroups = array('O-','O+', 'A-', 'A+''B-','B+','AB-','AB+');
     $sickleCells = array('AA', 'AS', 'SS');
 
 ?>

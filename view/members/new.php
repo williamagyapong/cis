@@ -250,10 +250,14 @@
                                         <label class="w3-text-grey"><b><label for="id_blood">Blood Group:</label></b></label><br>
                                         <select name="blood_group" class="w3-select w3-border w3-border-dark-grey" id="id_blood">
                                             <option value="" selected>---------</option>
-                                            <option value="O">O</option>
-                                            <option value="A">A</option>
-                                            <option value="B">B</option>
-                                            <option value="AB">AB</option>
+                                            <option value="O-">O-</option>
+                                            <option value="O+">O+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB-">AB-</option>
+                                            <option value="AB+">AB</option>
                                         </select> 
                                     </div>
                                     <div class="w3-col m6 l6">
