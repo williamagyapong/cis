@@ -191,7 +191,7 @@ class DBHandler
    				$counter++;
    			}
             
-   			$sql = "UPDATE {$table} SET {$set} WHERE {$tableField} = {$fieldValue}";
+   			$sql = "UPDATE {$table} SET {$set} WHERE {$tableField} = '{$fieldValue}'";
 
    			if(!$this->query($sql, $data)->getError()) {
    				return true;//success

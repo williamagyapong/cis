@@ -4,6 +4,8 @@ $user = new User();
 $member = new Member();
 //$user = new User();date('-m-d', strtotime($year));
 $nextYear = (string)(date('Y') +1);
+$mData = $member->get(36);
+print_array(json_decode($mData->languages));
 //var_dump($nextYear);
 //var_dump(date('2019'.'-m-d'));
 

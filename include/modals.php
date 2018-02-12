@@ -1,3 +1,4 @@
+
 <div id="cis_modal0" class="w3-modal" style="padding-top:50px">
   <div class="page-background w3-modal-content w3-white w3-border w3-border-dark-grey w3-text-grey" style="background: #000; height:20%;width:20%;overflow:auto">
   <div class="w3-container content">
@@ -25,7 +26,6 @@
        <!-- load content on request -->
     </div>
     <footer class="w3-container">
-       <!-- <button type="button" class="w3-button w3-border w3-display-bottomright w3-margin w3-hover-blue-grey" name="button" onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')">close</button> -->
     </footer>
   </div>
 </div>

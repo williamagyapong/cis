@@ -33,7 +33,7 @@
   	   	 <p>
           <?php 
           echo Session::get('add_new_errors');
-          echo date('Y', strtotime(Input::get('birth_date'))).'<br>';
+          //echo date('Y', strtotime(Input::get('birth_date'))).'<br>';
           print_array($_POST);
           ?>
 	        Sorry, an error occurred while adding new member &nbsp;&nbsp;<a href="view/index.php" class="btn btn-default" style="display: inline; text-decoration: none;color: blue; font-weight: bolder;">Try again </a>

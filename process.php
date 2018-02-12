@@ -14,7 +14,7 @@ if(Input::exist('add_token'))
 
       case 'update_member_profile':
            if($member->updateProfile()) Redirect::to('view/index.php?page=members_list');
-           else Redirect::to(503);
+           else Redirect::to(502);
       break;
 
       case 'add_ministry':

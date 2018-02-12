@@ -5,18 +5,14 @@
   $memberData = $member->get(Input::get('unique_id','get'));
   $languages = json_decode($memberData->languages);
   $languages = (empty($languages))?array():$languages;
-  //$languages = $member->getLanguage($memberData->id)
-  //print_array(json_encode(array(1,2,4,5,9)));
+  
 ?>
-
 <div class="w3-row">
 	<div>
 		<h4 class="w3-center">
 			<span class="">Member Profile </span>
 			
 			<span onclick="<?php echo "popUpLargeModal('members/edit.php','get_member_details','".$memberData->id."')"?>" class="fa fa-edit w3-text-blue" style="cursor: pointer;" title="Edit Profile" ></span>
-			<!-- <img src="../assets/images/system/edit_icon2.png" width="50" height="30"> -->
-			<!-- <span onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')" class="fa fa-times btn btn-danger w3-right"></span> -->
 			<button title="Close" class="w3-button w3-border w3-right w3-hover-red" name="button" onclick="popDownModal('#cis_modal1 .content', 'cis_modal1')"><i class="fa fa-times"></i></button>
 		</h4>
 	</div>
@@ -24,7 +20,7 @@
 	<div class="w3-col l6 m6">
 	   <div class="w3-container">
 	   	 <div>
-	   	 	<?php echo ($memberData->status==0)?"<span class=\"w3-text-red\"><i>Of Blessed Memory</i></span><span class=\"w3-text-blue-grey w3-margin-left\"><i>Died On: ".date('d/m/Y', strtotime($memberData->died_on))."</i></span>":""?>
+	   	 	<?php echo ($memberData->status==0)?"<span class=\"w3-text-red\"><i>Of Blessed Memory</i></span><span class=\"w3-text-blue-grey w3-margin-left\"><i>Died On: ".date('d/m/Y', strtotime($memberData->died_on))."</i></span>":"";?>
 	   	 	<table class="table table-striped table-bordered">
 	   	 	  <tr>
 	   	 	  	<td colspan="2" class="w3-center w3-grey" style="padding:20px 0;">
@@ -109,8 +105,8 @@
 	   	 	  	<td>
                     <span><?php echo date('d/m/Y', strtotime($memberData->baptised_on));?></span>
 	   	 	  </tr>
-	   	 	  <?php endif;?>\
-	   	 	  <?php if($memberData->b_contact_person!=''):?>
+	   	 	  <?php endif;?>
+	   	 	  <?php if($memberData->baptised_at!='Gbawe'):?>
 	   	 	  <tr>
 	   	 	  	<td colspan="2">
                     <div class="panel-group" id="contact_person_accordion" style="margin-bottom: 0">

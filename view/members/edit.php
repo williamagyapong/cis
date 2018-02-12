@@ -11,7 +11,7 @@
     $spouse = $member->getRelation($memberId,'spouse');
     $nextOfKin = $member->getRelation($memberId, 'next_of_kin');
     $memberData = $member->get($memberId);
-    $bloodGroups = array('O-','O+', 'A-', 'A+''B-','B+','AB-','AB+');
+    $bloodGroups = array('O-','O+', 'A-', 'A+','B-','B+','AB-','AB+');
     $sickleCells = array('AA', 'AS', 'SS');
 
 ?>
@@ -85,13 +85,11 @@
                       <label class="w3-text-grey"><b><label for="id_languages">Languages<span class="w3-text-red w3-large">*</span></label></b></label><br>
                       <select name="languages[]" class="w3-select w3-border w3-border-dark-grey" required id="id_languages" size="3" multiple>
                         <?php foreach($settings->getLanguage() as $language):?>
-                            <?php foreach(json_decode($memberData->languages) as $languageId):?>
-                              <?php if($languageId==$language->id):?>
+                              <?php if(in_array($language->id, json_decode($memberData->languages))):?>
                                 <option class="w3-padding-left" value="<?php echo $language->id;?>" selected><?php echo $language->name;?></option>
                               <?php else:?>
                                 <option class="w3-padding-left" value="<?php echo $language->id;?>"><?php echo $language->name;?></option>
                               <?php endif;?>
-                            <?php endforeach;?>
                         <?php endforeach;?>
                       </select>
                   </div>
@@ -422,6 +420,7 @@
     <script src="../assets/js/jquery.Jcrop.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+
              // toggle baptism field inputs visibility as soon as page loads
             if($('#id_is_baptised').prop('checked')) {
                 $('.baptism').removeClass('w3-hide');

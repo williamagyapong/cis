@@ -28,7 +28,7 @@
 $GLOBALS['config'] = array(
         'mysql'=>array(
               'host'=>'127.0.0.1',
-              'db'=>'new_cis_db',
+              'db'=>'cis_db',
               'password'=>'',
               'username'=>'root'
         	),
